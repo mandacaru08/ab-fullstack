@@ -14,6 +14,7 @@ function App() {
       <TopBar/>
       <Container>
         <Destination/>
+        <Marketing/>
       </Container>
     </>
   )
