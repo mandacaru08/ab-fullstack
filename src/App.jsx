@@ -13,7 +13,7 @@ function App() {
     <>
       <TopBar/>
       <Container>
-        
+        <Destination/>
       </Container>
     </>
   )
