@@ -15,6 +15,7 @@ function App() {
       <Container>
         <Destination/>
         <Marketing/>
+        <BoatOffersComparator/>
       </Container>
     </>
   )
