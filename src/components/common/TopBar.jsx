@@ -1,29 +1,32 @@
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { IoMdSearch, IoMdPerson } from 'react-icons/io';
 
-
 export default function TopBar(){
-    return(
-      <Header>
-        <Menu>
-          <Options>
-            <Option>Ofertas</Option>
-            <Option>Informações de reservas</Option>
-            <Option>Frota de Barcos</Option>
-          </Options>
-          <SearchAndLogin>
-            <IoMdSearch/>
-            <ul>
-              <IoMdPerson />
-              <li>Login</li>
-            </ul>
-          </SearchAndLogin>
-        </Menu>
-        <Banner>
-          <img src='https://wallpapers.com/images/hd/aerial-view-of-amazonas-river-qoa6265cuypo4fd2.jpg' alt='banner'/>
-        </Banner>
-      </Header>
-    );
+
+  const navigate = new useNavigate();
+
+  return(
+    <Header>
+      <Menu>
+        <Options>
+          <Option onClick={() => navigate('/offers')}>Ofertas</Option>
+          <Option onClick={() => navigate('/booking-information')}>Informações de reservas</Option>
+          <Option onClick={() => navigate('/fleet')}>Frota de Barcos</Option>
+        </Options>
+        <SearchAndLogin>
+          <IoMdSearch/>
+          <ul onClick={() => navigate('/login')}>
+            <li>Login</li>
+          </ul>
+        </SearchAndLogin>
+      </Menu>
+      <Banner>
+        <img src='https://wallpapers.com/images/hd/aerial-view-of-amazonas-river-qoa6265cuypo4fd2.jpg' alt='banner'/>
+      </Banner>
+    </Header>
+  );
 }
 
 const Header = styled.div`
@@ -67,12 +70,16 @@ const Menu = styled.header`
   font-weight: 700;
 
   ul{
-    height: 100%;
+    height: 50%;
     width: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    :hover{
+      cursor: pointer;
+    }
   }
 
   ul:before{
@@ -85,6 +92,10 @@ const Menu = styled.header`
 
   svg{
     font-size: 25px;
+
+    :hover{
+      cursor: pointer;
+    }
   }
 
   @media(max-width: 770px){
