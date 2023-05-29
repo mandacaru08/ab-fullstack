@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { HiArrowLeft } from 'react-icons/hi';
 
 import { signIn } from '../../services/authApi';
 
@@ -27,6 +28,13 @@ export default function Login(){
 
     return(
         <Container>
+            <ToBack onClick={() => navigate('/')}>
+                <div>
+                    <HiArrowLeft/>
+                    <p>Voltar</p>
+                </div>
+            </ToBack>
+            <LoginForm>
             <header>AB</header>
             <FormContainer>
                 <div>
@@ -72,16 +80,44 @@ export default function Login(){
                     <button onClick={() => navigate('/sign-up')} >Registre-se agora como cliente privado gratuitamente</button>
                 </div>
             </Register>
+        </LoginForm>
         </Container>
+        
     );
 }
 
 const Container = styled.div`
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+`;
+
+const ToBack = styled.div`
+    height: 90px;
+    width: 375px;
+
+    div{
+        height: 100%;
+        width: 80px;
+
+        font-size: 20px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+`;
+
+const LoginForm = styled.div`
     height: 70vh;
     width: 375px;
     padding: 40px 15px;
     box-sizing: border-box;
-    margin: 10% 0;
 
     display: flex;
     flex-direction: column;
