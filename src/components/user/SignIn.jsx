@@ -7,7 +7,7 @@ import { HiArrowLeft } from 'react-icons/hi';
 
 import { signIn } from '../../services/authApi';
 
-export default function Login(){
+export default function SignIn(){
 
     const navigate = new useNavigate();
 
@@ -18,10 +18,51 @@ export default function Login(){
 
     const [ inputStatus, setInputStatus ] = useState({
         emailIsFocused: false,
-        passwordIsFocused: false
+        passwordIsFocused: false,
+        isEmailValid: true,
+        isPasswordEmpty: true
     });
 
-    async function login(){
+    const [ isButtonDisabled, setIsButtonDisabled ] = useState(true);
+
+    function validateEmail(email) {
+        const emailRegex = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i;
+        return emailRegex.test(email);
+    }
+
+    useEffect(() => {
+        const { email, password } = user;
+
+        if(email === '' || password === '') {
+            setIsButtonDisabled(true);
+        } else {
+            setIsButtonDisabled(false);
+        }
+
+        if(email !== ''){
+            setInputStatus({...inputStatus, isEmailValid: true});
+        }
+
+    }, [user]);
+
+    async function handleSignIn(event){
+        event.preventDefault();
+
+        const { email, password } = user;
+
+        if(validateEmail(email)){
+            setInputStatus({...inputStatus, isEmailValid: true});
+        } else {
+            setInputStatus({...inputStatus, isEmailValid: false});
+            return;
+        }
+
+        if(password === ''){
+            setInputStatus({...inputStatus, isPasswordValid: false});
+        } else {
+            setInputStatus({...inputStatus, isPasswordValid: true});
+        }
+
         await signIn(user);
         navigate('/');
     }
@@ -41,9 +82,12 @@ export default function Login(){
                     <h2>Log In</h2>
                 </div>
                 <Form>
-                    <form onSubmit={login}>
+                    <form onSubmit={handleSignIn}>
                         <InputsContainer>
-                            <Input isFocusedOrFilled={inputStatus.emailIsFocused || user.email !== ''}>
+                            <Input 
+                                isFocusedOrFilled={inputStatus.emailIsFocused || user.email !== ''}
+                                isInputValid={inputStatus.isEmailValid || inputStatus.emailIsFocused }
+                            >
                                 <input 
                                     type='text' 
                                     value={user.email} 
@@ -56,7 +100,10 @@ export default function Login(){
                                     <IoIosCloseCircle/>
                                 </Icon>
                             </Input>
-                            <Input isFocusedOrFilled={inputStatus.passwordIsFocused || user.password !== ''}>
+                            <Input 
+                                isFocusedOrFilled={inputStatus.passwordIsFocused || user.password !== ''}
+                                isInputValid={inputStatus.isPasswordEmpty || inputStatus.passwordIsFocused}
+                            >
                                 <input 
                                     type='password' 
                                     value={user.password} 
@@ -70,7 +117,7 @@ export default function Login(){
                                 </Icon>
                             </Input>
                         </InputsContainer>
-                        <Button type='submit'>Log In</Button>
+                        <Button type='submit' disabled={isButtonDisabled}>Log In</Button>
                     </form>
                 </Form>
             </FormContainer>
@@ -114,7 +161,7 @@ const ToBack = styled.div`
 `;
 
 const LoginForm = styled.div`
-    height: 70vh;
+    height: 632px;
     width: 375px;
     padding: 40px 15px;
     box-sizing: border-box;
@@ -129,7 +176,7 @@ const LoginForm = styled.div`
     box-shadow: 0 2px 8px rgba(0,0,0,.3);
 
     header{
-        height: 20%;
+        height: 100px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -140,7 +187,7 @@ const LoginForm = styled.div`
 `;
 
 const FormContainer = styled.div`
-    height:60%;
+    height: 230px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -149,7 +196,7 @@ const FormContainer = styled.div`
 `;
 
 const Form = styled.div`
-    height: 80%;
+    height: -webkit-fill-available;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -159,12 +206,16 @@ const Form = styled.div`
     form{
         height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
 
 `;
 
 const InputsContainer = styled.div`
-    height: 50%;
+    height: 123px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -180,7 +231,9 @@ const Input = styled.div`
     flex-direction: row;
     position: relative;
 
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: ${props => props.isInputValid? '1px solid #D9D9D9' : '1px solid #ff6767c4'};
+    background-color: ${props => props.isInputValid? 'transparent' : '#ff9a9ac4'};
+    transition: all 0.5s;
 
     label{
         position: absolute;
@@ -244,6 +297,7 @@ const Register = styled.div`
 
     button{
         height: 80px;
+        width: 100%;
 
         border: 1px solid #878c96;
         border-radius: 3px;

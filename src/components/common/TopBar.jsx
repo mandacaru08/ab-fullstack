@@ -17,7 +17,7 @@ export default function TopBar(){
         </Options>
         <SearchAndLogin>
           <IoMdSearch/>
-          <ul onClick={() => navigate('/login')}>
+          <ul onClick={() => navigate('/sign-in')}>
             <li>Login</li>
           </ul>
         </SearchAndLogin>
