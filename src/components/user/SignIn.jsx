@@ -54,6 +54,7 @@ export default function SignIn(){
             setInputStatus({...inputStatus, isEmailValid: true});
         } else {
             setInputStatus({...inputStatus, isEmailValid: false});
+            window.alert('Insira o e-mail corretamente.');
             return;
         }
 
@@ -117,7 +118,11 @@ export default function SignIn(){
                                 </Icon>
                             </Input>
                         </InputsContainer>
-                        <Button type='submit' disabled={isButtonDisabled}>Log In</Button>
+                        <Button 
+                            type='submit' 
+                            disabled={isButtonDisabled}
+                            isButtonDisabled={isButtonDisabled}
+                        >Log In</Button>
                     </form>
                 </Form>
             </FormContainer>
@@ -272,7 +277,9 @@ const Button = styled.button`
 
     border-style: none;
     border-radius: 5px;
-    background-color: lightblue;
+    color: #FFFFFF;
+    font-weight: 700;
+    background-color: ${props => props.isButtonDisabled? '#9c9cf8' : '#7979ff'};
 `;
 
 const Register = styled.div`
