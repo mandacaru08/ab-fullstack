@@ -1,0 +1,185 @@
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+
+function TimeInput() {
+
+    const [ time, setTime ] = useState({
+        hour: '',
+        minute: '',
+        period: ''
+    });
+
+    function convertToHour12(time24) {
+        const [hours, minutes] = time24.split(':');
+        let suffix = 'AM';
+      
+        let hour24 = parseInt(hours, 10);
+        let hour12 = Math.abs(hour24) % 24;
+      
+        if (hour12 === 0) {
+          hour12 = 12;
+        } else if (hour12 > 12) {
+          hour12 -= 12;
+          suffix = 'PM';
+        } else if (hour12 === 12) {
+          suffix = 'PM';
+        }
+      
+        hour12 = hour12.toString().padStart(2, '0');
+      
+        const time12 = { hour: hour12, minute: minutes, period: suffix };
+        return time12;
+    }
+
+    function validateHourOrMinuteInput(value){
+        const timeRegex = new RegExp('/^\d{1,2}$');
+        const isValidTime = timeRegex.test(value);
+        return isValidTime;
+    }
+
+    function validatePeriodInput(){
+        const periodRegex = new RegExp(/^(am|pm)$/i);
+        const isValidPeriod = periodRegex.test(time.period);
+        return isValidPeriod;
+    }
+
+    function setCurrentTime(){
+        const currentDateTime = new Date();
+        const options = { timeZone: 'America/Sao_Paulo' };
+        const localTime = currentDateTime.toLocaleTimeString('pt-BR', options);
+        const currentTimeConverted = convertToHour12(localTime);
+        setTime(currentTimeConverted);
+    }
+
+    function handleHourInputChange(hourInput) {
+        const isValidHourInput = validateHourOrMinuteInput(hourInput);
+        if (isValidHourInput) {
+          setTime(prevTime => ({ ...prevTime, hour: hourInput }));
+        }
+    }
+      
+
+    function handleInputChange(){
+        const { hour, minute, period } = time;
+
+        const isEmptyTime = (hour == '' && minute == '' && period == '');
+
+        if(isEmptyTime){
+            return setCurrentTime();
+        }
+        
+        handleHourInputChange(hour);
+    };
+
+    function decrementOneHour(){
+        const hourMinusOne = time.hour -1;
+        const convertedTime = convertToHour12(`${hourMinusOne}:00`);
+        setTime(convertedTime);
+    }
+
+    function incrementOneHour(){
+        const hourPlusOne = parseInt(time.hour, 10) +1;
+        const convertedTime = convertToHour12(`${hourPlusOne}:00`);
+        setTime(convertedTime);
+    }
+
+    useEffect(() => {
+        handleInputChange();
+    }, [time]);
+
+    return(
+        <Input>
+            <PreviousHour onClick={decrementOneHour}>
+                <MdArrowBackIos />
+            </PreviousHour>
+            <TimePicker>
+                <HourInput type='text' defaultValue={time.hour}/>
+                <span>:</span>
+                <MinuteInput type='text' defaultValue={time.minute}/>
+                <ShiftInput type='text' defaultValue={time.period}/>
+            </TimePicker>
+            <NextHour onClick={incrementOneHour}>
+                <MdArrowForwardIos/>
+            </NextHour>
+        </Input>
+    );
+}
+
+export default TimeInput;
+
+const Input = styled.div`
+    height: 48px;
+    width: 386px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    border: 0.0625rem solid #878c96;
+    border-radius: 3px;
+    color: #282d37;
+    box-sizing: border-box;
+`;
+
+const TimePicker = styled.div`
+    height: 100%;
+    width: 80px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    input{
+        border-style: none;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+    }
+    input:focus{
+        background-color: lightblue;
+        caret-color: transparent;
+    }
+    span{
+        font-size: 16px;
+        font-weight: 400;
+    }
+`;
+
+const HourInput = styled.input`
+    height: auto;
+    width: 18px;
+`;
+
+const MinuteInput = styled.input`
+    height: auto;
+    width: 18px;
+`;
+
+const ShiftInput = styled.input`
+    height: auto;
+    width: 24px;
+`;
+
+const NextHour = styled.div`
+    height: 100%;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+`;
+
+const PreviousHour = styled.div`
+    height: 100%;
+    width: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+`;
