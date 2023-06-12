@@ -55,18 +55,19 @@ export default function Marketing(){
             behavior: 'smooth',
           });
         }
-      }, [currentSection]);
+    }, [currentSection]);
 
     return(
         <AdvertisementsContainer>
             <Advertisements>
                 <Carousel ref={carouselRef}>
                     {
-                        carouselRef.current?
-
                         allInfos.map((advertisement, index) => {
                             return(
-                                <Advertisement ref={el => carouselRef.current[index] = el} key={advertisement.title}>
+                                <Advertisement 
+                                    key={advertisement.title}
+                                    ref={el => carouselRef.current[index] = el} 
+                                >
                                     <Poster>
                                         <Image src={advertisement.image} alt={'poster-' + advertisement.title}/>
                                     </Poster>
@@ -79,8 +80,6 @@ export default function Marketing(){
                                 </Advertisement>
                             )
                         })
-                        :
-                        <></>
                     }
                 </Carousel>
              </Advertisements>

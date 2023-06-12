@@ -1,55 +1,74 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { TbArrowsLeftRight } from 'react-icons/tb';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { RiRepeatFill } from 'react-icons/ri';
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
  
 export default function Destination(){
+
+    const [ showBackground, setShowBackground ] = useState(false);
+
     return(
-        <TravelInfos>
-            <h2>Para onde você quer ir?</h2>
-            <FormInfos>
+        <>
+            {showBackground && <BlurBackground onClick={() => setShowBackground(false)}/>}
+            <TravelInfos onClick={() => setShowBackground(true)}>
+                <h2>Para onde você quer ir?</h2>
+                <FormInfos>
 
-                <TravelRoute>
-                    <Input>
-                        <label>Saída</label>
-                        <input type='text' placeholder='estação / parada / endereço '/>
-                    </Input>
-                    <Icon>
-                        <TbArrowsLeftRight/>
-                    </Icon>
-                    <Input>
-                        <label>Destino</label>
-                        <input type='text' placeholder='estação / parada / endereço '/>
-                    </Input>
-                </TravelRoute>
-
-                <TravelDate>
-                    <h4>Viagem de ida</h4>
-                    <DateAndHour>
-                        <DateInput/>
+                    <TravelRoute>
+                        <Input>
+                            <label>Saída</label>
+                            <input type='text' placeholder='estação / parada / endereço '/>
+                        </Input>
                         <Icon>
-                            <FaRegCalendarAlt/>
+                            <TbArrowsLeftRight/>
                         </Icon>
-                        <TimeInput/>
-                    </DateAndHour>
-                </TravelDate>
+                        <Input>
+                            <label>Destino</label>
+                            <input type='text' placeholder='estação / parada / endereço '/>
+                        </Input>
+                    </TravelRoute>
 
-                <Options>
-                    <div>
-                        <Icon>
-                            <MdKeyboardArrowRight/>
-                        </Icon>
-                        <h3>Apenas assento (sem ticket)</h3>
-                    </div>
-                    <button>Pesquisar</button>
-                </Options>
+                    <TravelDate>
+                        <h4>Viagem de ida</h4>
+                        <DateAndHour>
+                            <DateInput/>
+                            <Icon>
+                                <FaRegCalendarAlt/>
+                            </Icon>
+                            <TimeInput/>
+                        </DateAndHour>
+                    </TravelDate>
 
-            </FormInfos>
-        </TravelInfos>
+                    <Options>
+                        <div>
+                            <Icon>
+                                <MdKeyboardArrowRight/>
+                            </Icon>
+                            <h3>Apenas assento (sem ticket)</h3>
+                        </div>
+                        <button>Pesquisar</button>
+                    </Options>
+
+                </FormInfos>
+            </TravelInfos>
+        </>
     );
 }
+
+const BlurBackground = styled.div`
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #282d37;
+    opacity: .8;
+`;
 
 const TravelInfos = styled.div`
     height: 380px;
@@ -63,7 +82,7 @@ const TravelInfos = styled.div`
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
 
     position: relative;
-    z-index: 1;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -171,6 +190,8 @@ const Options = styled.div`
         border-style: none;
         border-radius: 3px;
         background-color: #6495ED;
+        
+        font-weight: 700;
         color: #FFFFFF;
         :hover{
             cursor: pointer;

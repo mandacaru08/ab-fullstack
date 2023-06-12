@@ -5,22 +5,22 @@ import Destination from "../destination/Destination";
 import Marketing from "../common/Marketing";
 import BoatOffersComparator from "../common/BoatOffersComparator";
 import Footer from "../common/Footer";
-// import { CustomCalendar } from '../CustomCalendar';
-import InputDate from '../destination/DateInput';
+
 import 'react-calendar/dist/Calendar.css';
 
 export default function Home(){
-    return(
-        <>
-          <TopBar/>
-          <Container>
-            <Destination/>
-            <Marketing/>
-            <BoatOffersComparator/>
-            <Footer/>
-          </Container>
-        </>
-    );
+
+  return(
+      <>
+        <TopBar/>
+        <Container>
+          <Destination/>
+          <Marketing/>
+          <BoatOffersComparator/>
+          <Footer/>
+        </Container>
+      </>
+  );
 }
 
 

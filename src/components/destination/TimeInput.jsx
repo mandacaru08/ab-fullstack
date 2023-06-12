@@ -8,37 +8,44 @@ function TimeInput() {
         hour: '',
         minute: '',
         period: ''
-    });
+    });  
 
     function convertToHour12(time24) {
         const [hours, minutes] = time24.split(':');
-        let suffix = 'AM';
+
+        const currentPediod = hours > 12 ? 'PM' :'AM';
+        const suffix = time.period? time.period : currentPediod;
       
         let hour24 = parseInt(hours, 10);
         let hour12 = Math.abs(hour24) % 24;
+            
+        const HOURS_12 = 12;
+      
+        let convertedHour12 = hour12;
+        let convertedSuffix = suffix;
       
         if (hour12 === 0) {
-          hour12 = 12;
-        } else if (hour12 > 12) {
-          hour12 -= 12;
-          suffix = 'PM';
-        } else if (hour12 === 12) {
-          suffix = 'PM';
+          convertedSuffix = suffix === 'AM' ? 'PM' : 'AM';
+          convertedHour12 = HOURS_12;
+        } else if (hour12 === HOURS_12) {
+          convertedSuffix = suffix === 'AM' ? 'PM' : 'AM';
+        } else if (hour12 > HOURS_12) {
+          convertedHour12 -= HOURS_12;
         }
       
-        hour12 = hour12.toString().padStart(2, '0');
+        const formattedHour12 = convertedHour12.toString().padStart(2, '0');
       
-        const time12 = { hour: hour12, minute: minutes, period: suffix };
-        return time12;
+        return { hour: formattedHour12, minute: minutes, period: convertedSuffix };
     }
+      
 
     function validateHourOrMinuteInput(value){
-        const timeRegex = new RegExp('/^\d{1,2}$');
+        const timeRegex = new RegExp('^\\d{1,2}$');
         const isValidTime = timeRegex.test(value);
         return isValidTime;
     }
 
-    function validatePeriodInput(){
+    function validatePeriodInput(currentTime){        
         const periodRegex = new RegExp(/^(am|pm)$/i);
         const isValidPeriod = periodRegex.test(time.period);
         return isValidPeriod;
@@ -68,12 +75,10 @@ function TimeInput() {
         if(isEmptyTime){
             return setCurrentTime();
         }
-        
-        handleHourInputChange(hour);
     };
 
     function decrementOneHour(){
-        const hourMinusOne = time.hour -1;
+        const hourMinusOne = parseInt(time.hour, 10) -1;
         const convertedTime = convertToHour12(`${hourMinusOne}:00`);
         setTime(convertedTime);
     }
@@ -94,10 +99,10 @@ function TimeInput() {
                 <MdArrowBackIos />
             </PreviousHour>
             <TimePicker>
-                <HourInput type='text' defaultValue={time.hour}/>
+                <HourInput type='text' value={time.hour}/>
                 <span>:</span>
-                <MinuteInput type='text' defaultValue={time.minute}/>
-                <ShiftInput type='text' defaultValue={time.period}/>
+                <MinuteInput type='text' value={time.minute}/>
+                <ShiftInput type='text' value={time.period}/>
             </TimePicker>
             <NextHour onClick={incrementOneHour}>
                 <MdArrowForwardIos/>
