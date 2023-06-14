@@ -35,7 +35,7 @@ export default function DateInput(){
             <PreviousDay onClick={decrementDate}>
                 <MdArrowBackIos/>
             </PreviousDay>
-            <SelectedDate>{day}, {format(date, 'dd, MM, yyyy')}</SelectedDate>
+            <span>{day}, {format(date, 'dd, MM, yyyy')}</span>
             <NextDay onClick={incrementDate}>
                 <MdArrowForwardIos/>
             </NextDay>
@@ -56,7 +56,10 @@ const Input = styled.div`
     border-radius: 3px;
     color: #282d37;
     box-sizing: border-box;
-    //padding: 0.625rem 2.5rem;
+
+    div{
+        cursor: pointer;
+    }
 `;
 
 const NextDay = styled.div`
@@ -73,8 +76,4 @@ const PreviousDay = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-`;
-
-const SelectedDate = styled.span`
-
 `;
