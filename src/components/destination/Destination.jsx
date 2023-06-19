@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { TbArrowsLeftRight } from 'react-icons/tb';
-import { BsCheck } from 'react-icons/bs';
+import { FaCheck } from 'react-icons/fa';
 import { HiOutlineReceiptPercent } from 'react-icons/hi2';
 import { ImInfo } from 'react-icons/im';
 import { MdKeyboardArrowRight, MdOutlineKeyboardArrowDown, MdRepeat } from 'react-icons/md';
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
+import MoreInfos from './MoreInfos';
  
 export default function Destination(){
 
+    const moreInfosRef = useRef();
+
     const [ showBackground, setShowBackground ] = useState(false);
+    const [ showMoreInfosMessage, setShowMoreInfosMessage ] = useState(false);
     const [ transportTypes, setTransportTypes ] = useState({
         localTransports: false,
         fastestConnections: false,
@@ -26,41 +30,55 @@ export default function Destination(){
         class: '',
     });
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+          if (moreInfosRef.current && !moreInfosRef.current.contains(event.target)) {
+            setShowMoreInfosMessage(false);
+          }
+        }
+    
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+          document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
     return(
         <>
             {showBackground && <BlurBackground onClick={() => setShowBackground(false)}/>}
-            <TravelInfos isClicked={showBackground} onClick={() => setShowBackground(true)}>
+            <TravelForm isClicked={showBackground} onClick={() => setShowBackground(true)}>
                 <h2>Para onde você quer ir?</h2>
                 <FormInfos>
 
-                    <TravelRoute>
-                        <Input>
-                            <label>Saída</label>
-                            <input type='text' placeholder='estação / parada / endereço '/>
-                        </Input>
-                        <Icon>
-                            <TbArrowsLeftRight/>
-                        </Icon>
-                        <Input>
-                            <label>Destino</label>
-                            <input type='text' placeholder='estação / parada / endereço '/>
-                        </Input>
-                    </TravelRoute>
-
-                    <TravelDate>
-                        <h4>Viagem de ida</h4>
-                        <DateAndHour>
-                            <DateInput/>
+                    <TravelInfos>
+                        <TravelRoute>
+                            <Input>
+                                <label>Saída</label>
+                                <input type='text' placeholder='estação / parada / endereço '/>
+                            </Input>
                             <Icon>
-                                <FaRegCalendarAlt/>
+                                <TbArrowsLeftRight/>
                             </Icon>
-                            <TimeInput/>
-                        </DateAndHour>
-                    </TravelDate>
+                            <Input>
+                                <label>Destino</label>
+                                <input type='text' placeholder='estação / parada / endereço '/>
+                            </Input>
+                        </TravelRoute>
+                        <TravelDate>
+                            <h4>Viagem de ida</h4>
+                            <DateAndHour>
+                                <DateInput/>
+                                <Icon>
+                                    <FaRegCalendarAlt/>
+                                </Icon>
+                                <TimeInput/>
+                            </DateAndHour>
+                        </TravelDate>
+                    </TravelInfos>
                     
-                    {showBackground  === true?
+                    {showBackground &&
                         <OtherInfosForm>
-                            <span><MdRepeat/>dicionar viagem de retorno</span>
+                            <AddReturn><MdRepeat/>dicionar viagem de retorno</AddReturn>
                             <NumberPassengers>
                                 <select type='text' value={ticket.passengers}>
                                     <option value='1'>1 pessoa</option>
@@ -75,7 +93,7 @@ export default function Destination(){
                             </NumberPassengers>
                             <AgeAndCardType>
                                 <Age>
-                                    <InfoIcon>
+                                    <InfoIcon style={{position: 'absolute', top: '0', left: '0'}}>
                                         <ImInfo/>
                                     </InfoIcon>
                                     <select type='text' value={ticket.age}>
@@ -113,52 +131,73 @@ export default function Destination(){
                             <TransportationInfos>
                                 <TransportationClass>
                                     <Options>
-                                        <Option>
-                                            <input 
-                                                type="radio" 
-                                                value="1" 
-                                                checked={ticket.class === '1'}
-                                                onClick={(event) => setTicket({...ticket, class: event.target.value})}
-                                            />
-                                            <label>1ª Classe</label>
+                                        <Option 
+                                            checked={ticket.class === '1'}
+                                            onClick={() => setTicket({...ticket, class: '1'})}
+                                        >
+                                            <span>
+                                                <input 
+                                                    type="radio" 
+                                                    value="1" 
+                                                    checked={ticket.class === '1'}
+                                                />
+                                                <label>1ª Classe</label>
+                                            </span>
                                         </Option>
-                                        <Option>
-                                        <input 
-                                            type="radio" 
-                                            value="2" 
+                                        <Option 
                                             checked={ticket.class === '2'}
-                                            onClick={(event) => setTicket({...ticket, class: event.target.value})}
-                                        />
-                                            <label>2ª Classe</label>
+                                            onClick={() => setTicket({...ticket, class: '2'})}
+                                        >
+                                            <span>
+                                                <input 
+                                                    type="radio" 
+                                                    value="2" 
+                                                    checked={ticket.class === '2'}
+                                                />
+                                                <label>2ª Classe</label>
+                                            </span>
                                         </Option>
                                     </Options>
                                 </TransportationClass>
-                                <hr/>
-                                <LocalTransportOption>
+                                <Separator><hr/></Separator>
+                                <TransportOption>
                                     <Options>
-                                        <Option>
-                                            <input 
-                                                type="checkbox"
-                                                onClick={() => setTransportTypes({...transportTypes, localTransports: !transportTypes.localTransports})}
-                                            />
-                                            <label>Apenas Transposrtes Locais</label>
-                                            {transportTypes.localTransports && <BsCheck/>}
+                                        <Option 
+                                            checked={transportTypes.localTransports}
+                                            onClick={() => setTransportTypes({...transportTypes, localTransports: !transportTypes.localTransports})}
+                                        >
+                                            <span>
+                                                <input type="checkbox"/>
+                                                <label>Apenas Transposrtes Locais</label>
+                                                {transportTypes.localTransports && <FaCheck style={{position: 'absolute', top: '8px', left: '8px'}}/>}
+                                            </span>
                                         </Option>
-                                        <Option>
-                                            <input 
-                                                type="checkbox"
+                                        <Option 
+                                            style={{width: '270px'}}
+                                            checked={transportTypes.fastestConnections}
+                                        >
+                                            <span 
                                                 onClick={() => setTransportTypes({...transportTypes, fastestConnections: !transportTypes.fastestConnections})}
-                                            />
-                                            <label>Mostrar conexões mais rápidas</label>
-                                            {transportTypes.fastestConnections && <BsCheck/>}
+                                            >
+                                                <input type="checkbox"/>
+                                                <label>Mostrar conexões mais rápidas</label>
+                                                {transportTypes.fastestConnections && <FaCheck style={{position: 'absolute', top: '8px', left: '8px'}}/>}
+                                            </span>
+                                            <MoreInfosContainer 
+                                                ref={moreInfosRef} 
+                                                onClick={() => setShowMoreInfosMessage(!showMoreInfosMessage)}
+                                            >
+                                                <InfoIcon>
+                                                    <ImInfo/>
+                                                </InfoIcon>
+                                                <p>O que isso significa?</p>
+                                                {showMoreInfosMessage && <MoreInfos showMessage={showMoreInfosMessage}/>}
+                                            </MoreInfosContainer>
                                         </Option>
                                     </Options>
-                                </LocalTransportOption>
-                                <FastConnectionOption></FastConnectionOption>
+                                </TransportOption>
                             </TransportationInfos>
                         </OtherInfosForm>
-                        :
-                        <></>
                     }
 
                     <OnlySeatOption>
@@ -172,7 +211,7 @@ export default function Destination(){
                     </OnlySeatOption>
 
                 </FormInfos>
-            </TravelInfos>
+            </TravelForm>
         </>
     );
 }
@@ -184,6 +223,9 @@ const OtherInfosForm = styled.div`
     flex-direction: column;
     justify-content: space-between;
 
+    svg{
+        pointer-events: none;
+    }
 
     select{
         height: 100%;
@@ -194,10 +236,15 @@ const OtherInfosForm = styled.div`
     }
 `;
 
+const AddReturn = styled.span`
+    height: 60px;
+`;
+
 const NumberPassengers = styled.div`
     height: 48px;
     width: 45%;
     position: relative;
+    margin-bottom: 15px;
 
     display: flex;
     flex-direction: row;
@@ -227,6 +274,7 @@ const ShowOptions = styled.div`
 const AgeAndCardType = styled.div`
     height: 62px;
     width: 100%;
+    margin-bottom: 15px;
 
     display: flex;
     flex-direction: row;
@@ -244,7 +292,7 @@ const AgeAndCardType = styled.div`
 
 const Age = styled.div`
     height: 100%;
-    width: 45%;
+    width: 49.5%;
     box-sizing: border-box;
     padding: 0 8px;
     position: relative;
@@ -264,16 +312,12 @@ const InfoIcon = styled.div`
     justify-content: center;
     align-items: center;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-
     pointer-events: none;
 `;
 
 const CardType = styled.div`
     height: 100%;
-    width: 45%;
+    width: 49.5%;
     box-sizing: border-box;
     padding: 0 8px;
     position: relative;
@@ -330,34 +374,18 @@ const TransportationInfos = styled.div`
         margin: 0 2.5rem;
         visibility: hidden;
         width: 1px;
+
+        @media(min-width: 768px){
+            visibility: visible;
+        }
     }
 `;
 
 const TransportationClass = styled.div`
     height: 30px;
 
-    input[type="radio"]{
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        border: 1px solid #818181;
-        outline: none;
-        margin-right: 5px;
-        position: relative;
-        top: 3px;
-
-        &:checked::after{
-            content: "";
-            display: block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 5px solid #000;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+    label{
+        width: 90px;
     }
 `;
 
@@ -366,42 +394,107 @@ const Options = styled.ul`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
 `;
 
-const Option = styled.ul`
+const Option = styled.li`
     height: 100%;
-`;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    position: relative;
+    z-index: 1;
 
-const LocalTransportOption = styled.div`
-    height: 70px;
-    width: 500px;
+    font-weight: ${props => props.checked === true ? '700' : '400'};
 
-    input[type="checkbox"]{
+    span{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        cursor: pointer;
+    }
+
+    label{
+        padding-top: 5px;
+        box-sizing: border-box;
+        pointer-events: none;
+    }
+
+    svg{
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+
+    div svg{
+        color: #000;
+        font-size: 20px;
+    }
+
+    p{
+        font-size: 13px;
+        color: #646973;
+    }
+
+    input{
+        position: relative;
+        margin-right: 5px;
+        border: 1px solid #282D37;
+        outline: none;
+        pointer-events: none;
+    }
+
+    input[type="radio"]{
         width: 16px;
         height: 16px;
-        border-radius: 2px;
-        border: 1px solid #818181;
-        outline: none;
-        margin-right: 5px;
-        position: relative;
-        top: 3px;
-
+        border-radius: 50%;
+        
         &:checked::after{
             content: "";
+            width: 10px;
+            height: 10px;
+            border: 5px solid #282D37;
+            border-radius: 50%;
             display: block;
-            width: 16px;
-            height: 16px;
-            background-color: #000;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
     }
+
+    input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        background-color: ${props => props.checked? '#282D37' : ''};
+    }
 `;
 
-const FastConnectionOption = styled.div``;
+const MoreInfosContainer = styled.div`
+    height: 40px;
+    width: 170px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+const Separator = styled.div`
+    display: grid;
+    place-items: center;
+`;
+
+const TransportOption = styled.div`
+    height: 70px;
+    width: 520px;
+`;
 
 /*  */
 
@@ -416,7 +509,7 @@ const BlurBackground = styled.div`
     opacity: .8;
 `;
 
-const TravelInfos = styled.div`
+const TravelForm = styled.div`
     height: ${props => props.isClicked ? '765px' : '380px'};
     width: 85%;    
     box-sizing: border-box;
@@ -434,10 +527,11 @@ const TravelInfos = styled.div`
     justify-content: space-between;
 
     h2{
-        height: 10%;
+        height: 22px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 40px;
     }
 
     @media(max-width: 770px){
@@ -446,12 +540,18 @@ const TravelInfos = styled.div`
     }
 `;
 
+const TravelInfos = styled.div`
+    height: 210px;
+    width: 100%; 
+`;
+
 const FormInfos = styled.div`
-    height: 85%;
+    height: 705px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
 `;
 
 const TravelRoute = styled.div`
@@ -460,6 +560,7 @@ const TravelRoute = styled.div`
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    margin-bottom: 30px;
 `;
 
 const TravelDate = styled.div`
@@ -467,6 +568,11 @@ const TravelDate = styled.div`
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    margin-bottom: 15px;
+
+    h4{
+        margin-bottom: 10px;
+    }
 `;
 
 const DateAndHour = styled.div`
