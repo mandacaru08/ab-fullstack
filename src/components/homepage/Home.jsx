@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import TopBar from "../common/TopBar";
+import TopBar from "../menu/TopBar";
 import Destination from "../destination/Destination";
 import Marketing from "../common/Marketing";
 import BoatOffersComparator from "../common/BoatOffersComparator";

@@ -43,8 +43,8 @@ const Container = styled.div`
     border-radius: 0.5rem;
     background-color: #FFFFFF;
     box-shadow: 0 0 12px -2px rgba(0,0,0,.5);
-    opacity: ${({ show }) => (show ? 1 : 0)};
-    transition: opacity 0.5s ease-in;
+    opacity: ${({ show }) => (show ? '1' : '0')};
+    transition: opacity 2s ease-in;
 `;
 
 const Message = styled.div`

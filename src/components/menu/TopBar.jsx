@@ -1,19 +1,47 @@
+import { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 
+import Offers from './options/Offers';
+import BookingInfos from './options/BookingInfos';
+import BoatFleet from './options/BoatFleet';
+
 import styled from 'styled-components';
-import { IoMdSearch, IoMdPerson } from 'react-icons/io';
+import { IoMdSearch } from 'react-icons/io';
 
 export default function TopBar(){
 
   const navigate = new useNavigate();
 
+  const [ showMenuOptions, setShowMenuOptions ] = useState(false);
+
   return(
-    <Header>
+    <Container>
       <Menu>
         <Options>
-          <Option onClick={() => navigate('/offers')}>Ofertas</Option>
-          <Option onClick={() => navigate('/booking-information')}>Informações de reservas</Option>
-          <Option onClick={() => navigate('/fleet')}>Frota de Barcos</Option>
+          <Option 
+            onMouseEnter={() => setShowMenuOptions('offers')} 
+            onMouseLeave={() => setShowMenuOptions(false)}
+            onClick={() => navigate('/offers')}
+          >
+            <span>Ofertas</span>
+            {showMenuOptions == 'offers' && <Offers setShowMenuOptions={setShowMenuOptions}/>}
+          </Option>
+          <Option 
+            onMouseEnter={() => setShowMenuOptions('booking-information')} 
+            onMouseLeave={() => setShowMenuOptions(false)}
+            onClick={() => navigate('/booking-information')}
+          >
+            <span>Informações de reservas</span>
+            {showMenuOptions == 'booking-information' && <BookingInfos setShowMenuOptions={setShowMenuOptions}/>}
+          </Option>
+          <Option 
+            onMouseEnter={() => setShowMenuOptions('fleet')} 
+            onMouseLeave={() => setShowMenuOptions(false)}
+            onClick={() => navigate('/fleet')}
+          >
+            <span>Frota de Barcos</span>
+            {showMenuOptions == 'fleet' && <BoatFleet setShowMenuOptions={setShowMenuOptions}/>}
+          </Option>
         </Options>
         <SearchAndLogin>
           <IoMdSearch/>
@@ -25,11 +53,11 @@ export default function TopBar(){
       <Banner>
         <img src='https://wallpapers.com/images/hd/aerial-view-of-amazonas-river-qoa6265cuypo4fd2.jpg' alt='banner'/>
       </Banner>
-    </Header>
+    </Container>
   );
 }
 
-const Header = styled.div`
+const Container = styled.div`
   width: 100%;
   z-index: 1;
   padding:0 15%;
@@ -56,6 +84,7 @@ const Menu = styled.header`
   width: 90%;
   padding: 0 20px;
   z-index: 0;
+  position: relative;
   
   display: flex;
   flex-direction: row;
@@ -111,23 +140,31 @@ const Options = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-
-  div:hover{
-    cursor: pointer;
-    margin-top: 3px;
-    border-bottom: 3px solid #000000;
-  }
 `;
 
 const Option = styled.div`
-  height: 30px;
+  height: 100%;
   width: fit-content;
   margin: 0 16px;
+  padding: 20px 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  span{
+    height: 30px;
+    width: 100%;
+
+    display: grid;
+    place-items: center;
+    :hover{
+      cursor: pointer;
+      margin-top: 3px;
+      border-bottom: 3px solid #000000;
+  }
+  }
 `;
 
 const SearchAndLogin = styled.div`
@@ -142,7 +179,6 @@ const SearchAndLogin = styled.div`
 const Banner = styled.div`
   height: 440px;
   width: 100%;
-
   margin-top: -5rem;
 
   img{
