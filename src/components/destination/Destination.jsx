@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FaRegCalendarAlt } from 'react-icons/fa';
-import { TbArrowsLeftRight } from 'react-icons/tb';
-import { FaCheck } from 'react-icons/fa';
+import { FaRegCalendarAlt, FaCheck, FaRegTrashAlt } from 'react-icons/fa';
 import { HiOutlineReceiptPercent } from 'react-icons/hi2';
+import { TbArrowsLeftRight } from 'react-icons/tb';
 import { ImInfo } from 'react-icons/im';
 import { MdKeyboardArrowRight, MdOutlineKeyboardArrowDown, MdRepeat } from 'react-icons/md';
 import DateInput from './DateInput';
@@ -14,7 +13,9 @@ export default function Destination(){
 
     const moreInfosRef = useRef();
 
+    const [ formHeight, setFormHeight ] = useState(false)
     const [ showBackground, setShowBackground ] = useState(false);
+    const [ showReturnField, setShowReturnField ] = useState(false);
     const [ showMoreInfosMessage, setShowMoreInfosMessage ] = useState(false);
     const [ transportTypes, setTransportTypes ] = useState({
         localTransports: false,
@@ -24,11 +25,32 @@ export default function Destination(){
         from: '',
         to: '',
         outboundDate: '',
+        outboundTime: '',
         returnDate: '',
+        returnTime: '',
         passengers: 1,
         age: '',
         class: '',
     });
+
+    function handleFormHeight(){
+        if(showBackground && showReturnField){ 
+            setFormHeight('810px')
+        } else if(showBackground && !showReturnField){
+            setFormHeight('765px')
+        }
+        return(formHeight);
+    };
+
+    useEffect(() => {
+        if(showBackground && showReturnField){ 
+            setFormHeight('805px')
+        } else if(showBackground && !showReturnField){
+            setFormHeight('765px')
+        } else {
+            setFormHeight(false);
+        }
+    }, [showBackground, showReturnField]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -46,7 +68,7 @@ export default function Destination(){
     return(
         <>
             {showBackground && <BlurBackground onClick={() => setShowBackground(false)}/>}
-            <TravelForm isClicked={showBackground} onClick={() => setShowBackground(true)}>
+            <TravelForm isClicked={formHeight} onClick={() => setShowBackground(true)}>
                 <h2>Para onde você quer ir?</h2>
                 <FormInfos>
 
@@ -77,8 +99,31 @@ export default function Destination(){
                     </TravelInfos>
                     
                     {showBackground &&
-                        <OtherInfosForm>
-                            <AddReturn><MdRepeat/>dicionar viagem de retorno</AddReturn>
+                        <OtherInfosForm addReturnFieldHeight={showReturnField}>
+                            {
+                                showReturnField?
+                                    <ReturnField>
+                                        <TravelDate>
+                                            <h4>Viagem de volta</h4>
+                                            <DateAndHour>
+                                                <DateInput/>
+                                                <Icon>
+                                                    <FaRegCalendarAlt/>
+                                                </Icon>
+                                                <TimeInput/>
+                                            </DateAndHour>
+                                        </TravelDate>
+                                        <DeleteReturn onClick={() => setShowReturnField(false)}>
+                                            <FaRegTrashAlt/>
+                                            <span>Deletar Viagem de Volta</span>
+                                        </DeleteReturn>
+                                    </ReturnField>
+                                    :
+                                    <AddReturn onClick={() => setShowReturnField(true)}>
+                                    <MdRepeat/>
+                                    <span>Adicionar viagem de retorno</span>
+                                    </AddReturn>
+                            }
                             <NumberPassengers>
                                 <select type='text' value={ticket.passengers}>
                                     <option value='1'>1 pessoa</option>
@@ -217,7 +262,7 @@ export default function Destination(){
 }
 
 const OtherInfosForm = styled.div`
-    height: 385px;
+    height: ${props => props.addReturnFieldHeight? '470px' : '385px'};
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -237,7 +282,40 @@ const OtherInfosForm = styled.div`
 `;
 
 const AddReturn = styled.span`
-    height: 60px;
+    height: 30px;
+    width: 230px;
+    margin-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg{
+        height: 100%;
+        width: 15px;
+    }
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+const ReturnField = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 40px;
+`;
+
+const DeleteReturn = styled.div`
+    height: 30px;
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    :hover{
+        cursor: pointer;
+    }
 `;
 
 const NumberPassengers = styled.div`
@@ -509,8 +587,10 @@ const BlurBackground = styled.div`
     opacity: .8;
 `;
 
+/* TODO: THINK HOW TO TURN TRAVELFORM HEIGHT RESPONSIVE */
+
 const TravelForm = styled.div`
-    height: ${props => props.isClicked ? '765px' : '380px'};
+    height: ${props => props.isClicked ? props.isClicked : '380px'};
     width: 85%;    
     box-sizing: border-box;
     border-radius: 3px;
@@ -541,7 +621,7 @@ const TravelForm = styled.div`
 `;
 
 const TravelInfos = styled.div`
-    height: 210px;
+    height: 175px;
     width: 100%; 
 `;
 
