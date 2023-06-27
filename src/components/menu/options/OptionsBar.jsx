@@ -42,7 +42,6 @@ const Container = styled.ol`
     position: absolute;
     top: 5rem;
     left: 0;
-    z-index: 10;
 
     background-color: #F0F3F5;
 `;
