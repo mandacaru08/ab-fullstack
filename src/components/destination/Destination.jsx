@@ -33,18 +33,9 @@ export default function Destination(){
         class: '',
     });
 
-    function handleFormHeight(){
-        if(showBackground && showReturnField){ 
-            setFormHeight('810px')
-        } else if(showBackground && !showReturnField){
-            setFormHeight('765px')
-        }
-        return(formHeight);
-    };
-
     useEffect(() => {
         if(showBackground && showReturnField){ 
-            setFormHeight('805px')
+            setFormHeight('835px')
         } else if(showBackground && !showReturnField){
             setFormHeight('765px')
         } else {
@@ -574,8 +565,6 @@ const TransportOption = styled.div`
     width: 520px;
 `;
 
-/*  */
-
 const BlurBackground = styled.div`
     height: 100vh;
     width: 100%;
@@ -586,8 +575,6 @@ const BlurBackground = styled.div`
     background-color: #282d37;
     opacity: .8;
 `;
-
-/* TODO: THINK HOW TO TURN TRAVELFORM HEIGHT RESPONSIVE */
 
 const TravelForm = styled.div`
     height: ${props => props.isClicked ? props.isClicked : '380px'};
@@ -623,6 +610,7 @@ const TravelForm = styled.div`
 const TravelInfos = styled.div`
     height: 175px;
     width: 100%; 
+    margin-bottom: 20px;
 `;
 
 const FormInfos = styled.div`

@@ -25,7 +25,7 @@ export default function Home(){
 
 
 const Container = styled.div`
-  padding:0 15%;
+  padding: 0 15%;
   margin-bottom: 5%;
   display: flex;
   flex-direction: column;

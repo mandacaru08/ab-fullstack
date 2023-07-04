@@ -59,7 +59,7 @@ export default function TopBar(){
 
 const Container = styled.div`
   width: 100%;
-  z-index: 1;
+  z-index:10;
   padding:0 15%;
   box-sizing: border-box;
 
@@ -83,8 +83,8 @@ const Menu = styled.header`
   height: 5rem;
   width: 90%;
   padding: 0 20px;
-  z-index: 0;
   position: relative;
+  z-index: 10;
   
   display: flex;
   flex-direction: row;
@@ -92,7 +92,7 @@ const Menu = styled.header`
   align-items: center;
 
   background-color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,.9);
 
   color: #252d37;
   font-size: 16px;
