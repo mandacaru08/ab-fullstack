@@ -125,6 +125,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 16px;
     color: #333333;
 `;
 
@@ -229,6 +230,11 @@ const ShowDetails = styled.div`
         justify-content: space-between;
         align-items: center;
     }
+
+    :hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
 `;
 
 const SelectTicketContainer = styled.div`
@@ -278,6 +284,10 @@ const SelectTicket = styled.div`
         font-size: 32px;
         color: #FFFFFF;
     }
+
+    :hover{
+        cursor: pointer;
+    }
 `;
 
 const ReturnOption = styled.div`
@@ -293,5 +303,11 @@ const ReturnOption = styled.div`
     svg{
         font-size: 24px;
         color: #F24423;
+    }
+
+    :hover{
+        color: #F24423;
+        text-decoration: underline;
+        cursor: pointer;
     }
 `;

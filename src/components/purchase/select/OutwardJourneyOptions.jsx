@@ -8,14 +8,14 @@ export default function OutwardJourneyOptions(){
 
     return(
         <Container>
-            <Date>
+            <TravelDate>
                 <span>Viagem de ida em 30/06/2023</span>
                 <ShowBestPrice title='Os preços mais baixos aqui (1)'>
                     <RiMoneyDollarBoxFill/>
                     <span>Mostrar nossos melhores preços ¹</span>
                     <input type='checkbox'/>
                 </ShowBestPrice>
-            </Date>
+            </TravelDate>
             <SortByAndTimeButton/>
             <TicketOptions/>
         </Container>
@@ -37,12 +37,13 @@ const Container = styled.div`
     }
 `;
 
-const Date = styled.div`
+const TravelDate = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 16px;
 `;
 
 const ShowBestPrice = styled.label`

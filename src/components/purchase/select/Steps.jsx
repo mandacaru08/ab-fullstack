@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export default function Steps(){
     const steps = [
-        {name: 'Pesquisar', concluded: false},
-        {name: 'Selecionar', concluded: false},
-        {name: 'Ticker e Reserva', concluded: false},
-        {name: 'Pagamento', concluded: false},
-        {name: 'Verificar e Reservar', concluded: false},
-        {name: 'Confirmação', concluded: false},
+        {name: 'Pesquisar', status: 'in-progress'},
+        {name: 'Selecionar', status: 'pending'},
+        {name: 'Ticker e Reserva', status: 'pending'},
+        {name: 'Pagamento', status: 'pending'},
+        {name: 'Verificar e Reservar', status: 'pending'},
+        {name: 'Confirmação', status: 'pending'},
     ];
     return(
         <Container>
@@ -15,7 +15,7 @@ export default function Steps(){
                 {
                     steps.map(step => {
                         return(
-                            <Step key={step.name} isConcluded={step.concluded}>
+                            <Step key={step.name} isCurrentStep={step.status == 'in-progress'} isPending={step.status == 'pending'}>
                                 <span>{step.name}</span>
                             </Step>
                         );
@@ -28,7 +28,9 @@ export default function Steps(){
 
 const Container = styled.div`
     width: 980px;
-    margin-bottom: 10px;
+    margin: 18px 0px 14px;
+    padding: 0 24px;
+    box-sizing: border-box;
 `;
 
 const StepsOptions = styled.ol`
@@ -44,9 +46,11 @@ const Step = styled.li`
     width: 148px;
     display: grid;
     place-items: center;
-    border-bottom: 2px solid ${props => props.isConcluded? '#63a615' : '#AFB4BB'};
+    border-bottom: 2px solid ${props => props.isPending?  '#AFB4BB' : '#63a615'};
 
     span{
-        font-weight: ${props => props.isConcluded? '700' : '400'};
+        font-size: 12px;
+        color: ${props => props.isCurrentStep? '#282D37' : '878c96'};
+        font-weight: ${props => props.isCurrentStep? '700' : '400'};
     }
 `;

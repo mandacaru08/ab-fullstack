@@ -33,9 +33,10 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 16px;
     padding: 17px 12px;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #FFFFFF;
 
     div{
@@ -63,4 +64,10 @@ const Earlier = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    :hover{
+        color: #F24423;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 `;

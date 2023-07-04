@@ -110,7 +110,8 @@ const ShowFastestConnection = styled.div`
 const ChangeButton = styled.button`
     height: 38px; 
     width: 90px;
-    background-color: '';
+    font-size: 14px;
+    background-color: transparent;
     border: 1px solid #282D37;
     border-radius: 3px;
 `;
