@@ -4,7 +4,6 @@ import { CgDanger } from 'react-icons/cg';
 import { RiMoneyDollarBoxFill } from 'react-icons/ri';
 
 export default function SymbolLegendNote(){
-
     return(
         <Container>
             <MeaningOfSymbols>
@@ -13,7 +12,7 @@ export default function SymbolLegendNote(){
                 </div>
                 <li>
                     <MdGroups style={{color: '#D77B00'}}/>
-                    <span>{info.legend}</span>
+                    <span>Alta demanda esperada</span>
                 </li>
                 <li>
                     <CgDanger/>
