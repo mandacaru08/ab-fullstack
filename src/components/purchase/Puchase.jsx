@@ -4,6 +4,7 @@ import Bar from './Bar';
 import Steps from './select/Steps';
 import TicketOverview from './select/TicketOverview';
 import OutwardJourneyOptions from './select/OutwardJourneyOptions';
+import SymbolLegendNote from './SymbolLegendNote';
 
 export default function Purchase(){
     return(
@@ -14,6 +15,7 @@ export default function Purchase(){
               <TicketOverview/>
               <OutwardJourneyOptions/>
             </Content>
+            <SymbolLegendNote/>
         </Container>
     );
 }
