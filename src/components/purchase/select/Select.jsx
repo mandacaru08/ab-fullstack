@@ -1,16 +1,27 @@
-import StepsStatus from './StepsStatus';
-import TicketOverview from '../select/TicketOverview';
-import OutwardJourneyOptions from '../select/OutwardJourneyOptions';
-import SymbolLegendNote from '../SymbolLegendNote';
+import { useContext } from 'react';
+
+import StepsStatus from '../StepsStatus';
+import TicketOverview from '../TicketOverview';
+import OutwardJourneyOptions from './ticket-options/OutwardJourneyOptions';
+import SymbolLegendNote from '../symbols-meaning/SymbolLegendNote';
 import CurrentPurchaseStep from '../CurrentPurchaseStep';
+import TicketSymbolsAndNotes from '../symbols-meaning/ticket-options-symbols/TicketSymbolsAndNotes';
+import TicketClassesOptions from './ticket-classes/TicketClassesOptions';
+import ClassSymbolsAndNotes from '../symbols-meaning/class-options-symbols/ClassSymbolsAndNotes';
+import TicketContext from '../../../contexts/ticket-context/TicketContext';
 
 export default function Select(){
+
+    const ticketContextData = useContext(TicketContext);
+
     return(
         <CurrentPurchaseStep>
             <StepsStatus/>
             <TicketOverview/>
-            <OutwardJourneyOptions/>
-            <SymbolLegendNote/>
+            {ticketContextData.ticketStatus?.ticketSelected? <TicketClassesOptions/> : <OutwardJourneyOptions/>}
+            <SymbolLegendNote>
+                {ticketContextData.ticketStatus?.ticketSelected? <ClassSymbolsAndNotes/> : <TicketSymbolsAndNotes/>}
+            </SymbolLegendNote>
         </CurrentPurchaseStep>
     );
 }

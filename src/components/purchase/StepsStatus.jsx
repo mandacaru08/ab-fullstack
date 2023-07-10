@@ -4,7 +4,7 @@ export default function StepsStatus(){
     const steps = [
         {name: 'Pesquisar', status: 'in-progress'},
         {name: 'Selecionar', status: 'pending'},
-        {name: 'Ticker e Reserva', status: 'pending'},
+        {name: 'Ticket e Reserva', status: 'pending'},
         {name: 'Pagamento', status: 'pending'},
         {name: 'Verificar e Reservar', status: 'pending'},
         {name: 'Confirmação', status: 'pending'},

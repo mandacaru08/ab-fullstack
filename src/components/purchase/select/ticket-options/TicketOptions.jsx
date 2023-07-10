@@ -1,7 +1,20 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import TicketContext from '../../../../contexts/ticket-context/TicketContext';
+
 import styled from 'styled-components';
-import { MdOutlineKeyboardArrowDown, MdKeyboardArrowRight, MdGroups } from 'react-icons/md';
+import { 
+    MdOutlineKeyboardArrowDown, 
+    MdKeyboardArrowRight, 
+    MdGroups 
+} from 'react-icons/md';
 
 export default function TicketOptions(){
+
+    const ticketContext = useContext(TicketContext);
+
+    const navigate = useNavigate();
 
     const ticketsInformation =[
         {
@@ -54,6 +67,12 @@ export default function TicketOptions(){
         return({hour, minute});
     }
 
+    function selectTicket(){
+        const { ticketStatus, setTicketStatus } = ticketContext;
+        setTicketStatus({ ...ticketStatus, ticketSelected: true });
+    }
+
+
     return(
         <Container>
             {
@@ -102,7 +121,7 @@ export default function TicketOptions(){
                                     <Price>
                                         A partir de <h1>R${ticket.price}</h1>
                                     </Price>
-                                    <SelectTicket>
+                                    <SelectTicket onClick={selectTicket}>
                                         <MdKeyboardArrowRight/>
                                     </SelectTicket>    
                                 </PriceAndSelectTicket>
