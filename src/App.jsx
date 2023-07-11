@@ -6,7 +6,7 @@ import Home from './components/homepage/Home';
 import SignIn from './components/user/SignIn';
 import SignUp from './components/user/SignUp';
 import Select from './components/purchase/select/Select';
-import TicketClassesOptions from './components/purchase/select/ticket-classes/TicketClassesOptions';
+import TicketAndReservation from './components/purchase/ticket-reservation/TicketAndReservation';
 import './App.css';
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
           <Route path='/sign-in' element={<SignIn/>}/>
           <Route path='/sign-up' element={<SignUp/>}/>
           <Route path='/purchase/select' element={<Select/>}/>
+          <Route path='/purchase/ticket-reservation' element={<TicketAndReservation/>}/>
         </Routes>
       </BrowserRouter>
     </TicketContext.Provider>
