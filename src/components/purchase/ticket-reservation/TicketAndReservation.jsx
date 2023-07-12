@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CurrentPurchaseStep from "../CurrentPurchaseStep";
 import StepsStatus from "../StepsStatus";
 import LogAndBook from "./LogAndBook";
+import LoginRegistration from "./LoginRegistration";
 
 export default function TicketAndReservation(){
     return(
@@ -10,6 +11,7 @@ export default function TicketAndReservation(){
             <StepsStatus/>
             <Section></Section>
             <LogAndBook />
+            <LoginRegistration/>
         </CurrentPurchaseStep>
     );
 }

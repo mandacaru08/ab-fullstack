@@ -21,6 +21,7 @@ export default function LogAndBook(){
 const Container = styled.div`
     height: 170px;
     width: 100%;
+    margin-bottom: 20px;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
