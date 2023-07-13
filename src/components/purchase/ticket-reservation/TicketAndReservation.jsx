@@ -1,17 +1,28 @@
+import { useState } from "react";
+
 import styled from "styled-components";
 
 import CurrentPurchaseStep from "../CurrentPurchaseStep";
 import StepsStatus from "../StepsStatus";
 import LogAndBook from "./LogAndBook";
-import LoginRegistration from "./LoginRegistration";
+import CustomerDataDetails from "./CustomerDataDetails";
+import DigitalTicketAndSeat from "./DigitalTicketAndSeat";
 
 export default function TicketAndReservation(){
+
+    const [customerDetailsFilled, setCustomerDetailsFilled ] = useState(false);
+
     return(
         <CurrentPurchaseStep>
             <StepsStatus/>
             <Section></Section>
             <LogAndBook />
-            <LoginRegistration/>
+            {
+                customerDetailsFilled?
+                <CustomerDataDetails setCustomerDetailsFilled={setCustomerDetailsFilled}/>
+                :
+                <DigitalTicketAndSeat></DigitalTicketAndSeat>
+            }
         </CurrentPurchaseStep>
     );
 }

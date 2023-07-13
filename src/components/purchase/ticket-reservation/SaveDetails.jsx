@@ -4,7 +4,20 @@ import styled from 'styled-components';
 import { BsFillCheckCircleFill, BsFillCheckSquareFill } from 'react-icons/bs';
 import { ImInfo } from 'react-icons/im';
 
-
+const advantages = [
+    {
+        id: 1,
+        name: 'Use os dados do perfil para compra rápida'
+    },
+    {
+        id: 2,
+        name: 'Vizualize e administre reservas de forma rápida'
+    },
+    {
+        id: 3,
+        name: 'Mantenha-se informado com as notificações de viagem'
+    },
+];
 
 export default function SaveDetails(){
 
@@ -69,6 +82,7 @@ const Container = styled.div`
     align-items: left;
     background-color: #FFFFFF;
     border-top: 1px solid #F0F3F5;
+    border-radius: 0 0 4px 4px !important;
     
     label{
         height: 98px;

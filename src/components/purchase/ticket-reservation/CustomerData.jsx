@@ -68,6 +68,7 @@ const Container = styled.section`
     justify-content: space-between;
     align-items: center;
     background-color: #FFFFFF;
+    border-radius: 4px 4px 0 0 !important;
 
     h4{
         height: 52px;

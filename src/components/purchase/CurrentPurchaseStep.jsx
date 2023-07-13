@@ -15,6 +15,7 @@ export default function CurrentPurchaseStep({children}){
 const Container = styled.div`
   height: auto;
   width: 980px;
+  padding: 0 20px;
   box-sizing: border-box;
   margin-bottom: 5%;
   display: flex;

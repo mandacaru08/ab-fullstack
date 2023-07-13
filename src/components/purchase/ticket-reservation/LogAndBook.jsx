@@ -28,6 +28,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background-color: #FFFFFF;
+    border-radius: 4px;
 
     h4{
         height: 52px;

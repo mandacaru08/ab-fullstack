@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CustomerData from './CustomerData';
 import SaveDetails from './SaveDetails';
 
-export default function LoginRegistration(){
+export default function CustomerDataDetails(){
     return(
         <Container>
             <CustomerData/>
