@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 
 import CustomerData from './CustomerData';
+import SaveDetails from './SaveDetails';
 
 export default function LoginRegistration(){
     return(
         <Container>
             <CustomerData/>
+            <SaveDetails/>
         </Container>
     );
 }
 
 const Container = styled.div`
-    height: 590px;
+    height: 552px;
     width: 100%;
     display: flex;
     flex-direction: column;
