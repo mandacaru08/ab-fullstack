@@ -6,7 +6,7 @@ import Home from './components/homepage/Home';
 import SignIn from './components/user/SignIn';
 import SignUp from './components/user/SignUp';
 import Select from './components/purchase/select/Select';
-import TicketAndReservation from './components/purchase/ticket-reservation/TicketAndReservation';
+import TicketAndReservation from './components/purchase/ticket-reservation/ticket-and-seats/TicketAndReservation';
 import './App.css';
 
 function App() {

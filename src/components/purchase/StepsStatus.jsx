@@ -27,7 +27,7 @@ export default function StepsStatus(){
 }
 
 const Container = styled.div`
-    width: 980px;
+    width: 100%;
     margin: 18px 0px 14px;
     padding: 0 24px;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ const StepsOptions = styled.ol`
 
 const Step = styled.li`
     height: 100%;
-    width: 148px;
+    width: 118px;
     display: grid;
     place-items: center;
     border-bottom: 2px solid ${props => props.isPending?  '#AFB4BB' : '#63a615'};

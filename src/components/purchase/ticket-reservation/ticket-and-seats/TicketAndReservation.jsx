@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import styled from "styled-components";
 
-import CurrentPurchaseStep from "../CurrentPurchaseStep";
-import StepsStatus from "../StepsStatus";
-import CustomerDataDetails from "./CustomerDataDetails";
+import CurrentPurchaseStep from "../../CurrentPurchaseStep";
+import StepsStatus from "../../StepsStatus";
+import CustomerDataDetails from "../passenger-details/CustomerDataDetails";
 import DigitalTicketAndSeat from "./DigitalTicketAndSeat";
 
 export default function TicketAndReservation(){
