@@ -25,7 +25,6 @@ export default function SaveDetails(){
 
     function handleInputChange(){
         setSaveDetails(!saveDetails);
-        console.log(saveDetails);
     };
     
 
@@ -34,7 +33,7 @@ export default function SaveDetails(){
             <label onChange={() => handleInputChange()}>
                 <InputContainer showInput={!saveDetails}>
                     <input type='checkbox' readOnly/>
-                    {saveDetails ==true && <BsFillCheckSquareFill/>}
+                    {saveDetails == true && <BsFillCheckSquareFill/>}
                 </InputContainer>
                 <Title checked={saveDetails}>
                     <h4>Salve os detalhes para futuras reservas</h4>

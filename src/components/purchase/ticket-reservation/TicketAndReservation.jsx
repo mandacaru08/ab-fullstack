@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import CurrentPurchaseStep from "../CurrentPurchaseStep";
 import StepsStatus from "../StepsStatus";
-import LogAndBook from "./LogAndBook";
 import CustomerDataDetails from "./CustomerDataDetails";
 import DigitalTicketAndSeat from "./DigitalTicketAndSeat";
 
@@ -16,12 +15,11 @@ export default function TicketAndReservation(){
         <CurrentPurchaseStep>
             <StepsStatus/>
             <Section></Section>
-            <LogAndBook />
             {
                 customerDetailsFilled?
                 <CustomerDataDetails setCustomerDetailsFilled={setCustomerDetailsFilled}/>
                 :
-                <DigitalTicketAndSeat></DigitalTicketAndSeat>
+                <DigitalTicketAndSeat/>
             }
         </CurrentPurchaseStep>
     );
