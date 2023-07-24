@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { ImInfo } from 'react-icons/im';
 import { IoTicketOutline } from 'react-icons/io5';

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import CurrentPurchaseStep from "../../CurrentPurchaseStep";
 import StepsStatus from "../../StepsStatus";
-import CustomerDataDetails from "../passenger-details/CustomerDataDetails";
+import CustomerDataDetails from "../../passenger-details/CustomerDataDetails";
 import DigitalTicketAndSeat from "./DigitalTicketAndSeat";
 
 export default function TicketAndReservation(){
@@ -17,9 +17,9 @@ export default function TicketAndReservation(){
             <Section></Section>
             {
                 customerDetailsFilled?
-                <CustomerDataDetails setCustomerDetailsFilled={setCustomerDetailsFilled}/>
-                :
                 <DigitalTicketAndSeat/>
+                :
+                <CustomerDataDetails setCustomerDetailsFilled={setCustomerDetailsFilled}/>
             }
         </CurrentPurchaseStep>
     );
