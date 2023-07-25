@@ -4,6 +4,7 @@ import Bar from '../Bar';
 import StepsStatus from '../StepsStatus';
 import CustomerGreetings from '../passenger-details/CustomerGreetings';
 import PaymentOptions from './PaymentOptions';
+import TotalPrice from '../TotalPrice';
 
 export default function Payment(){
     return(
@@ -75,6 +76,7 @@ export default function Payment(){
                 </AddressForm>
             </PaymentForm>
             <PaymentOptions/>
+            <TotalPrice/>
         </Container>
     );
 }
