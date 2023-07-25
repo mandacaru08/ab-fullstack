@@ -15,7 +15,6 @@ function App() {
   const [ ticketStatus, setTicketStatus ] = useState({
     ticketSelected: false,
     classSelected: false,
-
   });
 
   const ticketContextData = {ticketStatus, setTicketStatus};

@@ -1,21 +1,36 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function StepsStatus(){
     const steps = [
-        {name: 'Pesquisar', status: 'in-progress'},
-        {name: 'Selecionar', status: 'pending'},
-        {name: 'Ticket e Reserva', status: 'pending'},
-        {name: 'Pagamento', status: 'pending'},
-        {name: 'Verificar e Reservar', status: 'pending'},
-        {name: 'Confirmação', status: 'pending'},
+        {stepName : 'search', name: 'Pesquisar', status: 'in-progress'},
+        {stepName : 'select', name: 'Selecionar', status: 'pending'},
+        {stepName : 'ticket-reservation', name: 'Ticket e Reserva', status: 'pending'},
+        {stepName : 'payment', name: 'Pagamento', status: 'pending'},
+        {stepName : 5, name: 'Verificar e Reservar', status: 'pending'},
+        {stepName : 6, name: 'Confirmação', status: 'pending'},
     ];
+
+    const navigate = useNavigate();
+
+    function redirectCurrentStep(stepName){
+        const route = stepName == 'search'? '/' : `/purchase/${stepName}`;
+        console.log(route)
+        navigate(route);
+    }
+
     return(
         <Container>
             <StepsOptions>
                 {
                     steps.map(step => {
                         return(
-                            <Step key={step.name} isCurrentStep={step.status == 'in-progress'} isPending={step.status == 'pending'}>
+                            <Step 
+                                key={step.name} 
+                                isPending={step.status == 'pending'}
+                                isCurrentStep={step.status == 'in-progress'} 
+                                onClick={() => redirectCurrentStep(step.stepName)}
+                            >
                                 <span>{step.name}</span>
                             </Step>
                         );
@@ -52,5 +67,9 @@ const Step = styled.li`
         font-size: 12px;
         color: ${props => props.isCurrentStep? '#282D37' : '878c96'};
         font-weight: ${props => props.isCurrentStep? '700' : '400'};
+    }
+
+    :hover{
+        cursor: pointer;
     }
 `;
