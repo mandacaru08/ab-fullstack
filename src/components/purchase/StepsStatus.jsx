@@ -7,7 +7,7 @@ export default function StepsStatus(){
         {stepName : 'select', name: 'Selecionar', status: 'pending'},
         {stepName : 'ticket-reservation', name: 'Ticket e Reserva', status: 'pending'},
         {stepName : 'payment', name: 'Pagamento', status: 'pending'},
-        {stepName : 5, name: 'Verificar e Reservar', status: 'pending'},
+        {stepName : 'ticket-verification' , name: 'Verificar e Reservar', status: 'pending'},
         {stepName : 6, name: 'Confirmação', status: 'pending'},
     ];
 
@@ -15,7 +15,6 @@ export default function StepsStatus(){
 
     function redirectCurrentStep(stepName){
         const route = stepName == 'search'? '/' : `/purchase/${stepName}`;
-        console.log(route)
         navigate(route);
     }
 

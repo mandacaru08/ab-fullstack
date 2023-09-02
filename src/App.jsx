@@ -9,6 +9,7 @@ import Select from './components/purchase/select/Select';
 import TicketAndReservation from './components/purchase/ticket-reservation/ticket-and-seats/TicketAndReservation';
 import Payment from './components/purchase/payment/Payment';
 import './App.css';
+import TicketConfirmation from './components/purchase/confirmation/TicketConfirmation';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/purchase/select' element={<Select/>}/>
           <Route path='/purchase/ticket-reservation' element={<TicketAndReservation/>}/>
           <Route path='/purchase/payment' element={<Payment/>}/>
+          <Route path='/purchase/ticket-verification' element={<TicketConfirmation/>}/>
         </Routes>
       </BrowserRouter>
     </TicketContext.Provider>
