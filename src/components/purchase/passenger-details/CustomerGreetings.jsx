@@ -17,7 +17,7 @@ export default function CustomerGreetings(){
                 <section>
                     <label>Saudações</label>
                     <Options>
-                        <select type='text' value={customerData.salutation}>
+                        <select type='text' onChange={(e) => setCustomerData({...customerData, salutation: e.target.value})}>
                             <option>Sr.</option>
                             <option>Sra.</option>
                         </select>
@@ -27,7 +27,7 @@ export default function CustomerGreetings(){
                 <section>
                     <label>Título</label>
                     <Options>
-                        <select type='text' value={customerData.title}>
+                        <select type='text' onChange={(e) => setCustomerData({...customerData, title: e.target.value})}>
                             <option>Dr.</option>
                             <option>Prof.</option>
                             <option>Prof. Dr.</option>

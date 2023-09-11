@@ -99,10 +99,10 @@ function TimeInput() {
                 <MdArrowBackIos />
             </PreviousHour>
             <TimePicker>
-                <HourInput type='text' value={time.hour}/>
+                <HourInput type='text' value={time.hour} onChange={(e) => setTime({...time, hour: e.target.value})}/>
                 <span>:</span>
-                <MinuteInput type='text' value={time.minute}/>
-                <ShiftInput type='text' value={time.period}/>
+                <MinuteInput type='text' value={time.minute} onChange={(e) => setTime({...time, minute: e.target.value})}/>
+                <ShiftInput type='text' value={time.period} onChange={(e) => setTime({...time, period: e.target.value})}/>
             </TimePicker>
             <NextHour onClick={incrementOneHour}>
                 <MdArrowForwardIos/>

@@ -63,13 +63,13 @@ export default function Payment(){
                         <Fieldset>
                             <section style={{width: '100%'}}>
                                 <label>Complemento</label>
-                                <input type='text' style={{width: 'calc(20% - 10px);'}}/>
+                                <input type='text' style={{width: 'calc(20% - 10px)'}}/>
                             </section> 
                         </Fieldset>
                         <Fieldset>
                             <section>
                                 <label>Celular</label>
-                                <input type='text' style={{width: 'calc(30% - 10px);'}}/>
+                                <input type='text' style={{width: 'calc(30% - 10px)'}}/>
                             </section> 
                         </Fieldset>
                     </Form>

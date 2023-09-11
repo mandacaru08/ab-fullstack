@@ -31,6 +31,7 @@ export default function Destination(){
         passengers: 1,
         age: '',
         class: '',
+        paymentMethod: ''
     });
 
     useEffect(() => {
@@ -116,12 +117,12 @@ export default function Destination(){
                                     </AddReturn>
                             }
                             <NumberPassengers>
-                                <select type='text' value={ticket.passengers}>
-                                    <option value='1'>1 pessoa</option>
-                                    <option value='2'>2 pessoas</option>
-                                    <option value='3'>3 pessoas</option>
-                                    <option value='4'>4 pessoas</option>
-                                    <option value='5'>5 pessoas</option>
+                                <select type='text' value={ticket.passengers} onChange={(e) => setTicket({...ticket, passengers: e.target.value})}>
+                                    <option >1 pessoa</option>
+                                    <option >2 pessoas</option>
+                                    <option >3 pessoas</option>
+                                    <option >4 pessoas</option>
+                                    <option >5 pessoas</option>
                                 </select>
                                 <ShowOptions>
                                     <MdOutlineKeyboardArrowDown/>
@@ -132,18 +133,19 @@ export default function Destination(){
                                     <InfoIcon style={{position: 'absolute', top: '0', left: '0'}}>
                                         <ImInfo/>
                                     </InfoIcon>
-                                    <select type='text' value={ticket.age}>
-                                        <option value='1'>Idade entre 5-14</option>
-                                        <option value='2'>Idade entre 15-27</option>
-                                        <option value='3'>Maior de 27</option>
+                                    <select type='text' value={ticket.age} onChange={(e) => setTicket({...ticket, age: e.target.value})}>
+                                        <option >Idade entre 5-14</option>
+                                        <option >Idade entre 15-27</option>
+                                        <option >Maior de 27</option>
                                     </select>
                                     <ShowOptions>
                                         <MdOutlineKeyboardArrowDown/>
                                     </ShowOptions>
                                 </Age>
                                 <CardType>
-                                    <select type='text' value={ticket.age}>
-                                        <option value='1'>Sem Cartão</option>
+                                    <select type='text' value={ticket.paymentMethod} onChange={(e) => setTicket({...ticket, paymentMethod: e.target.value})}>
+                                        <option >Sem Cartão</option>
+                                        <option >Cartão de Crédito</option>
                                     </select>
                                     <ShowOptions>
                                         <MdOutlineKeyboardArrowDown/>
@@ -168,27 +170,25 @@ export default function Destination(){
                                 <TransportationClass>
                                     <Options>
                                         <Option 
-                                            checked={ticket.class === '1'}
                                             onClick={() => setTicket({...ticket, class: '1'})}
                                         >
                                             <span>
                                                 <input 
                                                     type="radio" 
-                                                    value="1" 
                                                     checked={ticket.class === '1'}
+                                                    readOnly
                                                 />
                                                 <label>1ª Classe</label>
                                             </span>
                                         </Option>
                                         <Option 
-                                            checked={ticket.class === '2'}
                                             onClick={() => setTicket({...ticket, class: '2'})}
                                         >
                                             <span>
                                                 <input 
                                                     type="radio" 
-                                                    value="2" 
                                                     checked={ticket.class === '2'}
+                                                    readOnly
                                                 />
                                                 <label>2ª Classe</label>
                                             </span>
@@ -211,9 +211,9 @@ export default function Destination(){
                                         <Option 
                                             style={{width: '270px'}}
                                             checked={transportTypes.fastestConnections}
+                                            onClick={() => setTransportTypes({...transportTypes, fastestConnections: !transportTypes.fastestConnections})}
                                         >
                                             <span 
-                                                onClick={() => setTransportTypes({...transportTypes, fastestConnections: !transportTypes.fastestConnections})}
                                             >
                                                 <input type="checkbox"/>
                                                 <label>Mostrar conexões mais rápidas</label>

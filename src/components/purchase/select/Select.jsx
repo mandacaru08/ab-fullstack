@@ -12,15 +12,13 @@ import TicketContext from '../../../contexts/ticket-context/TicketContext';
 
 export default function Select(){
 
-    const ticketContextData = useContext(TicketContext);
-
     return(
         <CurrentPurchaseStep>
             <StepsStatus/>
             <TicketOverview/>
-            {ticketContextData.ticketStatus?.ticketSelected? <TicketClassesOptions/> : <OutwardJourneyOptions/>}
+            {/* ticketContextData.ticketStatus?.ticketSelected */ false? <TicketClassesOptions/> : <OutwardJourneyOptions/>}
             <SymbolLegendNote>
-                {ticketContextData.ticketStatus?.ticketSelected? <ClassSymbolsAndNotes/> : <TicketSymbolsAndNotes/>}
+                {/* ticketContextData.ticketStatus?.ticketSelected */ false? <ClassSymbolsAndNotes/> : <TicketSymbolsAndNotes/>}
             </SymbolLegendNote>
         </CurrentPurchaseStep>
     );

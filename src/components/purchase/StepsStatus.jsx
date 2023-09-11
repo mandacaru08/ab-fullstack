@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-export default function StepsStatus(){
-    const steps = [
-        {stepName : 'search', name: 'Pesquisar', status: 'in-progress'},
-        {stepName : 'select', name: 'Selecionar', status: 'pending'},
-        {stepName : 'ticket-reservation', name: 'Ticket e Reserva', status: 'pending'},
-        {stepName : 'payment', name: 'Pagamento', status: 'pending'},
-        {stepName : 'ticket-verification' , name: 'Verificar e Reservar', status: 'pending'},
-        {stepName : 6, name: 'Confirmação', status: 'pending'},
-    ];
+
+import TicketContext from '../../contexts/ticket-context/TicketContext';
+
+export default function StepsStatus(){ 
 
     const navigate = useNavigate();
 
@@ -17,6 +13,9 @@ export default function StepsStatus(){
         const route = stepName == 'search'? '/' : `/purchase/${stepName}`;
         navigate(route);
     }
+
+    const { steps } = useContext(TicketContext);
+
 
     return(
         <Container>

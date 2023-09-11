@@ -1,12 +1,14 @@
-import { useState } from "react";
 import styled from 'styled-components';
 import { BsFillPassFill } from 'react-icons/bs'
 import { RiSecurePaymentFill } from 'react-icons/ri';
+import { useNavigate } from "react-router-dom";
 
 import Bar from "../Bar";
 import StepsStatus from "../StepsStatus";
 
 export default function TicketConfirmation() {
+
+    const navigate = new useNavigate();
 
     return(
         <Container>
@@ -73,7 +75,7 @@ export default function TicketConfirmation() {
                     </PaymentMethodOverview>
                     <ContainerButton>
                         <button>Alterar</button>
-                        <button>Confirmar</button>
+                        <button onClick={() => navigate('/purchase/ticket-confirmation')}>Confirmar</button>
                     </ContainerButton>
                 </Overview>
             </OverviewAndReservation>

@@ -1,27 +1,22 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import TicketContext from './contexts/ticket-context/TicketContext';
+import { TicketProvider } from './contexts/ticket-context/TicketContext';
+
 import Home from './components/homepage/Home';
 import SignIn from './components/user/SignIn';
 import SignUp from './components/user/SignUp';
 import Select from './components/purchase/select/Select';
 import TicketAndReservation from './components/purchase/ticket-reservation/ticket-and-seats/TicketAndReservation';
 import Payment from './components/purchase/payment/Payment';
-import './App.css';
 import TicketConfirmation from './components/purchase/confirmation/TicketConfirmation';
+import TicketOverview from './components/purchase/TicketOverview';
+import './App.css';
 
 function App() {
 
-  const [ ticketStatus, setTicketStatus ] = useState({
-    ticketSelected: false,
-    classSelected: false,
-  });
-
-  const ticketContextData = {ticketStatus, setTicketStatus};
-
   return (
-    <TicketContext.Provider value={ticketContextData}>
+    <TicketProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -31,9 +26,10 @@ function App() {
           <Route path='/purchase/ticket-reservation' element={<TicketAndReservation/>}/>
           <Route path='/purchase/payment' element={<Payment/>}/>
           <Route path='/purchase/ticket-verification' element={<TicketConfirmation/>}/>
+          <Route path='/purchase/ticket-overview' element={<TicketOverview/>}/>
         </Routes>
       </BrowserRouter>
-    </TicketContext.Provider>
+    </TicketProvider>
   )
 }
 

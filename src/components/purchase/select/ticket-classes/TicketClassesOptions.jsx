@@ -139,7 +139,7 @@ export default function TicketClassesOptions() {
                                         checked={selectedClass.class === ticketClass.id}
                                         onClick={() => setSelectedClass({...selectedClass, class: ticketClass.id})}
                                     >
-                                        <input type="radio" value={ticketClass.id}/>
+                                        <input type="radio"/>
                                         {ticketClass.seatIncluded && <MdAirlineSeatReclineNormal/>}
                                         <span>R$ {ticketClass.price}</span>
                                     </Price>
