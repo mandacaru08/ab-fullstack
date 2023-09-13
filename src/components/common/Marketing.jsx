@@ -21,8 +21,6 @@ export default function Marketing(){
 
     const [currentSection, setCurrentSection] = useState(0);
 
-    const carouselRef = useRef([]);
-
     function previousSection(event){
 
         event.preventDefault();
@@ -45,28 +43,16 @@ export default function Marketing(){
         }
     }
 
-    useEffect(() => {
-        const element = carouselRef.current[currentSection];
-        if (element) {
-          const wrapper = element.parentElement.parentElement;
-          const scrollLeft = element.offsetLeft - wrapper.offsetLeft;
-          wrapper.scrollTo({
-            left: scrollLeft,
-            behavior: 'smooth',
-          });
-        }
-    }, [currentSection]);
-
     return(
         <AdvertisementsContainer>
             <Advertisements>
-                <Carousel ref={carouselRef}>
+                <Carousel>
                     {
                         allInfos.map((advertisement, index) => {
                             return(
                                 <Advertisement 
                                     key={advertisement.title}
-                                    ref={el => carouselRef.current[index] = el} 
+                                    style={{transform: `translateX(-${currentSection * 100}%)`}}
                                 >
                                     <Poster>
                                         <Image src={advertisement.image} alt={'poster-' + advertisement.title}/>
@@ -101,9 +87,7 @@ export default function Marketing(){
                             allInfos.map((section, index) => {
                                 return(
                                     <li key={section.title}>
-                                        {
-                                            index == currentSection? <FaCircle/> : <FiCircle/>
-                                        }
+                                        {index == currentSection? <FaCircle/> : <FiCircle/>}
                                     </li>
                                 )
                             })
@@ -115,7 +99,6 @@ export default function Marketing(){
 }
 
 const AdvertisementsContainer = styled.div`
-    //height: 360px;
     width: 100%;
     margin-top: 40px;
 
@@ -126,7 +109,6 @@ const AdvertisementsContainer = styled.div`
 `;
 
 const Advertisements = styled.div`
-    //height: 300px;
     width: fit-content;
 
     display: flex;
@@ -142,12 +124,13 @@ const Carousel = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    transition: transform 0.3s ease-in-out;
 `;
 
 const Advertisement = styled.div`
     height: 100%;
+    min-height: 324px;
     width: 100%;
+    transition: transform 0.5s ease-out;
 
     display: flex;
     flex-direction: row;
@@ -220,6 +203,9 @@ const Description = styled.div`
 const ArrowButtons = styled.div`
     button{
         height: 100%;
+        :hover {
+            cursor: pointer;
+        }
     }
     div{
         height: 40px;
@@ -231,7 +217,7 @@ const ArrowButtons = styled.div`
         justify-content: center;
         
         align-items: center;
-        background-color: #FFFFFF70;
+        background-color: #FFFFFF80;
     }
 `;
 
