@@ -64,8 +64,8 @@ export default function SignIn(){
             setInputStatus({...inputStatus, isPasswordValid: true});
         }
 
-        await signIn(user);
-        navigate('/');
+        const existUser = await signIn(user);
+        if(existUser) navigate('/');
     }
 
     return(
