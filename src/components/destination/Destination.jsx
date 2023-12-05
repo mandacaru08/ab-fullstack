@@ -1,19 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FaRegCalendarAlt, FaCheck, FaRegTrashAlt } from 'react-icons/fa';
+import { MdKeyboardArrowRight, MdOutlineKeyboardArrowDown, MdRepeat } from 'react-icons/md';
 import { HiOutlineReceiptPercent } from 'react-icons/hi2';
 import { TbArrowsLeftRight } from 'react-icons/tb';
 import { ImInfo } from 'react-icons/im';
-import { MdKeyboardArrowRight, MdOutlineKeyboardArrowDown, MdRepeat } from 'react-icons/md';
+import { IoCloseCircleSharp } from "react-icons/io5";
+import styled from 'styled-components';
+
+
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
 import MoreInfos from './MoreInfos';
+import CitiesOptionsFiltered from './CitiesOptionsFiltered';
+import amazonCities from '../../helper/cities.json';
  
 export default function Destination(){
+
+    const navigate = useNavigate();
 
     const moreInfosRef = useRef();
 
     const [ formHeight, setFormHeight ] = useState(false)
+    const [ inputCity, setInputCity ] = useState('');
+    const [ filteredCities, setFilteredCities ] = useState([]);
     const [ showBackground, setShowBackground ] = useState(false);
     const [ showReturnField, setShowReturnField ] = useState(false);
     const [ showMoreInfosMessage, setShowMoreInfosMessage ] = useState(false);
@@ -57,25 +67,54 @@ export default function Destination(){
         };
     }, []);
 
+    useEffect(() => {
+        filterCities();
+    }, [inputCity]);
+
+    function filterCities(){
+        if (inputCity == '') {
+            return setFilteredCities([]);
+        }
+        const cities = amazonCities.locales.amazon_cities.filter(city => {
+            return city?.name?.toLowerCase()?.includes(inputCity?.toLowerCase());
+        });
+
+        setFilteredCities(cities);
+    }
+
     return(
         <>
-            {showBackground && <BlurBackground onClick={() => setShowBackground(false)}/>}
+            {showBackground && <BlurBackground position={"fixed"} onClick={() => setShowBackground(false)}/>}
             <TravelForm isClicked={formHeight} onClick={() => setShowBackground(true)}>
                 <h2>Para onde você quer ir?</h2>
                 <FormInfos>
-
                     <TravelInfos>
                         <TravelRoute>
                             <Input>
                                 <label>Saída</label>
-                                <input type='text' placeholder='estação / parada / endereço '/>
+                                <input 
+                                    type='text' 
+                                    placeholder='estação / parada / endereço '
+                                    value={ticket.from}
+                                    onChange={(e) => setTicket({...ticket, from: e.target.value})}
+                                />
+                                <IoCloseCircleSharp onClick={() => setInputCity('')}/>
+                                <CitiesOptionsFiltered cities={filteredCities} showOptions={filteredCities.length > 0}/>
                             </Input>
                             <Icon>
                                 <TbArrowsLeftRight/>
                             </Icon>
                             <Input>
                                 <label>Destino</label>
-                                <input type='text' placeholder='estação / parada / endereço '/>
+                                <input 
+                                    type='text' 
+                                    placeholder='estação / parada / endereço '
+                                    value={ticket.to}
+                                    onChange={(e) => setTicket({...ticket, to: e.target.value})}
+                                />
+                                
+                                <IoCloseCircleSharp onClick={() => setInputCity('')}/>
+                                <CitiesOptionsFiltered cities={filteredCities} showOptions={filteredCities.length > 0}/>
                             </Input>
                         </TravelRoute>
                         <TravelDate>
@@ -243,7 +282,7 @@ export default function Destination(){
                             </Icon>
                             <h3>Apenas assento (sem ticket)</h3>
                         </div>
-                        <button>Pesquisar</button>
+                        <button onClick={() => navigate('/purchase/select')}>Pesquisar</button>
                     </OnlySeatOption>
 
                 </FormInfos>
@@ -566,10 +605,10 @@ const TransportOption = styled.div`
 `;
 
 const BlurBackground = styled.div`
-    height: 100vh;
+    height: 100%;
     width: 100%;
     z-index: 2;
-    position: fixed;
+    position: ${props => props.position ? props.position : 'absolute'};
     top: 0;
     left: 0;
     background-color: #282d37;
@@ -620,6 +659,7 @@ const FormInfos = styled.div`
     flex-direction: column;
     justify-content: space-between;
     z-index: 1;
+    position: relative;
 `;
 
 const TravelRoute = styled.div`
@@ -660,6 +700,13 @@ const Input = styled.div`
     border-radius: 0.25rem;
     background-color: #f0f3f5;
 
+    svg {
+        font-size: 20px;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
     input{
         height: 100%;
