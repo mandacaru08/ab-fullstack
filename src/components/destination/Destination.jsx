@@ -22,8 +22,12 @@ export default function Destination(){
     const moreInfosRef = useRef();
 
     const [ formHeight, setFormHeight ] = useState(false)
-    const [ inputCity, setInputCity ] = useState('');
-    const [ filteredCities, setFilteredCities ] = useState([]);
+
+    const [ fromCity, setFromCity ] = useState('');
+    const [ toCity, setToCity ] = useState('');
+    const [fromFilteredCities, setFromFilteredCities] = useState([]);
+    const [toFilteredCities, setToFilteredCities] = useState([]);
+
     const [ showBackground, setShowBackground ] = useState(false);
     const [ showReturnField, setShowReturnField ] = useState(false);
     const [ showMoreInfosMessage, setShowMoreInfosMessage ] = useState(false);
@@ -67,19 +71,11 @@ export default function Destination(){
         };
     }, []);
 
-    useEffect(() => {
-        filterCities();
-    }, [inputCity]);
-
-    function filterCities(){
-        if (inputCity == '') {
-            return setFilteredCities([]);
-        }
+    function filterCities(inputCity){
         const cities = amazonCities.locales.amazon_cities.filter(city => {
             return city?.name?.toLowerCase()?.includes(inputCity?.toLowerCase());
         });
-
-        setFilteredCities(cities);
+        return cities;
     }
 
     return(
@@ -95,11 +91,14 @@ export default function Destination(){
                                 <input 
                                     type='text' 
                                     placeholder='estação / parada / endereço '
-                                    value={ticket.from}
-                                    onChange={(e) => setTicket({...ticket, from: e.target.value})}
+                                    value={fromCity}
+                                    onChange={(e) => {
+                                        setFromCity(e.target.value);
+                                        setFromFilteredCities(filterCities(e.target.value));
+                                    }}
                                 />
-                                <IoCloseCircleSharp onClick={() => setInputCity('')}/>
-                                <CitiesOptionsFiltered cities={filteredCities} showOptions={filteredCities.length > 0}/>
+                                <IoCloseCircleSharp onClick={() => setFromFilteredCities([])}/>
+                                <CitiesOptionsFiltered cities={fromFilteredCities} showOptions={fromFilteredCities.length > 0}/>
                             </Input>
                             <Icon>
                                 <TbArrowsLeftRight/>
@@ -109,12 +108,15 @@ export default function Destination(){
                                 <input 
                                     type='text' 
                                     placeholder='estação / parada / endereço '
-                                    value={ticket.to}
-                                    onChange={(e) => setTicket({...ticket, to: e.target.value})}
+                                    value={toCity}
+                                    onChange={(e) => {
+                                        setToCity(e.target.value);
+                                        setToFilteredCities(filterCities(e.target.value));
+                                    }}
                                 />
                                 
-                                <IoCloseCircleSharp onClick={() => setInputCity('')}/>
-                                <CitiesOptionsFiltered cities={filteredCities} showOptions={filteredCities.length > 0}/>
+                                <IoCloseCircleSharp onClick={() => setToFilteredCities([])}/>
+                                <CitiesOptionsFiltered cities={toFilteredCities} showOptions={toFilteredCities.length > 0}/>
                             </Input>
                         </TravelRoute>
                         <TravelDate>

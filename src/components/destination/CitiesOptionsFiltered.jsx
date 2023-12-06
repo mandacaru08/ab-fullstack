@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
+import PropTypes from 'prop-types';
+
 function CitiesOptionsFiltered({ cities, showOptions }) {
   return (
     <CitiesOptions visibility={showOptions}>
-      {cities.map((city) => {
+      {cities?.map((city) => {
         return (
             <CityOption 
-                key={city.id} 
-                value={city.id}
+                key={city.name} 
+                value={city.name}
             >
                 {city.name} - {city.state}
             </CityOption>
@@ -21,6 +23,7 @@ const CitiesOptions = styled.ol`
     position: absolute;
     top: 64px;
     left: 0;
+    z-index: 10;
     width: 100%;
     height: fit-content;
     display: flex;
