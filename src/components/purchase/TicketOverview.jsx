@@ -1,11 +1,16 @@
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { CgEditBlackPoint } from 'react-icons/cg';
 import { MdLocationOn } from 'react-icons/md';
 import { FiClock } from 'react-icons/fi';
 import { IoPersonSharp } from 'react-icons/io5';
 import { CgOptions } from 'react-icons/cg';
+import ButtonHorizontal from '../ButtonHorizontal';
+import styled from 'styled-components';
 
 export default function TicketOverview(){
+
+    const navigate = useNavigate();
+
     return(
         <Container>
             <DestinationAndTime>
@@ -30,7 +35,11 @@ export default function TicketOverview(){
                 <CgOptions/>
                 <span>Show fastest conncetions</span>
             </ShowFastestConnection>
-            <ChangeButton>Alterar</ChangeButton>
+            <ButtonHorizontal 
+                size="small"
+                fontColor="#282D37"
+                onClick={() => navigate('/')}
+            >Alterar</ButtonHorizontal>
         </Container>
     );
 }
@@ -114,4 +123,8 @@ const ChangeButton = styled.button`
     background-color: transparent;
     border: 1px solid #282D37;
     border-radius: 3px;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
