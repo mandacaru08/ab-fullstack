@@ -8,7 +8,7 @@ const buttonVariants = {
   },
   medium: {
     height: "52px",
-    width: "120px",
+    width: "232px",
     borderRadius: "3px",
   },
   large: {

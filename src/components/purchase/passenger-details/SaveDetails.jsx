@@ -60,7 +60,7 @@ export default function SaveDetails(){
                 </ol>
             </Advantages>
             <ButtonContainer>
-                <ButtonHorizontal size='large'>
+                <ButtonHorizontal size='medium'>
                     {
                         saveDetails?
                             'Continuar com o registro'

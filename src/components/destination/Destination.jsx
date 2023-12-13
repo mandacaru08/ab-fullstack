@@ -359,7 +359,7 @@ export default function Destination() {
               onClick={() => navigate("/purchase/select")}
               backgroundColor={"#6495ED"}
               fontColor={"#FFFFFF"}
-              size={"medium"}
+              size={"small"}
             >
               Pesquisar
             </ButtonHorizontal>
