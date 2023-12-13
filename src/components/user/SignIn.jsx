@@ -7,7 +7,8 @@ import { HiArrowLeft } from "react-icons/hi";
 
 import { signIn } from "../../services/authApi";
 
-import ButtonHorizontal from "../ButtonHorizontal";
+import RedirectAuthButton from "./RedirectAuthButton";
+import AuthSubmitButton from "./AuthSubmitButton";
 
 export default function SignIn() {
   const navigate = new useNavigate();
@@ -144,31 +145,22 @@ export default function SignIn() {
                   </Icon>
                 </Input>
               </InputsContainer>
-              <ButtonHorizontal
+              <AuthSubmitButton
                 type="submit"
                 disabled={isButtonDisabled}
-                isButtonDisabled={isButtonDisabled}
-                backgroundColor="#7979FF"
-                fontColor="#FFFFFF"
-                size="large"
+                onClick={(e) => handleSignIn(e)}
               >
                 Log In
-              </ButtonHorizontal>
+              </AuthSubmitButton>
             </form>
           </Form>
         </FormContainer>
         <Register>
           <div>
             <h2>Sua primeira vez aqui?</h2>
-            <ButtonHorizontal 
-              type="button"
-              backgroundColor="#D7DCE1"
-              fontColor="#232D37"
-              size="large"
-              onClick={() => navigate("/sign-up")}
-            >
+            <RedirectAuthButton onClick={() => navigate("/sign-up")}>
               Registre-se agora como cliente privado gratuitamente
-            </ButtonHorizontal>
+            </RedirectAuthButton>
           </div>
         </Register>
       </LoginForm>

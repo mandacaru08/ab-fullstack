@@ -6,7 +6,8 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { HiArrowLeft } from "react-icons/hi";
 
 import { signUp } from "../../services/authApi";
-import ButtonHorizontal from "../ButtonHorizontal";
+import AuthSubmitButton from "./AuthSubmitButton";
+import RedirectAuthButton from "./RedirectAuthButton";
 
 export default function SignUp() {
   const navigate = new useNavigate();
@@ -183,28 +184,15 @@ export default function SignUp() {
                   </Icon>
                 </Input>
               </InputsContainer>
-              <ButtonHorizontal 
-                type="submit" 
-                disabled={isButtonDisabled}
-                backgroundColor="#7979FF"
-                fontColor="#ffffff"
-                size="large"
-              >
-                Registrar
-              </ButtonHorizontal>
+              <AuthSubmitButton>Registrar</AuthSubmitButton>
             </form>
           </Form>
         </FormContainer>
         <Register>
-            <h2 >Você tem uma conta?</h2>
-            <ButtonHorizontal
-              onClick={() => navigate("/sign-in")}
-              backgroundColor="#D7DCE1"
-              fontColor="#232D37"
-              size="large"
-            >
-              Entre agora
-            </ButtonHorizontal>
+          <h2>Você tem uma conta?</h2>
+          <RedirectAuthButton onClick={() => navigate("/sign-in")}>
+            Entre agora
+          </RedirectAuthButton>
         </Register>
       </SignUpForm>
     </Container>

@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import ButtonHorizontal from "../../ButtonHorizontal";
+import Button from "../../Button";
+
+const ContinueToLoginButton = ({ children, onClick, ...props }) => {
+  return (
+    <Button onClick={onClick} {...props}>
+      {children}
+    </Button>
+  );
+};
 
 export default function LogAndBook() {
   return (
@@ -12,13 +20,10 @@ export default function LogAndBook() {
         </span>
       </h4>
       <ButtonContainer>
-        <ButtonHorizontal
-          size="medium"
-          fontColor="#FFFFFF"
-          backgroundColor="#EC0016"
+        <ContinueToLoginButton
         >
           Continue para logar
-        </ButtonHorizontal>
+        </ContinueToLoginButton>
       </ButtonContainer>
     </Container>
   );

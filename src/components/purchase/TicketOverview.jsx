@@ -3,11 +3,19 @@ import { CgEditBlackPoint, CgOptions } from "react-icons/cg";
 import { MdLocationOn } from "react-icons/md";
 import { FiClock } from "react-icons/fi";
 import { IoPersonSharp } from "react-icons/io5";
-import ButtonHorizontal from "../ButtonHorizontal";
+import Button from "../Button";
 import styled from "styled-components";
 
 export default function TicketOverview() {
   const navigate = useNavigate();
+
+  const NavigateButton = ({ onClick }) => {
+    return (
+      <Button size="small" fontColor="#282D37" onClick={onClick}>
+        Alterar
+      </Button>
+    );
+  };
 
   return (
     <Container>
@@ -33,13 +41,7 @@ export default function TicketOverview() {
         <CgOptions />
         <span>Show fastest conncetions</span>
       </ShowFastestConnection>
-      <ButtonHorizontal
-        size="small"
-        fontColor="#282D37"
-        onClick={() => navigate("/")}
-      >
-        Alterar
-      </ButtonHorizontal>
+      <NavigateButton onClick={() => navigate("/")}/>
     </Container>
   );
 }

@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import { ImInfo } from "react-icons/im";
-import ButtonHorizontal from "../ButtonHorizontal";
+import Button from "../Button";
+
+const PreviousOrNextButton = ({ children, onClick, ...props }) => {
+  return (
+    <Button fontColor="#282D37" size="small" onClick={onClick} {...props}>
+      {children}
+    </Button>
+  );
+};
 
 export default function TotalPrice() {
   return (
@@ -11,16 +19,10 @@ export default function TotalPrice() {
         <Price>R$150</Price>
       </Total>
       <Buttons>
-        <ButtonHorizontal fontColor="#282D37" size="small">
-          Voltar
-        </ButtonHorizontal>
-        <ButtonHorizontal
-          fontColor="#FFFFFF"
-          backgroundColor="#EC0016"
-          size="small"
-        >
+        <PreviousOrNextButton>Voltar</PreviousOrNextButton>
+        <PreviousOrNextButton fontColor="#FFFFFF" backgroundColor="#EC0016">
           Continuar
-        </ButtonHorizontal>
+        </PreviousOrNextButton>
       </Buttons>
     </Container>
   );

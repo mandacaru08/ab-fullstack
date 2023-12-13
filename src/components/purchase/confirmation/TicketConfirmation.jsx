@@ -5,7 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 import Bar from "../Bar";
 import StepsStatus from "../StepsStatus";
-import ButtonHorizontal from "../../ButtonHorizontal";
+import Button from "../../Button";
+
+const PreviousOrNextButton = ({ children, onClick, ...props }) => {
+  return (
+    <Button onClick={onClick} {...props} size="small">
+      {children}
+    </Button>
+  );
+};
 
 export default function TicketConfirmation() {
   const navigate = new useNavigate();
@@ -74,13 +82,12 @@ export default function TicketConfirmation() {
             </PaymentInfos>
           </PaymentMethodOverview>
           <ContainerButton>
-            <ButtonHorizontal size="small">Alterar</ButtonHorizontal>
-            <ButtonHorizontal
-              size="small"
+            <PreviousOrNextButton>Alterar</PreviousOrNextButton>
+            <PreviousOrNextButton
               onClick={() => navigate("/purchase/ticket-overview")}
             >
               Confirmar
-            </ButtonHorizontal>
+            </PreviousOrNextButton>
           </ContainerButton>
         </Overview>
       </OverviewAndReservation>

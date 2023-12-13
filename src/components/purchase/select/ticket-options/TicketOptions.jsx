@@ -10,7 +10,21 @@ import {
   MdGroups,
 } from "react-icons/md";
 
-import ButtonHorizontal from "../../../ButtonHorizontal";
+import Button from "../../../Button";
+
+const SelectTicketButton = ({ children, onClick }) => {
+  return (
+    <Button
+      size="fitContent"
+      backgroundColor="#F24423"
+      fontColor="#FFFFFF"
+      borderRadius="0 4px 0 0"
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default function TicketOptions() {
   const ticketContext = useContext(TicketContext);
@@ -133,15 +147,9 @@ export default function TicketOptions() {
                 <Price>
                   A partir de <h1>R${ticket.price}</h1>
                 </Price>
-                <ButtonHorizontal
-                  size="fitContent"
-                  backgroundColor="#F24423"
-                  fontColor="#FFFFFF"
-                  borderRadius="0 4px 0 0"
-                  onClick={selectTicket}
-                >
+                <SelectTicketButton onClick={selectTicket}>
                   <MdKeyboardArrowRight />
-                </ButtonHorizontal>
+                </SelectTicketButton>
               </PriceAndSelectTicket>
               <ReturnOption>
                 <span>Escolher viagem de volta</span>

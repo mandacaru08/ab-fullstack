@@ -17,7 +17,20 @@ import TimeInput from "./TimeInput";
 import MoreInfos from "./MoreInfos";
 import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../helper/cities.json";
-import ButtonHorizontal from "../ButtonHorizontal";
+import Button from "../Button";
+
+const SearchTicketButton = ({ onClick }) => {
+  return (
+    <Button
+      backgroundColor="#6495ED"
+      fontColor="#FFFFFF"
+      size="small"
+      onClick={onClick}
+    >
+      Pesquisar
+    </Button>
+  );
+};
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -355,14 +368,7 @@ export default function Destination() {
               </Icon>
               <h3>Apenas assento (sem ticket)</h3>
             </div>
-            <ButtonHorizontal
-              onClick={() => navigate("/purchase/select")}
-              backgroundColor={"#6495ED"}
-              fontColor={"#FFFFFF"}
-              size={"small"}
-            >
-              Pesquisar
-            </ButtonHorizontal>
+            <SearchTicketButton onClick={() => navigate("/purchase/select")} />
           </OnlySeatOption>
         </FormInfos>
       </TravelForm>

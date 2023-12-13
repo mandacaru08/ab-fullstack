@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FiCircle } from "react-icons/fi";
 import { FaCircle } from "react-icons/fa";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import ButtonHorizontal from "../ButtonHorizontal";
+import Button from "../Button";
 
 const allInfos = [
   {
@@ -30,6 +30,20 @@ const allInfos = [
     ),
   },
 ];
+
+const ArrowButton = ({ children, onClick,position }) => {
+  return (
+    <Button
+      size="fitContent"
+      fontSize="22px"
+      position={position}
+      backgroundColor="#FFFFFF80"
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default function Marketing() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -82,26 +96,18 @@ export default function Marketing() {
         </Carousel>
       </Advertisements>
       <ArrowButtons>
-        <ButtonHorizontal
-          size="fitContent"
-          position="left"
-          backgroundColor="transparent"
+        <ArrowButton
+        position="left"
           onClick={(event) => previousSection(event)}
         >
-          <div>
-            <MdArrowBackIos />
-          </div>
-        </ButtonHorizontal>
-        <ButtonHorizontal
-          size="fitContent"
+          <MdArrowBackIos />
+        </ArrowButton>
+        <ArrowButtons
           position="right"
-          backgroundColor="transparent"
           onClick={(event) => nextSection(event)}
         >
-          <div>
-            <MdArrowForwardIos />
-          </div>
-        </ButtonHorizontal>
+          <MdArrowForwardIos />
+        </ArrowButtons>
       </ArrowButtons>
       <Sections>
         <ul>
