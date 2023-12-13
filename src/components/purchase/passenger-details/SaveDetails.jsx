@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { BsFillCheckCircleFill, BsFillCheckSquareFill } from 'react-icons/bs';
 import { ImInfo } from 'react-icons/im';
+import ButtonHorizontal from '../../ButtonHorizontal';
 
 const advantages = [
     {
@@ -59,14 +60,14 @@ export default function SaveDetails(){
                 </ol>
             </Advantages>
             <ButtonContainer>
-                <button>
+                <ButtonHorizontal size='large'>
                     {
                         saveDetails?
                             'Continuar com o registro'
                             :
                             'Continuar como convidado'
                     }
-                </button>
+                </ButtonHorizontal>
             </ButtonContainer>
         </Container>
     );
@@ -166,16 +167,4 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: right;
     align-items: center;
-
-    button{
-        height: 44px;
-        padding: 8px;
-        box-sizing: border-box;
-        border: 1px solid #282D37;
-        border-radius: 4px;
-        :hover{
-            cursor: pointer;
-            background-color: #afb4bb;
-        }
-    }
 `;
