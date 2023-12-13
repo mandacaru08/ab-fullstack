@@ -27,8 +27,12 @@ const ButtonHorizontalStyled = styled.button`
     props.size ? buttonVariants[props.size]?.height : "40px"};
   width: ${(props) =>
     props.size ? buttonVariants[props.size]?.width : "120px"};
+  position: ${(props) => (props.position ? "absolute" : "relative")};
+  top: ${(props) => (props.position ? "0" : "auto")};
+  right: ${(props) => (props.position == "right" ? 0 : "auto")};
+  left: ${(props) => (props.position == "left" ? 0 : "auto")};
   border-radius: ${(props) =>
-    props.size.borderRadius
+    buttonVariants[props.size]?.borderRadius
       ? buttonVariants[props.size]?.borderRadius
       : props.borderRadius};
   border: ${(props) => (props.backgroundColor ? "none" : "1px solid #282D37")};
@@ -49,6 +53,7 @@ function ButtonHorizontal({
   className,
   backgroundColor,
   fontColor,
+  position,
   borderRadius,
   size,
 }) {
@@ -58,6 +63,7 @@ function ButtonHorizontal({
       backgroundColor={backgroundColor}
       fontColor={fontColor}
       size={size}
+      position={position}
       borderRadius={borderRadius}
       onClick={onClick}
     >
