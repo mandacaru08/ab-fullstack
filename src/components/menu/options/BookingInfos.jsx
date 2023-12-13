@@ -14,7 +14,6 @@ export default function BookingInfos({setShowMenuOptions}){
         {name: 'Localizador de melhor preço', url: ''},
         {name: 'Resgatar Cupons', url: ''},
         {name: 'Viagens Seguras', url: ''},
-        {name: 'Viagens Seguras', url: ''}
     ];
     
     return(

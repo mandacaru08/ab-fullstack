@@ -16,7 +16,7 @@ export default function TicketAndReservation(){
             <StepsStatus/>
             <Section></Section>
             {
-                customerDetailsFilled?
+                false?
                 <DigitalTicketAndSeat/>
                 :
                 <CustomerDataDetails setCustomerDetailsFilled={setCustomerDetailsFilled}/>

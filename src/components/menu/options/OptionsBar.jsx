@@ -15,7 +15,7 @@ export default function OptionsBar({options}){
     }, [optionHeight]);
     
     return(
-        <Container linesNumber={linesNumber} onMouseEnter={() => setShowMenuOptions('booking-information')}>
+        <Container linesNumber={linesNumber}>
             {
                 options.map(option => {
                     return(
@@ -32,13 +32,13 @@ export default function OptionsBar({options}){
 
 const Container = styled.ol`
     height: ${props => props.linesNumber? `${34 * props.linesNumber +52}px` : ''};
+    min-height: 210px;
     width: 100%;
     column-count: 3;
     display: block;
 
     padding: 2rem 2rem 1rem;
     box-sizing: border-box;
-    
     position: absolute;
     top: 5rem;
     left: 0;
@@ -47,11 +47,12 @@ const Container = styled.ol`
 `;
 
 const Option = styled.li`
-    height: ${props => props.linesHeight? props.linesHeight : 'auto'};
+    height: ${props => props.linesHeight? props.linesHeight : 'fit-content'};
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+
     :hover{
         text-decoration: underline;
         cursor: pointer;
@@ -63,8 +64,8 @@ const Option = styled.li`
 `;
 
 const OptionName = styled.p`
-    height: 100%;
-    width: auto;
+    height: 41px;
+    width: fit-content;
     display: flex;
     flex-direction: center;
     align-items: center;
