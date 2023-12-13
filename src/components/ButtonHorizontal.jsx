@@ -16,6 +16,10 @@ const buttonVariants = {
     width: "345px",
     borderRadius: "3px",
   },
+  fitContent: {
+    height: "100%",
+    width: "fit-content",
+  },
 };
 
 const ButtonHorizontalStyled = styled.button`
@@ -23,12 +27,15 @@ const ButtonHorizontalStyled = styled.button`
     props.size ? buttonVariants[props.size]?.height : "40px"};
   width: ${(props) =>
     props.size ? buttonVariants[props.size]?.width : "120px"};
-  border-radius: ${(props) => 
-    props.size ? buttonVariants[props.size]?.borderRadius : "none" };
-  border: ${(props) =>
-    props.backgroundColor ? "none" : "1px solid #282D37"};
+  border-radius: ${(props) =>
+    props.size.borderRadius
+      ? buttonVariants[props.size]?.borderRadius
+      : props.borderRadius};
+  border: ${(props) => (props.backgroundColor ? "none" : "1px solid #282D37")};
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "border: 1px solid #282D37"};
+    props.backgroundColor
+      ? props.backgroundColor
+      : "border: 1px solid #282D37"};
   color: ${(props) => (props.fontColor ? props.fontColor : "#232D37")};
   :hover {
     cursor: pointer;
@@ -42,6 +49,7 @@ function ButtonHorizontal({
   className,
   backgroundColor,
   fontColor,
+  borderRadius,
   size,
 }) {
   return (
@@ -50,6 +58,7 @@ function ButtonHorizontal({
       backgroundColor={backgroundColor}
       fontColor={fontColor}
       size={size}
+      borderRadius={borderRadius}
       onClick={onClick}
     >
       {children}
