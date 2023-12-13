@@ -25,8 +25,10 @@ const ButtonHorizontalStyled = styled.button`
     props.size ? buttonVariants[props.size]?.width : "120px"};
   border-radius: ${(props) => 
     props.size ? buttonVariants[props.size]?.borderRadius : "none" };
+  border: ${(props) =>
+    props.backgroundColor ? "none" : "1px solid #282D37"};
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "transparent"};
+    props.backgroundColor ? props.backgroundColor : "border: 1px solid #282D37"};
   color: ${(props) => (props.fontColor ? props.fontColor : "#232D37")};
   :hover {
     cursor: pointer;
