@@ -19,13 +19,14 @@ import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../helper/cities.json";
 import Button from "../Button";
 
-const SearchTicketButton = ({ onClick }) => {
+const SearchTicketButton = ({ onClick, ...props }) => {
   return (
     <Button
       backgroundColor="#6495ED"
       fontColor="#FFFFFF"
       size="small"
       onClick={onClick}
+      {...props}
     >
       Pesquisar
     </Button>
