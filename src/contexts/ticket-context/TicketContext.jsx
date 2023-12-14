@@ -13,7 +13,6 @@ export function TicketProvider({children}) {
         {id: 4, stepName : 'ticket-verification' , name: 'Verificar e Reservar', status: 'pending'},
         {id: 5, stepName : 'ticket-confirmation', name: 'Confirmação', status: 'pending'}
     ]), []);
-    
 
     return(
         <TicketContext.Provider value={{steps}} >

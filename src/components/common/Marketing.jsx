@@ -31,7 +31,7 @@ const allInfos = [
   },
 ];
 
-const ArrowButton = ({ children, onClick,position }) => {
+const ArrowButton = ({ children, onClick, position, ...props }) => {
   return (
     <Button
       size="fitContent"
@@ -39,6 +39,7 @@ const ArrowButton = ({ children, onClick,position }) => {
       position={position}
       backgroundColor="#FFFFFF80"
       onClick={onClick}
+      {...props}
     >
       {children}
     </Button>
@@ -97,17 +98,14 @@ export default function Marketing() {
       </Advertisements>
       <ArrowButtons>
         <ArrowButton
-        position="left"
+          position="left"
           onClick={(event) => previousSection(event)}
         >
           <MdArrowBackIos />
         </ArrowButton>
-        <ArrowButtons
-          position="right"
-          onClick={(event) => nextSection(event)}
-        >
+        <ArrowButton position="right" onClick={(event) => nextSection(event)}>
           <MdArrowForwardIos />
-        </ArrowButtons>
+        </ArrowButton>
       </ArrowButtons>
       <Sections>
         <ul>

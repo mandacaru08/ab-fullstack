@@ -1,6 +1,8 @@
 :root {
-  background-color: #F0F3F5;
-  background-color: #FCFCFD;
+  --color-background-light: '#F0F3F5';
+  --color-background-dark: '#232D37';
+  --color-text-light: '#232D37';
+  --color-text-dark: '#FCFCFD';
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -10,7 +12,6 @@
 
 body{
   font-family: 'Raleway', sans-serif;
-  color: #232D37;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,4 +46,14 @@ p{
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4em;
+}
+
+.light-theme {
+  --color-background: var(--color-background-light);
+  --color-text: var(--color-text-light);
+}
+
+.dark-theme {
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
 }
