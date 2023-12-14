@@ -6,8 +6,8 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { HiArrowLeft } from "react-icons/hi";
 
 import { signUp } from "../../services/authApi";
-import AuthSubmitButton from "./components/AuthSubmitButton";
 import RedirectAuthButton from "./components/RedirectAuthButton";
+import AuthSubmitButton from "./components/AuthSubmitButton";
 
 export default function SignUp() {
   const navigate = new useNavigate();
