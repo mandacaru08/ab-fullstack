@@ -14,45 +14,56 @@ const InputVariants = {
 };
 
 const InputContainer = styled.div`
-  height: 65px;
-  width: 45%;
-  position: relative;
-  box-sizing: border-box;
-  border-bottom: 0.0625rem solid #878c96;
-  border-radius: 0.25rem;
-  background-color: #f0f3f5;
+  ${({ type, width, isFocusedOrFilled, isInputValid }) => {
+    const height = type === "radio" ? "16px" : "65px";
+    const widthSize = type === "radio" ? "16px" : width;
+    const borderRadius = type === "custom" ? "100%" : "0.25rem";
+    const borderBottom = isInputValid
+      ? "1px solid #D9D9D9"
+      : "1px solid #ff6767c4";
+    const backgroundColor = isInputValid ? "transparent" : "#ff9a9ac4";
+    const labelPosition = isFocusedOrFilled ? "0" : "50%";
 
-  svg {
-    font-size: 20px;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+    return `
+      height: ${height};
+      width: ${widthSize};
+      border-bottom: ${borderBottom};
+      border-radius: ${borderRadius};
+      background-color: ${backgroundColor};
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      box-sizing: border-box;
+      padding: 32px 16px 8px 16px;
 
-  input {
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 32px 16px 8px 16px;
-    border-style: none;
-    background-color: #f0f3f5;
-  }
+      transition: all 0.5s;
 
-  label {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-    font-size: 0.75rem;
-  }
+      svg {
+        font-size: 20px;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
 
-  transition: all 0.5s;
+      label {
+        position: absolute;
+        left: 5px;
+        z-index: 0;
+        top: ${isFocusedOrFilled ? 0 : "50%"};
+        font-size: ${isFocusedOrFilled ? "12px" : "16px"};
+        transition: all 0.5s;
+      }
+    `;
+  }}
 `;
 
 const InputStyled = styled.input`
+  border-style: none;
+  height: 100%;
+  width: 100%;
   position: relative;
   margin-right: 5px;
-  border: 1px solid #282d37;
   outline: none;
 
   &[type="radio"] {
@@ -75,14 +86,36 @@ const InputStyled = styled.input`
   }
 `;
 
-function Input({ type, id, value, name, placeholder, onChange, required }) {
+function Input({
+  id,
+  type,
+  name,
+  icon,
+  width,
+  label,
+  value,
+  required,
+  placeholder,
+  onBlur,
+  onFocus,
+  onChange,
+  isInputValid,
+  isFocusedOrFilled,
+}) {
   return (
-    <InputContainer>
+    <InputContainer
+      width={width}
+      isFocusedOrFilled={isFocusedOrFilled}
+      isInputValid={isInputValid}
+    >
       {type === "text" && <label>{label}</label>}
       <InputStyled
         placeholder={placeholder}
+        width={width}
         type={type}
         value={value}
+        onBlur={onBlur}
+        onFocus={onFocus}
         onChange={onChange}
         name={name}
         id={id}
@@ -90,6 +123,7 @@ function Input({ type, id, value, name, placeholder, onChange, required }) {
         readOnly={type === "radio"}
       />
       {type !== "text" && <label readOnly>{label}</label>}
+      {icon !== undefined && icon}
     </InputContainer>
   );
 }

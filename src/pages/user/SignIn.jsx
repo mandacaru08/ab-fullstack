@@ -9,6 +9,7 @@ import { signIn } from "../../services/authApi";
 
 import RedirectAuthButton from "./components/RedirectAuthButton";
 import AuthSubmitButton from "./components/AuthSubmitButton";
+import Input from "../../components/Input";
 
 export default function SignIn() {
   const navigate = new useNavigate();
@@ -87,63 +88,61 @@ export default function SignIn() {
             <form onSubmit={handleSignIn}>
               <InputsContainer>
                 <Input
+                  width="100%"
+                  type="custom"
+                  label="e-mail *"
+                  value={user.email}
                   isFocusedOrFilled={
                     inputStatus.emailIsFocused || user.email !== ""
                   }
                   isInputValid={
                     inputStatus.isEmailValid || inputStatus.emailIsFocused
                   }
-                >
-                  <input
-                    type="text"
-                    value={user.email}
-                    onFocus={() =>
-                      setInputStatus({ ...inputStatus, emailIsFocused: true })
-                    }
-                    onBlur={() =>
-                      setInputStatus({ ...inputStatus, emailIsFocused: false })
-                    }
-                    onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
-                    }
-                  />
-                  <label>e-mail *</label>
-                  <Icon onClick={() => setUser({ ...user, email: "" })}>
-                    <IoIosCloseCircle />
-                  </Icon>
-                </Input>
+                  onFocus={() =>
+                    setInputStatus({ ...inputStatus, emailIsFocused: true })
+                  }
+                  onBlur={() =>
+                    setInputStatus({ ...inputStatus, emailIsFocused: false })
+                  }
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  icon={
+                    <IoIosCloseCircle
+                      onClick={() => setUser({ ...user, email: "" })}
+                    />
+                  }
+                />
                 <Input
+                  width="100%;"
+                  type="password"
+                  label="password *"
+                  value={user.password}
+                  icon={
+                    <IoIosCloseCircle
+                      onClick={() => setUser({ ...user, password: "" })}
+                    />
+                  }
                   isFocusedOrFilled={
                     inputStatus.passwordIsFocused || user.password !== ""
                   }
                   isInputValid={
                     inputStatus.isPasswordEmpty || inputStatus.passwordIsFocused
                   }
-                >
-                  <input
-                    type="password"
-                    value={user.password}
-                    onFocus={() =>
-                      setInputStatus({
-                        ...inputStatus,
-                        passwordIsFocused: true,
-                      })
-                    }
-                    onBlur={() =>
-                      setInputStatus({
-                        ...inputStatus,
-                        passwordIsFocused: false,
-                      })
-                    }
-                    onChange={(e) =>
-                      setUser({ ...user, password: e.target.value })
-                    }
-                  />
-                  <label>password *</label>
-                  <Icon onClick={() => setUser({ ...user, password: "" })}>
-                    <IoIosCloseCircle />
-                  </Icon>
-                </Input>
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
+                  onFocus={() =>
+                    setInputStatus({
+                      ...inputStatus,
+                      passwordIsFocused: true,
+                    })
+                  }
+                  onBlur={() =>
+                    setInputStatus({
+                      ...inputStatus,
+                      passwordIsFocused: false,
+                    })
+                  }
+                />
               </InputsContainer>
               <AuthSubmitButton
                 type="submit"
@@ -257,7 +256,7 @@ const InputsContainer = styled.div`
   align-items: center;
 `;
 
-const Input = styled.div`
+/* const Input = styled.div`
   height: 56px;
   width: 100%;
 
@@ -287,7 +286,7 @@ const Input = styled.div`
     z-index: 1;
     background-color: transparent;
   }
-`;
+`; */
 
 const Icon = styled.div`
   height: 100%;
