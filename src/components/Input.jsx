@@ -50,6 +50,7 @@ const InputContainer = styled.div`
         position: absolute;
         left: 5px;
         z-index: 0;
+        pointer-events: none;
         top: ${isFocusedOrFilled ? 0 : "50%"};
         font-size: ${isFocusedOrFilled ? "12px" : "16px"};
         transition: all 0.5s;
@@ -108,7 +109,7 @@ function Input({
       isFocusedOrFilled={isFocusedOrFilled}
       isInputValid={isInputValid}
     >
-      {type === "text" && <label>{label}</label>}
+      {type === "text" && <label >{label}</label>}
       <InputStyled
         placeholder={placeholder}
         width={width}
@@ -122,7 +123,7 @@ function Input({
         required={required}
         readOnly={type === "radio"}
       />
-      {type !== "text" && <label readOnly>{label}</label>}
+      {type !== "text" && <label>{label}</label>}
       {icon !== undefined && icon}
     </InputContainer>
   );
