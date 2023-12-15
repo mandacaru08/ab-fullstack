@@ -256,50 +256,6 @@ const InputsContainer = styled.div`
   align-items: center;
 `;
 
-/* const Input = styled.div`
-  height: 56px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  position: relative;
-
-  border-bottom: ${(props) =>
-    props.isInputValid ? "1px solid #D9D9D9" : "1px solid #ff6767c4"};
-  background-color: ${(props) =>
-    props.isInputValid ? "transparent" : "#ff9a9ac4"};
-  transition: all 0.5s;
-
-  label {
-    position: absolute;
-    left: 5px;
-    z-index: 0;
-    top: ${(props) => (props.isFocusedOrFilled ? 0 : "50%")};
-    font-size: ${(props) => (props.isFocusedOrFilled ? "12px" : "16px")};
-    transition: all 0.5s;
-  }
-
-  input {
-    height: auto;
-    width: 90%;
-    border-style: none;
-    z-index: 1;
-    background-color: transparent;
-  }
-`; */
-
-const Icon = styled.div`
-  height: 100%;
-  width: 10%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 18px;
-  color: #646973;
-`;
-
 const Register = styled.div`
   height: 150px;
   width: 100%;
