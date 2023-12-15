@@ -1,10 +1,10 @@
 import Button from "../../../components/Button";
 
-const AuthSubmitButton = ({ children, onClick, isButtonDisabled }) => {
+const AuthSubmitButton = ({ children, onClick, disabled }) => {
   return (
     <Button
       type="submit"
-      disabled={isButtonDisabled}
+      disabled={disabled}
       backgroundColor="#7979FF"
       fontColor="#FFFFFF"
       size="large"
