@@ -60,12 +60,15 @@ function Button({
   children,
   onClick,
   className,
+  disabled,
   ...props
 }) {
+
   return (
     <ButtonStyled
       className={className}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       {children}
