@@ -17,21 +17,7 @@ import TimeInput from "./TimeInput";
 import MoreInfos from "./MoreInfos";
 import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../../helper/cities.json";
-import Button from "../../../components/Button";
-
-const SearchTicketButton = ({ onClick, ...props }) => {
-  return (
-    <Button
-      backgroundColor="#6495ED"
-      fontColor="#FFFFFF"
-      size="small"
-      onClick={onClick}
-      {...props}
-    >
-      Pesquisar
-    </Button>
-  );
-};
+import SearchTicketButton from "./components/SearchTicketButton";
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -369,7 +355,7 @@ export default function Destination() {
               </Icon>
               <h3>Apenas assento (sem ticket)</h3>
             </div>
-            <SearchTicketButton onClick={() => navigate("/purchase/select")} />
+            <SearchTicketButton onClick={() => navigate("/purchase/select")}>Pesquisar</SearchTicketButton>
           </OnlySeatOption>
         </FormInfos>
       </TravelForm>
