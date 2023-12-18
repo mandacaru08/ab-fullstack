@@ -48,7 +48,6 @@ const InputContainer = styled.div`
       position: relative;
       display: flex;
       flex-direction: row;
-      margin-top: 24px;
       box-sizing: border-box;
       transition: all 0.5s;
 
@@ -124,6 +123,7 @@ function Input({
   isInputValid,
   isFocusedOrFilled,
 }) {
+
   return (
     <InputContainer
       inputVariant={inputVariant}

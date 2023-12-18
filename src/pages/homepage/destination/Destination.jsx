@@ -18,6 +18,7 @@ import MoreInfos from "./MoreInfos";
 import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
+import Input from "../../../components/Input";
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -84,6 +85,16 @@ export default function Destination() {
     return cities;
   }
 
+  function cleanInputCities(inputName) {
+    if (inputName === "from") {
+      setFromCity("");
+      setFromFilteredCities([]);
+    } else {
+      setToCity("");
+      setToFilteredCities([]);
+    }
+  }
+
   return (
     <>
       {showBackground && (
@@ -100,44 +111,51 @@ export default function Destination() {
         <FormInfos>
           <TravelInfos>
             <TravelRoute>
-              <Input>
-                <label>Saída</label>
-                <input
-                  type="text"
-                  placeholder="estação / parada / endereço "
-                  value={fromCity}
-                  onChange={(e) => {
-                    setFromCity(e.target.value);
-                    setFromFilteredCities(filterCities(e.target.value));
-                  }}
-                />
-                <IoCloseCircleSharp onClick={() => setFromFilteredCities([])} />
-                <CitiesOptionsFiltered
-                  cities={fromFilteredCities}
-                  showOptions={fromFilteredCities.length > 0}
-                />
-              </Input>
+              <Input
+                type="text"
+                label="Origem"
+                width="calc(50% - 30px)"
+                variantInput="default"
+                value={fromCity}
+                placeholder="estação / parada / endereço "
+                onChange={(e) => {
+                  setFromCity(e.target.value);
+                  setFromFilteredCities(filterCities(e.target.value));
+                }}
+                icon={
+                  <IoCloseCircleSharp
+                    onClick={() => cleanInputCities("from")}
+                  />
+                }
+              ></Input>
+              <CitiesOptionsFiltered
+                left="0"
+                cities={fromFilteredCities}
+                showOptions={fromFilteredCities.length > 0}
+              />
               <Icon>
                 <TbArrowsLeftRight />
               </Icon>
-              <Input>
-                <label>Destino</label>
-                <input
-                  type="text"
-                  placeholder="estação / parada / endereço "
-                  value={toCity}
-                  onChange={(e) => {
-                    setToCity(e.target.value);
-                    setToFilteredCities(filterCities(e.target.value));
-                  }}
-                />
-
-                <IoCloseCircleSharp onClick={() => setToFilteredCities([])} />
-                <CitiesOptionsFiltered
-                  cities={toFilteredCities}
-                  showOptions={toFilteredCities.length > 0}
-                />
-              </Input>
+              <Input
+                type="text"
+                label="Destino"
+                width="calc(50% - 30px)"
+                variantInput="default"
+                placeholder="estação / parada / endereço "
+                value={toCity}
+                onChange={(e) => {
+                  setToCity(e.target.value);
+                  setToFilteredCities(filterCities(e.target.value));
+                }}
+                icon={
+                  <IoCloseCircleSharp onClick={() => cleanInputCities("to")} />
+                }
+              ></Input>
+              <CitiesOptionsFiltered
+                right="0"
+                cities={toFilteredCities}
+                showOptions={toFilteredCities.length > 0}
+              />
             </TravelRoute>
             <TravelDate>
               <h4>Viagem de ida</h4>
@@ -355,7 +373,9 @@ export default function Destination() {
               </Icon>
               <h3>Apenas assento (sem ticket)</h3>
             </div>
-            <SearchTicketButton onClick={() => navigate("/purchase/select")}>Pesquisar</SearchTicketButton>
+            <SearchTicketButton onClick={() => navigate("/purchase/select")}>
+              Pesquisar
+            </SearchTicketButton>
           </OnlySeatOption>
         </FormInfos>
       </TravelForm>
@@ -763,7 +783,7 @@ const DateAndHour = styled.div`
   box-sizing: border-box;
 `;
 
-const Input = styled.div`
+/* const Input = styled.div`
   height: 65px;
   width: 45%;
   position: relative;
@@ -795,7 +815,7 @@ const Input = styled.div`
     left: 16px;
     font-size: 0.75rem;
   }
-`;
+`; */
 
 const Icon = styled.div`
   height: 100%;
