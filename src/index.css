@@ -3,6 +3,13 @@
   --color-background-dark: '#232D37';
   --color-text-light: '#232D37';
   --color-text-dark: '#FCFCFD';
+  --color-input-alert: '#ff9a9ac4';
+  --color-input-success: '#9aff9ac4';
+  --color-input-border-alert: '#ff6767c4';
+
+  --position-onFocus-label-top: '0';
+  --position-label-left-Blur: '50%'
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,6 +53,10 @@ p{
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4em;
+}
+
+input {
+  background-color: var(--color-background-light);
 }
 
 .light-theme {

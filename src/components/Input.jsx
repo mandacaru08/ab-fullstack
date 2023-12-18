@@ -2,40 +2,53 @@ import styled from "styled-components";
 
 const InputVariants = {
   default: {
+    height: "52px",
     backgroundColor: "#F0F3F5",
+    borderRadius: "4px",
+    labelPosition: "absolute",
+    labelTop: "-22px"
   },
   custom: {
-    labelPosition: "absolute",
+    height: "64px",
     top: "50%",
-    zIndex: "0",
     left: "5px",
+    zIndex: "0",
     fontSize: "12px",
+    borderRadius: "4px",
+    labelPosition: "absolute",
+    labelTop: "50%"
   },
+  radio: {
+    width: "16px",
+    height: "16px",
+    borderRadius: "50%",
+    labelTop: "0"
+  }, 
+  checked: {
+    content: "",
+    width: "10px",
+    height: "10px",
+    borderRadius: "3px",
+    labelTop: "0"
+  }
 };
 
 const InputContainer = styled.div`
-  ${({ type, width, isFocusedOrFilled, isInputValid }) => {
-    const height = type === "radio" ? "16px" : "65px";
-    const widthSize = type === "radio" ? "16px" : width;
-    const borderRadius = type === "custom" ? "100%" : "0.25rem";
-    const borderBottom = isInputValid
-      ? "1px solid #D9D9D9"
-      : "1px solid #ff6767c4";
-    const backgroundColor = isInputValid ? "transparent" : "#ff9a9ac4";
-    const labelPosition = isFocusedOrFilled ? "0" : "50%";
+  ${({ inputVariant, width, bgColor, isFocusedOrFilled, isInputValid }) => {
+    const height = InputVariants[inputVariant]?.height || "52px";
+    const widthSize = InputVariants[inputVariant]?.width || width;
+    const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
+    const labelTop = inputVariant == "custom" && isFocusedOrFilled ? "5px" : InputVariants[inputVariant]?.labelTop;
 
     return `
       height: ${height};
       width: ${widthSize};
-      border-bottom: ${borderBottom};
       border-radius: ${borderRadius};
-      background-color: ${backgroundColor};
+      background-color: ${bgColor? bgColor : "#F0F3F5"};
       position: relative;
       display: flex;
       flex-direction: row;
       box-sizing: border-box;
-      padding: 32px 16px 8px 16px;
-
       transition: all 0.5s;
 
       svg {
@@ -48,11 +61,11 @@ const InputContainer = styled.div`
 
       label {
         position: absolute;
-        left: 5px;
         z-index: 0;
+        left: 5px;
+        top: ${labelTop};
+        font-size: ${inputVariant !== "custom" || isFocusedOrFilled ? "12px" : "16px"};
         pointer-events: none;
-        top: ${isFocusedOrFilled ? 0 : "50%"};
-        font-size: ${isFocusedOrFilled ? "12px" : "16px"};
         transition: all 0.5s;
       }
     `;
@@ -60,12 +73,11 @@ const InputContainer = styled.div`
 `;
 
 const InputStyled = styled.input`
-  border-style: none;
   height: 100%;
   width: 100%;
   position: relative;
-  margin-right: 5px;
-  outline: none;
+  padding: 8px 16px;
+  box-sizing: border-box;
 
   &[type="radio"] {
     width: 16px;
@@ -87,12 +99,20 @@ const InputStyled = styled.input`
   }
 `;
 
+const RequiredInput = ({labelName}) =>  {
+  return (
+    <label>{labelName}<span>*</span></label>
+  );
+}
+
 function Input({
   id,
   type,
+  inputVariant,
   name,
   icon,
   width,
+  bgColor,
   label,
   value,
   required,
@@ -105,11 +125,12 @@ function Input({
 }) {
   return (
     <InputContainer
+      inputVariant={inputVariant}
       width={width}
       isFocusedOrFilled={isFocusedOrFilled}
       isInputValid={isInputValid}
     >
-      {type === "text" && <label >{label}</label>}
+      {type === "text" && required? <RequiredInput labelName={label}/> : <label >{label}</label>}
       <InputStyled
         placeholder={placeholder}
         width={width}
