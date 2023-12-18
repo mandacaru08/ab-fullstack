@@ -89,7 +89,8 @@ export default function SignIn() {
               <InputsContainer>
                 <Input
                   width="100%"
-                  type="custom"
+                  type="text"
+                  inputVariant="custom"
                   label="e-mail *"
                   value={user.email}
                   isFocusedOrFilled={
@@ -114,6 +115,7 @@ export default function SignIn() {
                 <Input
                   width="100%;"
                   type="password"
+                  inputVariant="custom"
                   label="password *"
                   value={user.password}
                   icon={
@@ -248,7 +250,7 @@ const Form = styled.div`
 `;
 
 const InputsContainer = styled.div`
-  height: 123px;
+  height: 140px;
   width: 100%;
   display: flex;
   flex-direction: column;
