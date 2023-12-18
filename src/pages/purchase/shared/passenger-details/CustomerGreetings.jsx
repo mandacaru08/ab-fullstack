@@ -72,13 +72,14 @@ export default function CustomerGreetings() {
 }
 
 const FieldsetContainer = styled.fieldset`
-  height: calc(100% - 52px);
+  height: 132px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 `;
 
 const Fieldset = styled.div`

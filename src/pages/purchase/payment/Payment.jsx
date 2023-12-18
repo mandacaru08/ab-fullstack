@@ -149,7 +149,7 @@ const Fieldset = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 
   section {
     height: 62px;
