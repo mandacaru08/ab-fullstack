@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const InputVariants = {
   default: {
-    height: "52px",
+    height: "42px",
     backgroundColor: "#F0F3F5",
     borderRadius: "4px",
     labelPosition: "absolute",
@@ -48,6 +48,7 @@ const InputContainer = styled.div`
       position: relative;
       display: flex;
       flex-direction: row;
+      margin-top: 24px;
       box-sizing: border-box;
       transition: all 0.5s;
 
@@ -130,7 +131,7 @@ function Input({
       isFocusedOrFilled={isFocusedOrFilled}
       isInputValid={isInputValid}
     >
-      {type === "text" && required? <RequiredInput labelName={label}/> : <label >{label}</label>}
+      {required? <RequiredInput labelName={label}/> : <label >{label}</label>}
       <InputStyled
         placeholder={placeholder}
         width={width}
@@ -144,7 +145,7 @@ function Input({
         required={required}
         readOnly={type === "radio"}
       />
-      {type !== "text" && <label>{label}</label>}
+      {type == "radio" || type == "checked" && <label>{label}</label>}
       {icon !== undefined && icon}
     </InputContainer>
   );

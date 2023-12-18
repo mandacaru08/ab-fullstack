@@ -14,7 +14,7 @@ export default function TicketAndReservation() {
     <CurrentPurchaseStep>
       <StepsStatus />
       <Section></Section>
-      {false ? (
+      {true ? (
         <DigitalTicketAndSeat />
       ) : (
         <CustomerDataDetails

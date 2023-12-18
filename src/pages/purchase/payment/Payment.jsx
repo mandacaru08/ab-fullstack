@@ -5,6 +5,7 @@ import StepsStatus from "../StepsStatus";
 import CustomerGreetings from "../shared/passenger-details/CustomerGreetings";
 import PaymentOptions from "./PaymentOptions";
 import TotalPrice from "../TotalPrice";
+import Input from "../../../components/Input";
 
 export default function Payment() {
   return (
@@ -20,32 +21,38 @@ export default function Payment() {
           <Form>
             <CustomerGreetings />
             <Fieldset>
-              <section style={{ width: "100%" }}>
-                <label>
-                  E-mail<span>*</span>
-                </label>
-                <input type="text" />
-              </section>
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Email"
+                width="100%"
+                required
+              />
             </Fieldset>
             <Fieldset>
-              <section style={{ width: "calc(50% - 10px)" }}>
-                <label>
-                  Rua / Número<span>*</span>
-                </label>
-                <input type="text" />
-              </section>
-              <section style={{ width: "calc(30% - 14px)" }}>
-                <label>
-                  CEP<span>*</span>
-                </label>
-                <input type="text" />
-              </section>
-              <section style={{ width: "calc(20% - 14px)" }}>
-                <label>
-                  Cidade<span>*</span>
-                </label>
-                <input type="text" />
-              </section>
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Rua / Número"
+                width="calc(50% - 10px)"
+                required
+              />
+
+              <Input
+                type="text"
+                inputVariant="default"
+                label="CEP"
+                width="calc(30% - 14px)"
+                required
+              />
+
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Cidade"
+                width="calc(20% - 14px)"
+                required
+              />
             </Fieldset>
             <Fieldset>
               <section>
@@ -61,24 +68,29 @@ export default function Payment() {
                   <MdOutlineKeyboardArrowDown />
                 </Options>
               </section>
-              <section>
-                <label>
-                  Estado<span>*</span>
-                </label>
-                <input type="text" />
-              </section>
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Estado"
+                width="calc(50% - 10px)"
+                required
+              />
             </Fieldset>
             <Fieldset>
-              <section style={{ width: "100%" }}>
-                <label>Complemento</label>
-                <input type="text" style={{ width: "calc(20% - 10px)" }} />
-              </section>
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Complemento"
+                width="calc(50% - 10px)"
+              />
             </Fieldset>
             <Fieldset>
-              <section>
-                <label>Celular</label>
-                <input type="text" style={{ width: "calc(30% - 10px)" }} />
-              </section>
+              <Input
+                type="text"
+                inputVariant="default"
+                label="Celular"
+                width="calc(30% - 10px)"
+              />
             </Fieldset>
           </Form>
         </AddressForm>
@@ -137,7 +149,7 @@ const Fieldset = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 
   section {
     height: 62px;
@@ -148,16 +160,6 @@ const Fieldset = styled.div`
     align-items: left;
   }
 
-  label {
-    height: 22px;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  input,
   select {
     height: 100%;
     width: 100%;

@@ -16,7 +16,7 @@ export default function Select() {
       <StepsStatus />
       <TicketOverview />
       {
-        /* ticketContextData.ticketStatus?.ticketSelected */ false ? (
+        /* ticketContextData.ticketStatus?.ticketSelected */ true ? (
           <TicketClassesOptions />
         ) : (
           <OutwardJourneyOptions />
@@ -24,7 +24,7 @@ export default function Select() {
       }
       <SymbolLegendNote>
         {
-          /* ticketContextData.ticketStatus?.ticketSelected */ true ? (
+          /* ticketContextData.ticketStatus?.ticketSelected */ false ? (
             <ClassSymbolsAndNotes />
           ) : (
             <TicketSymbolsAndNotes />
