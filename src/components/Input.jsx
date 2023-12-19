@@ -73,6 +73,12 @@ const InputContainer = styled.div`
         pointer-events: none;
         transition: all 0.5s;
       }
+
+      span {
+        font-size: 22px;
+        font-weight: 700;
+        color: #c50014;
+      }
     `;
   }}
 `;
