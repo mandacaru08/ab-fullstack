@@ -105,25 +105,6 @@ const InputContainer = styled.div`
   }
 `;
 
-const SelectContainer = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  label {
-    font-weight: 700;
-    margin-bottom: 5px;
-  }
-
-  div svg {
-    position: absolute;
-    right: 0;
-    font-size: 22px;
-    pointer-events: none;
-  }
-`;
-
 const Icon = styled.div`
   height: 100%;
   width: 56px;
@@ -137,29 +118,6 @@ const Icon = styled.div`
 
   svg {
     font-size: 30px;
-  }
-`;
-
-const Options = styled.div`
-  height: 42px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-
-  option {
-    display: block;
-  }
-
-  select {
-    height: 100%;
-    width: 100%;
-    padding: 2px 0 4px 16px;
-    box-sizing: border-box;
-    border: 1px solid #878c96;
-    border-radius: 4px;
   }
 `;
 
