@@ -19,6 +19,7 @@ import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
 import Input from "../../../components/Input";
+import Select from "../../../components/Select";
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -194,61 +195,45 @@ export default function Destination() {
                   <span>Adicionar viagem de retorno</span>
                 </AddReturn>
               )}
-              <NumberPassengers>
-                <select
-                  type="text"
-                  value={ticket.passengers}
-                  onChange={(e) =>
-                    setTicket({ ...ticket, passengers: e.target.value })
-                  }
-                >
-                  <option>1 pessoa</option>
-                  <option>2 pessoas</option>
-                  <option>3 pessoas</option>
-                  <option>4 pessoas</option>
-                  <option>5 pessoas</option>
-                </select>
-                <ShowOptions>
-                  <MdOutlineKeyboardArrowDown />
-                </ShowOptions>
-              </NumberPassengers>
+              <Select
+                type="text"
+                width="48%"
+                selectVariant="default"
+                value={ticket.passengers}
+                onChange={(e) =>
+                  setTicket({ ...ticket, passengers: e.target.value })
+                }
+                optionsArray={[
+                  "1 pessoa",
+                  "2 pessoas",
+                  "3 pessoas",
+                  "4 pessoas",
+                  "5 pessoas",
+                ]}
+              />
               <AgeAndCardType>
-                <Age>
-                  <InfoIcon
-                    style={{ position: "absolute", top: "0", left: "0" }}
-                  >
-                    <ImInfo />
-                  </InfoIcon>
-                  <select
-                    type="text"
-                    value={ticket.age}
-                    onChange={(e) =>
-                      setTicket({ ...ticket, age: e.target.value })
-                    }
-                  >
-                    <option>Idade entre 5-14</option>
-                    <option>Idade entre 15-27</option>
-                    <option>Maior de 27</option>
-                  </select>
-                  <ShowOptions>
-                    <MdOutlineKeyboardArrowDown />
-                  </ShowOptions>
-                </Age>
-                <CardType>
-                  <select
-                    type="text"
-                    value={ticket.paymentMethod}
-                    onChange={(e) =>
-                      setTicket({ ...ticket, paymentMethod: e.target.value })
-                    }
-                  >
-                    <option>Sem Cartão</option>
-                    <option>Cartão de Crédito</option>
-                  </select>
-                  <ShowOptions>
-                    <MdOutlineKeyboardArrowDown />
-                  </ShowOptions>
-                </CardType>
+                <Select
+                  type="text"
+                  width="48%"
+                  selectVariant="custom"
+                  value={ticket.age}
+                  icon={<ImInfo />}
+                  onChange={(e) =>
+                    setTicket({ ...ticket, age: e.target.value })
+                  }
+                  optionsArray={["Idade entre 5-14", "Idade entre 15-27", "Maior de 27"]}
+                />
+                <Select
+                  type="text"
+                  width="48%"
+                  selectVariant="custom"
+                  value={ticket.paymentMethod}
+                  icon={<ImInfo />}
+                  onChange={(e) =>
+                    setTicket({ ...ticket, paymentMethod: e.target.value })
+                  }
+                  optionsArray={["Sem cartão", "Cartão Amazon Boat"]}
+                />
               </AgeAndCardType>
               <AmazonTicketInformation>
                 <PercentIcon>
@@ -389,18 +374,6 @@ const OtherInfosForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  svg {
-    pointer-events: none;
-  }
-
-  select {
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.625rem 1rem;
-    cursor: pointer;
-  }
 `;
 
 const AddReturn = styled.span`
@@ -440,37 +413,6 @@ const DeleteReturn = styled.div`
   }
 `;
 
-const NumberPassengers = styled.div`
-  height: 48px;
-  width: 45%;
-  position: relative;
-  margin-bottom: 15px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  border: 0.0625rem solid #878c96;
-  border-radius: 3px;
-  color: #282d37;
-`;
-
-const ShowOptions = styled.div`
-  height: 100%;
-  width: 45px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  pointer-events: none;
-`;
-
 const AgeAndCardType = styled.div`
   height: 62px;
   width: 100%;
@@ -480,26 +422,6 @@ const AgeAndCardType = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  select {
-    height: calc(100% - 8px);
-    padding-left: 32px;
-    padding-right: 0;
-    border-bottom: 1px solid #878c96;
-    cursor: pointer;
-  }
-`;
-
-const Age = styled.div`
-  height: 100%;
-  width: 49.5%;
-  box-sizing: border-box;
-  padding: 0 8px;
-  position: relative;
-  background-color: #f0f3f5;
-
-  border-radius: 3px;
-  color: #282d37;
 `;
 
 const InfoIcon = styled.div`
@@ -513,18 +435,6 @@ const InfoIcon = styled.div`
   align-items: center;
 
   pointer-events: none;
-`;
-
-const CardType = styled.div`
-  height: 100%;
-  width: 49.5%;
-  box-sizing: border-box;
-  padding: 0 8px;
-  position: relative;
-  background-color: #f0f3f5;
-
-  border-radius: 3px;
-  color: #282d37;
 `;
 
 const AmazonTicketInformation = styled.div`
@@ -782,40 +692,6 @@ const DateAndHour = styled.div`
   align-items: center;
   box-sizing: border-box;
 `;
-
-/* const Input = styled.div`
-  height: 65px;
-  width: 45%;
-  position: relative;
-  box-sizing: border-box;
-  border-bottom: 0.0625rem solid #878c96;
-  border-radius: 0.25rem;
-  background-color: #f0f3f5;
-
-  svg {
-    font-size: 20px;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  input {
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 32px 16px 8px 16px;
-    border-style: none;
-    background-color: #f0f3f5;
-  }
-
-  label {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-    font-size: 0.75rem;
-  }
-`; */
 
 const Icon = styled.div`
   height: 100%;

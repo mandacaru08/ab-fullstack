@@ -6,7 +6,7 @@ const InputVariants = {
     backgroundColor: "#F0F3F5",
     borderRadius: "4px",
     labelPosition: "absolute",
-    labelTop: "-22px"
+    labelTop: "-22px",
   },
   custom: {
     height: "64px",
@@ -16,21 +16,21 @@ const InputVariants = {
     fontSize: "12px",
     borderRadius: "4px",
     labelPosition: "absolute",
-    labelTop: "50%"
+    labelTop: "50%",
   },
   radio: {
     width: "16px",
     height: "16px",
     borderRadius: "50%",
-    labelTop: "0"
-  }, 
+    labelTop: "0",
+  },
   checked: {
     content: "",
     width: "10px",
     height: "10px",
     borderRadius: "3px",
-    labelTop: "0"
-  }
+    labelTop: "0",
+  },
 };
 
 const InputContainer = styled.div`
@@ -38,13 +38,16 @@ const InputContainer = styled.div`
     const height = InputVariants[inputVariant]?.height || "52px";
     const widthSize = InputVariants[inputVariant]?.width || width;
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
-    const labelTop = inputVariant == "custom" && isFocusedOrFilled ? "5px" : InputVariants[inputVariant]?.labelTop;
+    const labelTop =
+      inputVariant == "custom" && isFocusedOrFilled
+        ? "5px"
+        : InputVariants[inputVariant]?.labelTop;
 
     return `
       height: ${height};
       width: ${widthSize};
       border-radius: ${borderRadius};
-      background-color: ${bgColor? bgColor : "#F0F3F5"};
+      background-color: ${bgColor ? bgColor : "#F0F3F5"};
       position: relative;
       display: flex;
       flex-direction: row;
@@ -64,7 +67,9 @@ const InputContainer = styled.div`
         z-index: 0;
         left: 5px;
         top: ${labelTop};
-        font-size: ${inputVariant !== "custom" || isFocusedOrFilled ? "12px" : "16px"};
+        font-size: ${
+          inputVariant !== "custom" || isFocusedOrFilled ? "12px" : "16px"
+        };
         pointer-events: none;
         transition: all 0.5s;
       }
@@ -78,7 +83,8 @@ const InputStyled = styled.input`
   position: relative;
   padding: 8px 16px;
   box-sizing: border-box;
-  border-radius: ${({ inputVariant }) => InputVariants[inputVariant]?.borderRadius || "4px"};
+  border-radius: ${({ inputVariant }) =>
+    InputVariants[inputVariant]?.borderRadius || "4px"};
 
   &[type="radio"] {
     width: 16px;
@@ -100,11 +106,14 @@ const InputStyled = styled.input`
   }
 `;
 
-const RequiredInput = ({labelName}) =>  {
+const RequiredInput = ({ labelName }) => {
   return (
-    <label>{labelName}<span>*</span></label>
+    <label>
+      {labelName}
+      <span>*</span>
+    </label>
   );
-}
+};
 
 function Input({
   id,
@@ -124,7 +133,6 @@ function Input({
   isInputValid,
   isFocusedOrFilled,
 }) {
-
   return (
     <InputContainer
       inputVariant={inputVariant}
@@ -132,8 +140,8 @@ function Input({
       isFocusedOrFilled={isFocusedOrFilled}
       isInputValid={isInputValid}
     >
-      {required? <RequiredInput labelName={label}/> : <label >{label}</label>}
-      <InputStyled 
+      {required ? <RequiredInput labelName={label} /> : <label>{label}</label>}
+      <InputStyled
         inputVariant={inputVariant}
         placeholder={placeholder}
         width={width}
@@ -147,7 +155,7 @@ function Input({
         required={required}
         readOnly={type === "radio"}
       />
-      {type == "radio" || type == "checked" && <label>{label}</label>}
+      {type == "radio" || (type == "checked" && <label>{label}</label>)}
       {icon !== undefined && icon}
     </InputContainer>
   );
