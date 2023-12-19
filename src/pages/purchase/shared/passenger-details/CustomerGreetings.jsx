@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Input from "../../../../components/Input";
+import Select from "../../../../components/Select";
 
 function isValidInput(value) {
     const regex = /^[a-zA-Z]+$/;
@@ -17,39 +18,28 @@ export default function CustomerGreetings() {
   return (
     <FieldsetContainer>
       <Fieldset>
-        <section>
-          <label>Saudações</label>
-          <Options>
-            <select
-              type="text"
-              onChange={(e) =>
-                setCustomerData({ ...customerData, salutation: e.target.value })
-              }
-            >
-              <option>Sr.</option>
-              <option>Sra.</option>
-            </select>
-            <MdOutlineKeyboardArrowDown />
-          </Options>
-        </section>
-        <section>
-          <label>Título</label>
-          <Options>
-            <select
-              type="text"
-              onChange={(e) =>
-                setCustomerData({ ...customerData, title: e.target.value })
-              }
-            >
-              <option>Dr.</option>
-              <option>Prof.</option>
-              <option>Prof. Dr.</option>
-              <option>Dr. Dr.</option>
-              <option>Prof. Dr. Dr.</option>
-            </select>
-            <MdOutlineKeyboardArrowDown />
-          </Options>
-        </section>
+        <Select 
+          type="text"
+          label="Saudações"
+          width="calc(50% - 10px)"
+          selectVariant="default"
+          optionsArray={["Sr.", "Sra."]}
+          required
+          onChange={(e) =>
+            setCustomerData({ ...customerData, salutation: e.target.value })
+          }
+        />
+        <Select 
+          type="text"
+          label="Título"
+          width="calc(50% - 10px)"
+          selectVariant="default"
+          optionsArray={["Dr.", "Prof.", "Prof. Dr.", "Dr. Dr.", "Prof. Dr. Dr."]}
+          required
+          onChange={(e) =>
+            setCustomerData({ ...customerData, title: e.target.value })
+          }
+        />
       </Fieldset>
       <Fieldset>
         <Input
@@ -98,21 +88,6 @@ const Fieldset = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: left;
-  }
-
-  select {
-    height: 100%;
-    width: 100%;
-    padding: 2px 0 4px 16px;
-    box-sizing: border-box;
-    border: 1px solid #878c96;
-    border-radius: 4px;
-  }
-
-  span {
-    font-size: 22px;
-    font-weight: 700;
-    color: #c50014;
   }
 `;
 

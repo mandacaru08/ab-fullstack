@@ -16,6 +16,26 @@ const SelectVariants = {
   },
 };
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  margin-bottom: 18px;
+  height: ${({ selectVariant }) => `calc(${SelectVariants[selectVariant]?.height}px + 14px)`};
+  width: ${({ width }) => width};
+
+  label {
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #c50014;
+  }
+`;
+
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -25,7 +45,7 @@ const SelectContainer = styled.div`
   border-radius: 3px;
   box-sizing: border-box;
   cursor: pointer;
-  width: ${({ width }) => width};
+  width: 100%;
   height: ${({ selectVariant }) => SelectVariants[selectVariant]?.height};
   padding: ${({ selectVariant }) => SelectVariants[selectVariant]?.padding};
   border: ${({ selectVariant }) => SelectVariants[selectVariant]?.border};
@@ -37,7 +57,8 @@ const SelectContainer = styled.div`
     width: calc(100% + 8px);
     padding: 0 8px;
     cursor: pointer;
-    ${({ selectVariant }) => selectVariant === "custom" &&
+    ${({ selectVariant }) =>
+      selectVariant === "custom" &&
       `
         padding-left: 32px;
         padding-right: 0;
@@ -58,24 +79,35 @@ const ArrowIcon = styled.div`
   pointer-events: none;
 `;
 
-function Select({ selectVariant, icon, label, optionsArray, width, onChange }) {
+const RequiredInput = ({ labelName }) => {
   return (
-    <SelectContainer width={width} selectVariant={selectVariant}>
-      {label && <label>{label}</label>}
-      {icon && icon}
-      <select onChange={onChange}>
-        {optionsArray.map((option) => {
-          return (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          );
-        })}
-      </select>
-      <ArrowIcon>
-        <MdOutlineKeyboardArrowDown />
-      </ArrowIcon>
-    </SelectContainer>
+    <label>
+      {labelName}
+      <span>*</span>
+    </label>
+  );
+};
+
+function Select({ selectVariant, icon, label, optionsArray, width, required, onChange }) {
+  return (
+    <Container selectVariant={selectVariant} width={width}>
+      {label && required && <RequiredInput labelName={label}></RequiredInput>}
+      <SelectContainer selectVariant={selectVariant}>
+        {icon && icon}
+        <select onChange={onChange}>
+          {optionsArray.map((option) => {
+            return (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
+        <ArrowIcon>
+          <MdOutlineKeyboardArrowDown />
+        </ArrowIcon>
+      </SelectContainer>
+    </Container>
   );
 }
 

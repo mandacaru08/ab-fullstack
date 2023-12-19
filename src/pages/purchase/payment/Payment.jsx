@@ -6,6 +6,7 @@ import CustomerGreetings from "../shared/passenger-details/CustomerGreetings";
 import PaymentOptions from "./PaymentOptions";
 import TotalPrice from "../TotalPrice";
 import Input from "../../../components/Input";
+import Select from "../../../components/Select";
 
 export default function Payment() {
   return (
@@ -55,19 +56,14 @@ export default function Payment() {
               />
             </Fieldset>
             <Fieldset>
-              <section>
-                <label>País</label>
-                <Options>
-                  <select type="text">
-                    <option>Dr.</option>
-                    <option>Prof.</option>
-                    <option>Prof. Dr.</option>
-                    <option>Dr. Dr.</option>
-                    <option>Prof. Dr. Dr.</option>
-                  </select>
-                  <MdOutlineKeyboardArrowDown />
-                </Options>
-              </section>
+              <Select 
+                type="text"
+                label="País"
+                selectVariant="default"
+                width="calc(50% - 10px)"
+                optionsArray={["Brasil", "Bolívia", "Colômbia", "Equador",, "Peru"]}
+                required
+              />
               <Input
                 type="text"
                 inputVariant="default"
@@ -158,21 +154,6 @@ const Fieldset = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: left;
-  }
-
-  select {
-    height: 100%;
-    width: 100%;
-    padding: 2px 0 4px 16px;
-    box-sizing: border-box;
-    border: 1px solid #878c96;
-    border-radius: 4px;
-  }
-
-  input {
-    background-color: #f0f3f5;
-    border: none;
-    border-bottom: 1px solid #afb4bb;
   }
 
   span {
