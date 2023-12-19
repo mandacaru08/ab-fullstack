@@ -91,7 +91,7 @@ const RequiredInput = ({ labelName }) => {
 function Select({ selectVariant, icon, label, optionsArray, width, required, onChange }) {
   return (
     <Container selectVariant={selectVariant} width={width}>
-      {label && required && <RequiredInput labelName={label}></RequiredInput>}
+      {label && <RequiredInput labelName={label}></RequiredInput>}
       <SelectContainer selectVariant={selectVariant}>
         {icon && icon}
         <select onChange={onChange}>

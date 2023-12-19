@@ -16,7 +16,7 @@ export default function Select() {
       <StepsStatus />
       <TicketOverview />
       {
-        /* ticketContextData.ticketStatus?.ticketSelected */ true ? (
+        /* ticketContextData.ticketStatus?.ticketSelected */ false ? (
           <TicketClassesOptions />
         ) : (
           <OutwardJourneyOptions />

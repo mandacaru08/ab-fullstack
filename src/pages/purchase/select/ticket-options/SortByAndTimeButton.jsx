@@ -1,73 +1,51 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { BiUpArrowAlt } from 'react-icons/bi';
+import { useState } from "react";
+import styled from "styled-components";
+import { BiUpArrowAlt } from "react-icons/bi";
+import Select from "../../../../components/Select";
 
-export default function SortByAndTimeButton(){
+export default function SortByAndTimeButton() {
+  const [sortBy, setSortBy] = useState(null);
 
-    const [ sortBy, setSortBy ] = useState(null);
-
-    return(
-        <Container>
-            <Earlier style={{width: '100px'}}>
-                <span>Mais cedo</span>
-                <BiUpArrowAlt style={{color: '#FF0000'}}/>
-            </Earlier>
-            <div style={{width: 'auto'}}>
-                <select>
-                    <option value='partida' onClick={event => setSortBy(event.target.value)}>Ordenar por: Partida</option>
-                    <option value='duracao'>Ordenar por: Duração</option>
-                    <option value='mudanca'> Ordenar por: Mudanças</option>
-                    <option value='tarifa'>Ordenar por: Tarifa</option>
-                </select>
-                <MdOutlineKeyboardArrowDown/>
-            </div>
-        </Container>
-    );
+  return (
+    <Container>
+      <Earlier style={{ width: "100px" }}>
+        <span>Mais cedo</span>
+        <BiUpArrowAlt style={{ color: "#FF0000" }} />
+      </Earlier>
+      <Select
+        type="text"
+        label="Ordenar por:"
+        selectVariant="default"
+        optionsArray={["Partida", "Duração", "Mudanças", "Tarifa"]}
+        onClick={() => setIsOpen(!isOpen)}
+        onChange={(event) => setSortBy(event.target.value)}
+      />
+    </Container>
+  );
 }
 
 const Container = styled.div`
-    height: 54px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding: 17px 12px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-
-    div{
-        height: 30px;
-        position: relative;
-    }
-    select{
-        font-size: 16px;
-        font-weight: 400;
-        color: #232D37;
-        padding-right: 30px;
-        box-sizing: border-box;
-    }
-
-    svg{
-        font-size: 25px;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        pointer-events: none;
-    }
+  height: 54px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 17px 12px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: #ffffff;
 `;
 
 const Earlier = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    :hover{
-        color: #F24423;
-        text-decoration: underline;
-        cursor: pointer;
-    }
+  :hover {
+    color: #f24423;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
