@@ -78,6 +78,7 @@ const InputStyled = styled.input`
   position: relative;
   padding: 8px 16px;
   box-sizing: border-box;
+  border-radius: ${({ inputVariant }) => InputVariants[inputVariant]?.borderRadius || "4px"};
 
   &[type="radio"] {
     width: 16px;
@@ -132,7 +133,8 @@ function Input({
       isInputValid={isInputValid}
     >
       {required? <RequiredInput labelName={label}/> : <label >{label}</label>}
-      <InputStyled
+      <InputStyled 
+        inputVariant={inputVariant}
         placeholder={placeholder}
         width={width}
         type={type}
