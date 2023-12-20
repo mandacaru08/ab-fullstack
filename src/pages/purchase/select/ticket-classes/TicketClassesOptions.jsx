@@ -6,8 +6,9 @@ import {
 } from "react-icons/bs";
 import {
   MdKeyboardArrowRight,
-  MdAirlineSeatReclineNormal,
+  MdEventSeat,
 } from "react-icons/md";
+import Input from "../../../../components/Input";
 
 const ticketClasses = [
   {
@@ -105,40 +106,45 @@ export default function TicketClassesOptions() {
       <TicketClasses>
         {ticketClasses.map((ticketClass) => {
           return (
-            <>
-              <Class
-                key={ticketClass.name}
-                isSelected={selectedClass.class === ticketClass.id}
-              >
-                <BenefitsAndConditions>
-                  <Benefits>
-                    <h2>{ticketClass.name}</h2>
-                    {ticketClass.benefits.map((benefit) => {
-                      return (
-                        <Benefit
-                          key={benefit.description}
-                          isIncluded={benefit.included}
-                        >
-                          {benefit.included ? (
-                            <BsFillCheckCircleFill />
-                          ) : (
-                            <BsFillExclamationCircleFill />
-                          )}
-                          <span>{benefit.description}</span>
-                        </Benefit>
-                      );
-                    })}
-                  </Benefits>
-                  <Conditions>
-                    <MdKeyboardArrowRight />
-                    <span>Condições</span>
-                  </Conditions>
-                </BenefitsAndConditions>
-                <DashedPart isSelected={selectedClass.class === ticketClass.id}>
-                  <div style={{ left: "0" }}></div>
-                  <div style={{ right: "0" }}></div>
-                </DashedPart>
-                <Price
+            <Class
+              key={ticketClass.name}
+              isSelected={selectedClass.class === ticketClass.id}
+            >
+              <BenefitsAndConditions>
+                <Benefits>
+                  <h2>{ticketClass.name}</h2>
+                  {ticketClass.benefits.map((benefit) => {
+                    return (
+                      <Benefit
+                        key={benefit.description}
+                        isIncluded={benefit.included}
+                      >
+                        {benefit.included ? (
+                          <BsFillCheckCircleFill />
+                        ) : (
+                          <BsFillExclamationCircleFill />
+                        )}
+                        <span>{benefit.description}</span>
+                      </Benefit>
+                    );
+                  })}
+                </Benefits>
+                <Conditions>
+                  <MdKeyboardArrowRight />
+                  <span>Condições</span>
+                </Conditions>
+              </BenefitsAndConditions>
+              <DashedPart isSelected={selectedClass.class === ticketClass.id}>
+                <div style={{ left: "0" }}></div>
+                <div style={{ right: "0" }}></div>
+              </DashedPart>
+              <Price>
+                <Input 
+                  type="radio"
+                  width="100%"
+                  inputVariant="radio"
+                  label={`R$ ${ticketClass.price}`}
+                  icon={ticketClass.seatIncluded && <MdEventSeat />}
                   checked={selectedClass.class === ticketClass.id}
                   onClick={() =>
                     setSelectedClass({
@@ -146,13 +152,9 @@ export default function TicketClassesOptions() {
                       class: ticketClass.id,
                     })
                   }
-                >
-                  <input type="radio" />
-                  {ticketClass.seatIncluded && <MdAirlineSeatReclineNormal />}
-                  <span>R$ {ticketClass.price}</span>
-                </Price>
-              </Class>
-            </>
+                />
+              </Price>
+            </Class>
           );
         })}
       </TicketClasses>
@@ -301,7 +303,7 @@ const Price = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: right;
+  justify-content: start;
   align-items: center;
   font-size: 20px;
   font-weight: 700;
@@ -309,25 +311,4 @@ const Price = styled.div`
   padding: 26px 20px 14px 20px;
   box-sizing: border-box;
   position: relative;
-
-  input {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 5px;
-    position: absolute;
-    left: 0;
-    top: 40%;
-    transform: translate(-50% -50%);
-    border: ${(props) =>
-      props.checked ? "5px solid #282D37" : "1px solid #282D37"};
-    outline: none;
-    pointer-events: none;
-  }
-
-  svg {
-    font-size: 22px;
-    margin-right: 10px;
-    color: #95989c;
-  }
 `;
