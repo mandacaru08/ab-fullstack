@@ -24,7 +24,7 @@ const InputVariants = {
     height: "16px",
     borderRadius: "50%",
     labelTop: "0",
-    flexDirection: "column",
+    flexDirection: "row",
     labelPosition: "relative",
   },
   checked: {
@@ -32,7 +32,7 @@ const InputVariants = {
     height: "10px",
     borderRadius: "3px",
     labelTop: "0",
-    flexDirection: "column",
+    flexDirection: "row",
     labelPosition: "relative",
   },
 };
@@ -185,7 +185,7 @@ function Input({
         onChange={onChange}
       />
       {(type == "radio" || type == "checkbox") && <label>{label}</label>}
-      {icon !== undefined && icon}
+      {icon  && icon}
     </InputContainer>
   );
 }
