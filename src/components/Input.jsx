@@ -40,7 +40,7 @@ const InputVariants = {
 
 const InputContainer = styled.div`
   ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
-    const height = InputVariants[inputVariant]?.height || "52px";
+    const height = InputVariants[inputVariant]?.height;
     const widthSize = InputVariants[inputVariant]?.width || width;
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
     const flexDirection = InputVariants[inputVariant]?.flexDirection;
@@ -58,6 +58,7 @@ const InputContainer = styled.div`
       position: relative;
       display: flex;
       flex-direction: ${flexDirection};
+      justify-content: space-between;
       box-sizing: border-box;
       background-color: ${backgroundColor};
       transition: all 0.5s;
@@ -75,6 +76,7 @@ const InputContainer = styled.div`
         z-index: 0;
         left: 5px;
         top: ${labelTop};
+        margin-left: 8px;
         font-size: ${
           inputVariant !== "custom" || isFocusedOrFilled ? "12px" : "16px"
         };
@@ -92,13 +94,21 @@ const InputContainer = styled.div`
 `;
 
 const InputStyled = styled.input`
-  height: 100%;
-  width: 100%;
+  ${({ inputVariant, type }) => {
+    const height = InputVariants[inputVariant]?.height;
+    const width = type == "text"? "100%" : InputVariants[inputVariant]?.width;
+    const padding = type == "text"? "8px 16px" : "0"; 
+    const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
+    return `
+      height: ${height};
+      width: ${width};
+      padding: ${padding};
+      border-radius: ${borderRadius};
+    `;
+  }};
+
   position: relative;
-  padding: ${({ type }) => type == "text"? "8px 16px" : "0"};
   box-sizing: border-box;
-  border-radius: ${({ inputVariant }) =>
-    InputVariants[inputVariant]?.borderRadius || "4px"};
 
   &[type="radio"] {
     width: 16px;
@@ -122,10 +132,11 @@ const InputStyled = styled.input`
     }
   }
 
-  input[type="checkbox"] {
+  &[type="checkbox"] {
     width: 20px;
     height: 20px;
     border-radius: 3px;
+    border: 1px solid #282d37;
     background-color: ${({ checked }) => checked ? "#282D37" : ""};
     cursor: pointer;
   }

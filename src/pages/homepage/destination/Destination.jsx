@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FaRegCalendarAlt, FaCheck, FaRegTrashAlt } from "react-icons/fa";
 import {
   MdKeyboardArrowRight,
-  MdOutlineKeyboardArrowDown,
   MdRepeat,
 } from "react-icons/md";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
@@ -128,7 +127,7 @@ export default function Destination() {
                     onClick={() => cleanInputCities("from")}
                   />
                 }
-              ></Input>
+              />
               <CitiesOptionsFiltered
                 left="0"
                 cities={fromFilteredCities}
@@ -151,7 +150,7 @@ export default function Destination() {
                 icon={
                   <IoCloseCircleSharp onClick={() => cleanInputCities("to")} />
                 }
-              ></Input>
+              />
               <CitiesOptionsFiltered
                 right="0"
                 cities={toFilteredCities}
@@ -277,7 +276,12 @@ export default function Destination() {
                 </Separator>
                 <TransportOption>
                   <Options>
-                    <Option
+                    <Input 
+                      width="fit-content"
+                      type="checkbox"
+                      inputVariant="checkbox"
+                      label="Apenas Transportes Locais"
+                      icon={transportTypes.localTransports && <FaCheck/>}
                       checked={transportTypes.localTransports}
                       onClick={() =>
                         setTransportTypes({
@@ -285,23 +289,13 @@ export default function Destination() {
                           localTransports: !transportTypes.localTransports,
                         })
                       }
-                    >
-                      <span>
-                        <input type="checkbox" />
-                        <label>Apenas Transposrtes Locais</label>
-                        {transportTypes.localTransports && (
-                          <FaCheck
-                            style={{
-                              position: "absolute",
-                              top: "8px",
-                              left: "8px",
-                            }}
-                          />
-                        )}
-                      </span>
-                    </Option>
-                    <Option
-                      style={{ width: "270px" }}
+                    />
+                    <Input
+                      width="fit-content"
+                      type="checkbox"
+                      inputVariant="checkbox"
+                      label="Mostrar conexões mais rápidas"
+                      icon={transportTypes.fastestConnections && <FaCheck/>}
                       checked={transportTypes.fastestConnections}
                       onClick={() =>
                         setTransportTypes({
@@ -310,35 +304,21 @@ export default function Destination() {
                             !transportTypes.fastestConnections,
                         })
                       }
+                    />
+                    {/* <MoreInfosContainer
+                      ref={moreInfosRef}
+                      onClick={() =>
+                        setShowMoreInfosMessage(!showMoreInfosMessage)
+                      }
                     >
-                      <span>
-                        <input type="checkbox" />
-                        <label>Mostrar conexões mais rápidas</label>
-                        {transportTypes.fastestConnections && (
-                          <FaCheck
-                            style={{
-                              position: "absolute",
-                              top: "8px",
-                              left: "8px",
-                            }}
-                          />
-                        )}
-                      </span>
-                      <MoreInfosContainer
-                        ref={moreInfosRef}
-                        onClick={() =>
-                          setShowMoreInfosMessage(!showMoreInfosMessage)
-                        }
-                      >
-                        <InfoIcon>
-                          <ImInfo />
-                        </InfoIcon>
-                        <p>O que isso significa?</p>
-                        {showMoreInfosMessage && (
-                          <MoreInfos showMessage={showMoreInfosMessage} />
-                        )}
-                      </MoreInfosContainer>
-                    </Option>
+                      <InfoIcon>
+                        <ImInfo />
+                      </InfoIcon>
+                      <p>O que isso significa?</p>
+                      {showMoreInfosMessage && (
+                        <MoreInfos showMessage={showMoreInfosMessage} />
+                      )}
+                    </MoreInfosContainer> */}
                   </Options>
                 </TransportOption>
               </TransportationInfos>
@@ -499,82 +479,6 @@ const Options = styled.ul`
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
-`;
-
-const Option = styled.li`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
-  position: relative;
-  z-index: 1;
-
-  font-weight: ${(props) => (props.checked === true ? "700" : "400")};
-
-  span {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    cursor: pointer;
-  }
-
-  label {
-    padding-top: 5px;
-    box-sizing: border-box;
-    pointer-events: none;
-  }
-
-  svg {
-    font-size: 12px;
-    color: #ffffff;
-  }
-
-  div svg {
-    color: #000;
-    font-size: 20px;
-  }
-
-  p {
-    font-size: 13px;
-    color: #646973;
-  }
-
-  input {
-    position: relative;
-    margin-right: 5px;
-    border: 1px solid #282d37;
-    outline: none;
-    pointer-events: none;
-  }
-
-  input[type="radio"] {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-
-    &:checked::after {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border: 5px solid #282d37;
-      border-radius: 50%;
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-    background-color: ${(props) => (props.checked ? "#282D37" : "")};
-  }
 `;
 
 const MoreInfosContainer = styled.div`
