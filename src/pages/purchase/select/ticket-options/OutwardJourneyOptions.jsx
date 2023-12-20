@@ -1,19 +1,27 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
-
 import SortByAndTimeButton from "./SortByAndTimeButton";
 import TicketOptions from "./TicketOptions";
+import Input from "../../../../components/Input";
 
 export default function OutwardJourneyOptions() {
+
+  const [ showBestPrices, setShowBestPrices ] = useState(false);
+
   return (
     <Container>
       <TravelDate>
         <span>Viagem de ida em 30/06/2023</span>
-        <ShowBestPrice title="Os preços mais baixos aqui (1)">
-          <RiMoneyDollarBoxFill />
-          <span>Mostrar nossos melhores preços ¹</span>
-          <input type="checkbox" />
-        </ShowBestPrice>
+        <Input 
+          type="checkbox"
+          width="fit-content"
+          inputVariant="checkbox"
+          checked={showBestPrices}
+          icon={<RiMoneyDollarBoxFill />}
+          label="Mostrar nossos melhores preços ¹"
+          onClick={() => setShowBestPrices(!showBestPrices)}
+        />
       </TravelDate>
       <SortByAndTimeButton />
       <TicketOptions />
@@ -43,29 +51,4 @@ const TravelDate = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-`;
-
-const ShowBestPrice = styled.label`
-  height: 30px;
-  width: 305px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  svg {
-    font-size: 25px;
-    color: #77be27;
-  }
-
-  input {
-    height: 20px;
-    width: 20px;
-    border: 1px solid #878c96;
-    border-radius: 2px;
-  }
-
-  :hover {
-    cursor: pointer;
-  }
 `;
