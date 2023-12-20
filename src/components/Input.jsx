@@ -7,6 +7,7 @@ const InputVariants = {
     borderRadius: "4px",
     labelPosition: "absolute",
     labelTop: "-22px",
+    flexDirection: "column",
   },
   custom: {
     height: "64px",
@@ -17,27 +18,32 @@ const InputVariants = {
     borderRadius: "4px",
     labelPosition: "absolute",
     labelTop: "50%",
+    flexDirection: "column",
   },
   radio: {
-    width: "16px",
     height: "16px",
     borderRadius: "50%",
     labelTop: "0",
+    flexDirection: "column",
+    labelPosition: "relative",
   },
   checked: {
     content: "",
-    width: "10px",
     height: "10px",
     borderRadius: "3px",
     labelTop: "0",
+    flexDirection: "column",
+    labelPosition: "relative",
   },
 };
 
 const InputContainer = styled.div`
-  ${({ inputVariant, width, bgColor, isFocusedOrFilled, isInputValid }) => {
+  ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
     const height = InputVariants[inputVariant]?.height || "52px";
     const widthSize = InputVariants[inputVariant]?.width || width;
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
+    const flexDirection = InputVariants[inputVariant]?.flexDirection;
+    const labelPosition = InputVariants[inputVariant]?.labelPosition;
     const labelTop =
       inputVariant == "custom" && isFocusedOrFilled
         ? "5px"
@@ -47,10 +53,9 @@ const InputContainer = styled.div`
       height: ${height};
       width: ${widthSize};
       border-radius: ${borderRadius};
-      background-color: ${bgColor ? bgColor : "#F0F3F5"};
       position: relative;
       display: flex;
-      flex-direction: row;
+      flex-direction: ${flexDirection};
       box-sizing: border-box;
       transition: all 0.5s;
 
@@ -63,7 +68,7 @@ const InputContainer = styled.div`
       }
 
       label {
-        position: absolute;
+        position: ${labelPosition};
         z-index: 0;
         left: 5px;
         top: ${labelTop};
@@ -87,7 +92,7 @@ const InputStyled = styled.input`
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 8px 16px;
+  padding: ${({ type }) => type == "text"? "8px 16px" : "0"};
   box-sizing: border-box;
   border-radius: ${({ inputVariant }) =>
     InputVariants[inputVariant]?.borderRadius || "4px"};
@@ -96,6 +101,9 @@ const InputStyled = styled.input`
     width: 16px;
     height: 16px;
     border-radius: 50%;
+    border: 1px solid #282d37;
+    margin-right: 8px;
+    cursor: pointer;
 
     &:checked::after {
       content: "";
@@ -109,6 +117,14 @@ const InputStyled = styled.input`
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: ${({ checked }) => checked ? "#282D37" : ""};
+    cursor: pointer;
   }
 `;
 
@@ -128,12 +144,13 @@ function Input({
   name,
   icon,
   width,
-  bgColor,
+  checked,
   label,
   value,
   required,
   placeholder,
   onBlur,
+  onClick,
   onFocus,
   onChange,
   isInputValid,
@@ -145,23 +162,29 @@ function Input({
       width={width}
       isFocusedOrFilled={isFocusedOrFilled}
       isInputValid={isInputValid}
+      onClick={onClick}
     >
-      {required ? <RequiredInput labelName={label} /> : <label>{label}</label>}
+      {required && (type != "radio" && type != "checkbox") ? (
+        <RequiredInput labelName={label} />
+      ) : label && type == "text" && (
+        <label>{label}</label>
+      )}
       <InputStyled
-        inputVariant={inputVariant}
-        placeholder={placeholder}
-        width={width}
+        id={id}
+        name={name}
         type={type}
         value={value}
+        width={width}
+        inputVariant={inputVariant}
+        placeholder={placeholder}
+        required={required}
+        checked={checked}
+        readOnly={type === "radio" || type === "checkbox"}
         onBlur={onBlur}
         onFocus={onFocus}
         onChange={onChange}
-        name={name}
-        id={id}
-        required={required}
-        readOnly={type === "radio"}
       />
-      {type == "radio" || (type == "checked" && <label>{label}</label>)}
+      {(type == "radio" || type == "checkbox") && <label>{label}</label>}
       {icon !== undefined && icon}
     </InputContainer>
   );

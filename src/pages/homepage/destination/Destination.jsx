@@ -252,30 +252,24 @@ export default function Destination() {
               <TransportationInfos>
                 <TransportationClass>
                   <Options>
-                    <Option
+                    <Input 
+                      readOnly
+                      type="radio"
+                      label="1ª Classe"
+                      width="112px"
+                      selectVariant="radio"
+                      checked={ticket.class === "1"}
                       onClick={() => setTicket({ ...ticket, class: "1" })}
-                    >
-                      <span>
-                        <input
-                          type="radio"
-                          checked={ticket.class === "1"}
-                          readOnly
-                        />
-                        <label>1ª Classe</label>
-                      </span>
-                    </Option>
-                    <Option
+                    /> 
+                    <Input 
+                      readOnly
+                      type="radio"
+                      label="2ª Classe"
+                      width="112px"
+                      selectVariant="radio"
+                      checked={ticket.class === "2"}
                       onClick={() => setTicket({ ...ticket, class: "2" })}
-                    >
-                      <span>
-                        <input
-                          type="radio"
-                          checked={ticket.class === "2"}
-                          readOnly
-                        />
-                        <label>2ª Classe</label>
-                      </span>
-                    </Option>
+                    /> 
                   </Options>
                 </TransportationClass>
                 <Separator>
