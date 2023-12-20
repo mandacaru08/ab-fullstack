@@ -4,6 +4,7 @@ import { ImInfo } from "react-icons/im";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import { MdAirlineSeatReclineNormal, MdGroups } from "react-icons/md";
 import Select from "../../../../components/Select";
+import Input from "../../../../components/Input";
 
 export default function NumberOfSeatsOptions() {
   const [isSeatOptionSelected, setIsSeatOptionSelected] = useState(false);
@@ -16,10 +17,12 @@ export default function NumberOfSeatsOptions() {
     <SeatsNumber onClick={() => handleInputChange()}>
       <section>
         <SeatOptionsContainer>
-          <InputContainer showInput={!isSeatOptionSelected}>
-            <input type="checkbox" />
-            {isSeatOptionSelected == true && <BsFillCheckSquareFill />}
-          </InputContainer>
+          <Input 
+            type="checkbox"
+            inputVariant="checkbox"
+            icon={isSeatOptionSelected && <BsFillCheckSquareFill />}
+            checked={!isSeatOptionSelected}
+          />
           <Icon>
             <MdAirlineSeatReclineNormal />
           </Icon>

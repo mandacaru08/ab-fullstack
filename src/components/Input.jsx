@@ -28,7 +28,7 @@ const InputVariants = {
     flexDirection: "row",
     labelPosition: "relative",
   },
-  checked: {
+  checkbox: {
     content: "",
     height: "10px",
     borderRadius: "3px",
