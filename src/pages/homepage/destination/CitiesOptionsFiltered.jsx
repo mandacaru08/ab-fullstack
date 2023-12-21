@@ -16,7 +16,7 @@ function CitiesOptionsFiltered({ cities, showOptions, ...props }) {
 
 const CitiesOptions = styled.ol`
   position: absolute;
-  top: 64px;
+  top: 42px;
   left: ${props => props.left ? props.left : "none"};
   right: ${props => props.right ? props.right : "none"};
   z-index: 10;

@@ -21,7 +21,6 @@ export default function NumberOfSeatsOptions() {
             type="checkbox"
             inputVariant="checkbox"
             icon={isSeatOptionSelected && <BsFillCheckSquareFill />}
-            checked={!isSeatOptionSelected}
           />
           <Icon>
             <MdAirlineSeatReclineNormal />

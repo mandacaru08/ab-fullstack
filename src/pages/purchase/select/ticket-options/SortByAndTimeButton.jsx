@@ -4,7 +4,8 @@ import { BiUpArrowAlt } from "react-icons/bi";
 import Select from "../../../../components/Select";
 
 export default function SortByAndTimeButton() {
-  const [sortBy, setSortBy] = useState(null);
+  const [sortBy, setSortBy] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Container>
@@ -15,7 +16,9 @@ export default function SortByAndTimeButton() {
       <Select
         type="text"
         label="Ordenar por:"
-        selectVariant="default"
+        value={sortBy}
+        width="112px"
+        selectVariant="defaultWithoutBorder"
         optionsArray={["Partida", "Duração", "Mudanças", "Tarifa"]}
         onClick={() => setIsOpen(!isOpen)}
         onChange={(event) => setSortBy(event.target.value)}

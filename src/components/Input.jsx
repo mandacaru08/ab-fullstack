@@ -7,7 +7,7 @@ const InputVariants = {
     borderRadius: "4px",
     labelPosition: "absolute",
     labelTop: "-22px",
-    flexDirection: "column",
+    flexDirection: "row",
   },
   custom: {
     height: "64px",
@@ -18,7 +18,7 @@ const InputVariants = {
     borderRadius: "4px",
     labelPosition: "absolute",
     labelTop: "50%",
-    flexDirection: "column",
+    flexDirection: "row",
     backgroundColor: "#F0F3F5",
   },
   radio: {
@@ -39,7 +39,8 @@ const InputVariants = {
 };
 
 const InputContainer = styled.div`
-  ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
+
+${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
     const height = InputVariants[inputVariant]?.height;
     const widthSize = InputVariants[inputVariant]?.width || width;
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
@@ -62,14 +63,6 @@ const InputContainer = styled.div`
       box-sizing: border-box;
       background-color: ${backgroundColor};
       transition: all 0.5s;
-
-      svg {
-        font-size: 20px;
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
 
       label {
         position: ${labelPosition};

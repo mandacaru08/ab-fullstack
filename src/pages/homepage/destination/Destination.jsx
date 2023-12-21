@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegCalendarAlt, FaCheck, FaRegTrashAlt } from "react-icons/fa";
-import {
-  MdKeyboardArrowRight,
-  MdRepeat,
-} from "react-icons/md";
+import { MdKeyboardArrowRight, MdRepeat } from "react-icons/md";
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { ImInfo } from "react-icons/im";
@@ -19,6 +16,7 @@ import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
+import Icon from "../../../components/Icon";
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -115,7 +113,7 @@ export default function Destination() {
                 type="text"
                 label="Origem"
                 width="calc(50% - 30px)"
-                variantInput="default"
+                inputVariant="default"
                 value={fromCity}
                 placeholder="estação / parada / endereço "
                 onChange={(e) => {
@@ -123,7 +121,10 @@ export default function Destination() {
                   setFromFilteredCities(filterCities(e.target.value));
                 }}
                 icon={
-                  <IoCloseCircleSharp
+                  <Icon
+                    size={"20px"}
+                    color={"#646973"}
+                    icon={<IoCloseCircleSharp />}
                     onClick={() => cleanInputCities("from")}
                   />
                 }
@@ -133,14 +134,17 @@ export default function Destination() {
                 cities={fromFilteredCities}
                 showOptions={fromFilteredCities.length > 0}
               />
-              <Icon>
-                <TbArrowsLeftRight />
-              </Icon>
+              <Icon
+                size={"20px"}
+                color={"#646973"}
+                icon={<TbArrowsLeftRight />}
+                onClick={() => cleanInputCities("from")}
+              />
               <Input
                 type="text"
                 label="Destino"
                 width="calc(50% - 30px)"
-                variantInput="default"
+                inputVariant="default"
                 placeholder="estação / parada / endereço "
                 value={toCity}
                 onChange={(e) => {
@@ -148,7 +152,12 @@ export default function Destination() {
                   setToFilteredCities(filterCities(e.target.value));
                 }}
                 icon={
-                  <IoCloseCircleSharp onClick={() => cleanInputCities("to")} />
+                  <Icon
+                    size={"20px"}
+                    color={"#646973"}
+                    icon={<IoCloseCircleSharp />}
+                    onClick={() => cleanInputCities("to")}
+                  />
                 }
               />
               <CitiesOptionsFiltered
@@ -161,9 +170,12 @@ export default function Destination() {
               <h4>Viagem de ida</h4>
               <DateAndHour>
                 <DateInput />
-                <Icon>
-                  <FaRegCalendarAlt />
-                </Icon>
+                <Icon
+                  size={"20px"}
+                  color={"#646973"}
+                  icon={<FaRegCalendarAlt />}
+                  onClick={() => cleanInputCities("to")}
+                />
                 <TimeInput />
               </DateAndHour>
             </TravelDate>
@@ -177,9 +189,13 @@ export default function Destination() {
                     <h4>Viagem de volta</h4>
                     <DateAndHour>
                       <DateInput />
-                      <Icon>
-                        <FaRegCalendarAlt />
-                      </Icon>
+                      <Icon
+                        size={"20px"}
+                        color={"#646973"}
+                        icon={<FaRegCalendarAlt />}
+                        onClick={() => cleanInputCities("to")}
+                      />
+
                       <TimeInput />
                     </DateAndHour>
                   </TravelDate>
@@ -216,18 +232,26 @@ export default function Destination() {
                   width="48%"
                   selectVariant="custom"
                   value={ticket.age}
-                  icon={<ImInfo />}
+                  icon={
+                    <Icon size={"16px"} color={"#646973"} icon={<ImInfo />} />
+                  }
                   onChange={(e) =>
                     setTicket({ ...ticket, age: e.target.value })
                   }
-                  optionsArray={["Idade entre 5-14", "Idade entre 15-27", "Maior de 27"]}
+                  optionsArray={[
+                    "Idade entre 5-14",
+                    "Idade entre 15-27",
+                    "Maior de 27",
+                  ]}
                 />
                 <Select
                   type="text"
                   width="48%"
                   selectVariant="custom"
                   value={ticket.paymentMethod}
-                  icon={<ImInfo />}
+                  icon={
+                    <Icon size={"16px"} color={"#646973"} icon={<ImInfo />} />
+                  }
                   onChange={(e) =>
                     setTicket({ ...ticket, paymentMethod: e.target.value })
                   }
@@ -235,9 +259,12 @@ export default function Destination() {
                 />
               </AgeAndCardType>
               <AmazonTicketInformation>
-                <PercentIcon>
-                  <HiOutlineReceiptPercent />
-                </PercentIcon>
+                <Icon
+                  size={"18px"}
+                  color={"#646973"}
+                  position={"absolute"}
+                  icon={<HiOutlineReceiptPercent />}
+                />
                 <Information>
                   <p>
                     Para os portadores do Amazon-Ticket, pode ser mais barato
@@ -251,24 +278,24 @@ export default function Destination() {
               <TransportationInfos>
                 <TransportationClass>
                   <Options>
-                    <Input 
+                    <Input
                       readOnly
                       type="radio"
                       label="1ª Classe"
                       width="112px"
-                      selectVariant="radio"
+                      inputVariant="radio"
                       checked={ticket.class === "1"}
                       onClick={() => setTicket({ ...ticket, class: "1" })}
-                    /> 
-                    <Input 
+                    />
+                    <Input
                       readOnly
                       type="radio"
                       label="2ª Classe"
                       width="112px"
-                      selectVariant="radio"
+                      inputVariant="radio"
                       checked={ticket.class === "2"}
                       onClick={() => setTicket({ ...ticket, class: "2" })}
-                    /> 
+                    />
                   </Options>
                 </TransportationClass>
                 <Separator>
@@ -276,12 +303,11 @@ export default function Destination() {
                 </Separator>
                 <TransportOption>
                   <Options>
-                    <Input 
+                    <Input
                       width="fit-content"
                       type="checkbox"
                       inputVariant="checkbox"
                       label="Apenas Transportes Locais"
-                      icon={transportTypes.localTransports && <FaCheck/>}
                       checked={transportTypes.localTransports}
                       onClick={() =>
                         setTransportTypes({
@@ -295,7 +321,6 @@ export default function Destination() {
                       type="checkbox"
                       inputVariant="checkbox"
                       label="Mostrar conexões mais rápidas"
-                      icon={transportTypes.fastestConnections && <FaCheck/>}
                       checked={transportTypes.fastestConnections}
                       onClick={() =>
                         setTransportTypes({
@@ -327,9 +352,19 @@ export default function Destination() {
 
           <OnlySeatOption>
             <div>
-              <Icon>
-                <MdKeyboardArrowRight />
-              </Icon>
+              <Icon
+                size={"20px"}
+                color={"#646973"}
+                icon={
+                  <Icon
+                    size={"22px"}
+                    color={"#646973"}
+                    position={"absolute"}
+                    icon={<MdKeyboardArrowRight />}
+                  />
+                }
+                onClick={() => cleanInputCities("from")}
+              />
               <h3>Apenas assento (sem ticket)</h3>
             </div>
             <SearchTicketButton onClick={() => navigate("/purchase/select")}>
@@ -420,17 +455,6 @@ const AmazonTicketInformation = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-`;
-
-const PercentIcon = styled.div`
-  height: 100%;
-  width: 25px;
-  font-size: 20px;
-  color: #000000;
-
-  position: absolute;
-  top: 0;
-  left: 0;
 `;
 
 const Information = styled.div`
@@ -589,16 +613,6 @@ const DateAndHour = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-`;
-
-const Icon = styled.div`
-  height: 100%;
-  width: 30px;
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const OnlySeatOption = styled.div`

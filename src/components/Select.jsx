@@ -8,6 +8,12 @@ const SelectVariants = {
     border: "1px solid #878c96",
     padding: "0",
   },
+  defaultWithoutBorder: {
+    height: "48px",
+    backgroundColor: "transparent",
+    border: "0",
+    padding: "0",
+  },
   custom: {
     height: "62px",
     backgroundColor: "#F0F3F5",
@@ -91,7 +97,7 @@ const RequiredInput = ({ labelName }) => {
 function Select({ selectVariant, icon, label, optionsArray, width, required, onChange }) {
   return (
     <Container selectVariant={selectVariant} width={width}>
-      {label && <RequiredInput labelName={label}></RequiredInput>}
+      {(label && required)&& <RequiredInput labelName={label}/>}
       <SelectContainer selectVariant={selectVariant}>
         {icon && icon}
         <select onChange={onChange}>
