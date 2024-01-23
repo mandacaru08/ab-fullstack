@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { CgEditBlackPoint, CgOptions } from "react-icons/cg";
 import { MdLocationOn } from "react-icons/md";
@@ -15,6 +16,10 @@ export default function TicketOverview() {
         Alterar
       </Button>
     );
+  };
+
+  NavigateButton.propTypes = {
+    onClick: PropTypes.func.isRequired,
   };
 
   return (

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { ImInfo } from "react-icons/im";
 import Button from "../../components/Button";
@@ -8,6 +9,11 @@ const PreviousOrNextButton = ({ children, onClick, ...props }) => {
       {children}
     </Button>
   );
+};
+
+PreviousOrNextButton.propTypes = {
+  children: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default function TotalPrice() {

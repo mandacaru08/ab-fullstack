@@ -6,14 +6,13 @@ import TicketOptions from "./TicketOptions";
 import Input from "../../../../components/Input";
 
 export default function OutwardJourneyOptions() {
-
-  const [ showBestPrices, setShowBestPrices ] = useState(false);
+  const [showBestPrices, setShowBestPrices] = useState(false);
 
   return (
     <Container>
       <TravelDate>
         <span>Viagem de ida em 30/06/2023</span>
-        <Input 
+        <Input
           type="checkbox"
           width="fit-content"
           inputVariant="checkbox"

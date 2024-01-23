@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +25,11 @@ const SelectTicketButton = ({ children, onClick }) => {
       {children}
     </Button>
   );
+};
+
+SelectTicketButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default function TicketOptions() {

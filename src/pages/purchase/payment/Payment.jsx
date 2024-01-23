@@ -56,12 +56,19 @@ export default function Payment() {
               />
             </Fieldset>
             <Fieldset>
-              <Select 
+              <Select
                 type="text"
                 label="País"
                 selectVariant="default"
                 width="calc(50% - 10px)"
-                optionsArray={["Brasil", "Bolívia", "Colômbia", "Equador",, "Peru"]}
+                optionsArray={[
+                  "Brasil",
+                  "Bolívia",
+                  "Colômbia",
+                  "Equador",
+                  ,
+                  "Peru",
+                ]}
                 required
               />
               <Input

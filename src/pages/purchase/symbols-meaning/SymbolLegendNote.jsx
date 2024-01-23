@@ -1,8 +1,13 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 export default function SymbolLegendNote({ children }) {
   return <Container>{children}</Container>;
 }
+
+SymbolLegendNote.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const Container = styled.div`
   height: 320px;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Button from "../../Button";
 
@@ -7,6 +8,11 @@ const ContinueToLoginButton = ({ children, onClick, ...props }) => {
       {children}
     </Button>
   );
+};
+
+ContinueToLoginButton.propTypes = {
+  children: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default function LogAndBook() {

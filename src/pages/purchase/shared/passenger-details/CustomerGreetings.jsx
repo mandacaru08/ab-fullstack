@@ -5,8 +5,8 @@ import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 
 function isValidInput(value) {
-    const regex = /^[a-zA-Z]+$/;
-    return regex.test(value);
+  const regex = /^[a-zA-Z]+$/;
+  return regex.test(value);
 }
 
 export default function CustomerGreetings() {
@@ -18,7 +18,7 @@ export default function CustomerGreetings() {
   return (
     <FieldsetContainer>
       <Fieldset>
-        <Select 
+        <Select
           type="text"
           label="Saudações"
           width="calc(50% - 10px)"
@@ -29,12 +29,18 @@ export default function CustomerGreetings() {
             setCustomerData({ ...customerData, salutation: e.target.value })
           }
         />
-        <Select 
+        <Select
           type="text"
           label="Título"
           width="calc(50% - 10px)"
           selectVariant="default"
-          optionsArray={["Dr.", "Prof.", "Prof. Dr.", "Dr. Dr.", "Prof. Dr. Dr."]}
+          optionsArray={[
+            "Dr.",
+            "Prof.",
+            "Prof. Dr.",
+            "Dr. Dr.",
+            "Prof. Dr. Dr.",
+          ]}
           required
           onChange={(e) =>
             setCustomerData({ ...customerData, title: e.target.value })

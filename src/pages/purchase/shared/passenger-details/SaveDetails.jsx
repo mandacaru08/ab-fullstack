@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import styled from "styled-components";
 import { BsFillCheckCircleFill, BsFillCheckSquareFill } from "react-icons/bs";
@@ -22,9 +23,16 @@ const advantages = [
 ];
 
 const NavigateButton = ({ children, onClick, ...props }) => {
-    return (
-        <Button onClick={onClick} {...props} size="medium">{children}</Button>
-    );
+  return (
+    <Button onClick={onClick} {...props} size="medium">
+      {children}
+    </Button>
+  );
+};
+
+NavigateButton.propTypes = {
+  children: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default function SaveDetails() {
@@ -37,8 +45,8 @@ export default function SaveDetails() {
 
   return (
     <Container>
-      <section >
-        <Input 
+      <section>
+        <Input
           type="checkbox"
           inputVariant="checkbox"
           label="Salve os detalhes para futuras reservas"
@@ -63,9 +71,7 @@ export default function SaveDetails() {
         </ol>
       </Advantages>
       <ButtonContainer>
-        <NavigateButton
-          onClick={() => navigate("/purchase/ticket-overview")}
-        >
+        <NavigateButton onClick={() => navigate("/purchase/ticket-overview")}>
           {saveDetails
             ? "Continuar com o registro"
             : "Continuar como convidado"}

@@ -4,10 +4,7 @@ import {
   BsFillExclamationCircleFill,
   BsFillCheckCircleFill,
 } from "react-icons/bs";
-import {
-  MdKeyboardArrowRight,
-  MdEventSeat,
-} from "react-icons/md";
+import { MdKeyboardArrowRight, MdEventSeat } from "react-icons/md";
 import Input from "../../../../components/Input";
 
 const ticketClasses = [
@@ -139,7 +136,7 @@ export default function TicketClassesOptions() {
                 <div style={{ right: "0" }}></div>
               </DashedPart>
               <Price>
-                <Input 
+                <Input
                   type="radio"
                   width="100%"
                   inputVariant="radio"

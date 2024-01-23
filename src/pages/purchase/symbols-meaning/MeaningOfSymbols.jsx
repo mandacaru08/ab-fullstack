@@ -1,8 +1,13 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 export default function MeaningOfSymbol({ children }) {
   return <Container>{children}</Container>;
 }
+
+MeaningOfSymbol.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const Container = styled.ul`
   height: 100%;
