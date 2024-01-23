@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 function CitiesOptionsFiltered({ cities, showOptions, ...props }) {
@@ -13,6 +14,13 @@ function CitiesOptionsFiltered({ cities, showOptions, ...props }) {
     </CitiesOptions>
   );
 }
+
+CitiesOptionsFiltered.propTypes = {
+  cities: PropTypes.array.isRequired,
+  showOptions: PropTypes.bool.isRequired,
+};
+
+export default CitiesOptionsFiltered;
 
 const CitiesOptions = styled.ol`
   position: absolute;
@@ -48,5 +56,3 @@ const CityOption = styled.li`
   box-sizing: border-box;
   border-bottom: 1px solid #c1c1c1;
 `;
-
-export default CitiesOptionsFiltered;

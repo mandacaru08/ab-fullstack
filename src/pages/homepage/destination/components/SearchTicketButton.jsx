@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Button from "../../../../components/Button";
 
 const SearchTicketButton = ({ children, onClick }) => {
@@ -11,6 +12,11 @@ const SearchTicketButton = ({ children, onClick }) => {
       {children}
     </Button>
   );
+};
+
+SearchTicketButton.propTypes = {
+  children: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default SearchTicketButton;
