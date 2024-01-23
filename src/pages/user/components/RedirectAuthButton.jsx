@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Button from "../../../components/Button";
 
 const RedirectAuthButton = ({ children, onClick }) => {
@@ -11,6 +12,11 @@ const RedirectAuthButton = ({ children, onClick }) => {
       {children}
     </Button>
   );
+};
+
+RedirectAuthButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default RedirectAuthButton;

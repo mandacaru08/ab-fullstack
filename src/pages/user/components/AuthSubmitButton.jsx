@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Button from "../../../components/Button";
 
 const AuthSubmitButton = ({ children, onClick, disabled }) => {
@@ -13,6 +14,12 @@ const AuthSubmitButton = ({ children, onClick, disabled }) => {
       {children}
     </Button>
   );
+};
+
+AuthSubmitButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default AuthSubmitButton;
