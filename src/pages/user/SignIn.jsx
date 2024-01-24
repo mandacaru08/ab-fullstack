@@ -10,6 +10,7 @@ import { signIn } from "../../services/authApi";
 import RedirectAuthButton from "./components/RedirectAuthButton";
 import AuthSubmitButton from "./components/AuthSubmitButton";
 import Input from "../../components/Input";
+import Logo from "../../components/common/Logo";
 
 export default function SignIn() {
   const navigate = new useNavigate();
@@ -79,7 +80,9 @@ export default function SignIn() {
         </div>
       </ToBack>
       <LoginForm>
-        <header>AB</header>
+        <header>
+          <Logo/>
+        </header>
         <FormContainer>
           <div>
             <h2>Log In</h2>

@@ -25,8 +25,8 @@ export default CitiesOptionsFiltered;
 const CitiesOptions = styled.ol`
   position: absolute;
   top: 42px;
-  left: ${props => props.left ? props.left : "none"};
-  right: ${props => props.right ? props.right : "none"};
+  left: ${(props) => (props.left ? props.left : "none")};
+  right: ${(props) => (props.right ? props.right : "none")};
   z-index: 10;
   width: calc(50% - 30px);
   height: fit-content;

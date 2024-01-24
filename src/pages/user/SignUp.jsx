@@ -9,6 +9,7 @@ import { signUp } from "../../services/authApi";
 import RedirectAuthButton from "./components/RedirectAuthButton";
 import AuthSubmitButton from "./components/AuthSubmitButton";
 import Input from "../../components/Input";
+import Logo from "../../components/common/Logo";
 
 export default function SignUp() {
   const navigate = new useNavigate();
@@ -88,7 +89,9 @@ export default function SignUp() {
         </div>
       </ToBack>
       <SignUpForm>
-        <header>AB</header>
+        <header>
+          <Logo />
+        </header>
         <FormContainer>
           <div>
             <h2>Crie uma conta</h2>
@@ -96,7 +99,7 @@ export default function SignUp() {
           <Form>
             <form onSubmit={handleSignUp}>
               <InputsContainer>
-              <Input
+                <Input
                   width="100%"
                   type="text"
                   inputVariant="custom"
@@ -166,7 +169,8 @@ export default function SignUp() {
                     />
                   }
                   isFocusedOrFilled={
-                    inputStatus.confirmPasswordIsFocused || user.confirmPassword !== ""
+                    inputStatus.confirmPasswordIsFocused ||
+                    user.confirmPassword !== ""
                   }
                   isInputValid={
                     inputStatus.isConfirmPasswordEmpty ||
@@ -189,7 +193,9 @@ export default function SignUp() {
                   }
                 />
               </InputsContainer>
-              <AuthSubmitButton disabled={isButtonDisabled} type="submit">Registrar</AuthSubmitButton>
+              <AuthSubmitButton disabled={isButtonDisabled} type="submit">
+                Registrar
+              </AuthSubmitButton>
             </form>
           </Form>
         </FormContainer>
