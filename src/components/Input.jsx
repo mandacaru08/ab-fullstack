@@ -11,6 +11,7 @@ const InputVariants = {
   },
   custom: {
     height: "64px",
+    width: "100%",
     top: "50%",
     left: "5px",
     zIndex: "0",
@@ -39,8 +40,7 @@ const InputVariants = {
 };
 
 const InputContainer = styled.div`
-
-${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
+  ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
     const height = InputVariants[inputVariant]?.height;
     const widthSize = InputVariants[inputVariant]?.width || width;
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
@@ -49,7 +49,7 @@ ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
     const backgroundColor = InputVariants[inputVariant]?.backgroundColor;
     const labelTop =
       inputVariant == "custom" && isFocusedOrFilled
-        ? "5px"
+        ? "8px"
         : InputVariants[inputVariant]?.labelTop;
 
     return `
@@ -69,6 +69,7 @@ ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
         z-index: 0;
         left: 5px;
         top: ${labelTop};
+        transform: translateY(-50%);
         margin-left: 8px;
         font-size: ${
           inputVariant !== "custom" || isFocusedOrFilled ? "12px" : "16px"
@@ -84,13 +85,26 @@ ${({ inputVariant, width, isFocusedOrFilled, isInputValid }) => {
       }
     `;
   }}
+
+  svg {
+    width: 18px;
+    height: 18px;
+    color: #636973;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 `;
 
 const InputStyled = styled.input`
   ${({ inputVariant, type }) => {
     const height = InputVariants[inputVariant]?.height;
-    const width = type == "text"? "100%" : InputVariants[inputVariant]?.width;
-    const padding = type == "text"? "8px 16px" : "0"; 
+    const width = InputVariants[inputVariant]
+      ? InputVariants[inputVariant]?.width
+      : "100%";
+    const padding = type == "text" ? "8px 16px" : "0";
     const borderRadius = InputVariants[inputVariant]?.borderRadius || "4px";
     return `
       height: ${height};
@@ -130,7 +144,7 @@ const InputStyled = styled.input`
     height: 20px;
     border-radius: 3px;
     border: 1px solid #282d37;
-    background-color: ${({ checked }) => checked ? "#282D37" : ""};
+    background-color: ${({ checked }) => (checked ? "#282D37" : "")};
     cursor: pointer;
   }
 `;
@@ -171,10 +185,10 @@ function Input({
       isInputValid={isInputValid}
       onClick={onClick}
     >
-      {required && (type != "radio" && type != "checkbox") ? (
+      {required && type != "radio" && type != "checkbox" ? (
         <RequiredInput labelName={label} />
-      ) : label && type == "text" && (
-        <label>{label}</label>
+      ) : (
+        label && <label>{label}</label>
       )}
       <InputStyled
         id={id}
@@ -192,7 +206,7 @@ function Input({
         onChange={onChange}
       />
       {(type == "radio" || type == "checkbox") && <label>{label}</label>}
-      {icon  && icon}
+      {icon && icon}
     </InputContainer>
   );
 }

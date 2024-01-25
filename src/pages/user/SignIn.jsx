@@ -94,7 +94,7 @@ export default function SignIn() {
                   width="100%"
                   type="text"
                   inputVariant="custom"
-                  label="e-mail *"
+                  label="e-mail"
                   value={user.email}
                   isFocusedOrFilled={
                     inputStatus.emailIsFocused || user.email !== ""
@@ -119,7 +119,7 @@ export default function SignIn() {
                   width="100%;"
                   type="password"
                   inputVariant="custom"
-                  label="password *"
+                  label="password"
                   value={user.password}
                   icon={
                     <IoIosCloseCircle

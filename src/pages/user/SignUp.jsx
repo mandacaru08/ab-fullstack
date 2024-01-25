@@ -87,7 +87,7 @@ export default function SignUp() {
                   width="100%"
                   type="text"
                   inputVariant="custom"
-                  label="e-mail *"
+                  label="e-mail"
                   value={user.email}
                   isFocusedOrFilled={
                     inputStatus.emailIsFocused || user.email !== ""
@@ -112,7 +112,7 @@ export default function SignUp() {
                   width="100%;"
                   type="password"
                   inputVariant="custom"
-                  label="password *"
+                  label="password"
                   value={user.password}
                   icon={
                     <IoIosCloseCircle
@@ -145,7 +145,7 @@ export default function SignUp() {
                   width="100%;"
                   type="password"
                   inputVariant="custom"
-                  label="Confirm Password *"
+                  label="Confirm Password"
                   value={user.confirmPassword}
                   icon={
                     <IoIosCloseCircle
