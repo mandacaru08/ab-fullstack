@@ -1,6 +1,6 @@
 import api from "./api";
 
-export async function signIn(user) {
+async function signIn(user) {
   const response = await api.post(
     `${import.meta.env.VITE_API_BASE_URL}/api/user/sign-in`,
     { email: user.email, password: user.password }
@@ -8,10 +8,17 @@ export async function signIn(user) {
   return response.data;
 }
 
-export async function signUp(user) {
-  const response = await api.post(
-    `${import.meta.env.VITE_API_BASE_URL}/api/user/sign-up`,
-    { email: user.email, password: user.password }
-  );
-  return response.data;
+async function signUp({ email, password }) {
+  try {
+    await api.post(
+      `${import.meta.env.VITE_API_BASE_URL}/api/user/sign-up`,
+      { email, password }
+    );
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
+
+export { signIn, signUp};

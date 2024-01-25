@@ -11,6 +11,8 @@ import AuthSubmitButton from "./components/AuthSubmitButton";
 import Input from "../../components/Input";
 import Logo from "../../components/common/Logo";
 
+import { matchesEmailPattern, isValidPassword, displayValidationAlerts } from "./utils";
+
 export default function SignUp() {
   const navigate = new useNavigate();
 
@@ -31,39 +33,21 @@ export default function SignUp() {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  function validateEmail(email) {
-    const emailRegex = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i;
-    return emailRegex.test(email);
-  }
-
   async function handleSignUp(event) {
     event.preventDefault();
 
     const { email, password, confirmPassword } = user;
 
-    if (validateEmail(email)) {
-      setInputStatus({ ...inputStatus, isEmailValid: true });
-    } else {
-      setInputStatus({ ...inputStatus, isEmailValid: false });
-      window.alert("Insira o e-mail corretamente.");
-      return;
-    }
+    matchesEmailPattern({email, inputStatus, setInputStatus});
 
-    if (password === "" || confirmPassword == "") {
-      setInputStatus({ ...inputStatus, isPasswordValid: false });
-      window.alert("Insira os campos pass corretamente");
-    } else {
-      setInputStatus({ ...inputStatus, isPasswordValid: true });
-    }
+    const passwordValidationResult = isValidPassword({password, confirmPassword, inputStatus, setInputStatus});
+    displayValidationAlerts(passwordValidationResult);    
 
-    if (password !== confirmPassword) {
-      setInputStatus({ ...inputStatus, isPasswordValid: false });
-      window.alert("As senhas não coincidem.");
-      return;
+    const signUpResult = await signUp({ email, password });
+    
+    if (signUpResult) {
+      navigate("/sign-in");
     }
-
-    await signUp(email, password);
-    navigate("/sign-in");
   }
 
   useEffect(() => {
