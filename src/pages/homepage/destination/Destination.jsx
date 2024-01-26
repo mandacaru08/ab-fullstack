@@ -17,6 +17,8 @@ import SearchTicketButton from "./components/SearchTicketButton";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import Icon from "../../../components/Icon";
+import { Checkbox, RadioInput } from "../../../components";
+
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -278,21 +280,13 @@ export default function Destination() {
               <TransportationInfos>
                 <TransportationClass>
                   <Options>
-                    <Input
-                      readOnly
-                      type="radio"
+                    <RadioInput
                       label="1ª Classe"
-                      width="112px"
-                      inputVariant="radio"
                       checked={ticket.class === "1"}
                       onClick={() => setTicket({ ...ticket, class: "1" })}
                     />
-                    <Input
-                      readOnly
-                      type="radio"
+                    <RadioInput
                       label="2ª Classe"
-                      width="112px"
-                      inputVariant="radio"
                       checked={ticket.class === "2"}
                       onClick={() => setTicket({ ...ticket, class: "2" })}
                     />
@@ -303,10 +297,7 @@ export default function Destination() {
                 </Separator>
                 <TransportOption>
                   <Options>
-                    <Input
-                      width="fit-content"
-                      type="checkbox"
-                      inputVariant="checkbox"
+                    <Checkbox
                       label="Apenas Transportes Locais"
                       checked={transportTypes.localTransports}
                       onClick={() =>
@@ -316,10 +307,7 @@ export default function Destination() {
                         })
                       }
                     />
-                    <Input
-                      width="fit-content"
-                      type="checkbox"
-                      inputVariant="checkbox"
+                    <Checkbox
                       label="Mostrar conexões mais rápidas"
                       checked={transportTypes.fastestConnections}
                       onClick={() =>

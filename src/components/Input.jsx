@@ -25,7 +25,8 @@ const InputVariants = {
   radio: {
     height: "16px",
     borderRadius: "50%",
-    labelTop: "0",
+    labelTop: "50%",
+    transform: "translateY(-50%)",
     flexDirection: "row",
     labelPosition: "relative",
   },
@@ -33,7 +34,8 @@ const InputVariants = {
     content: "",
     height: "10px",
     borderRadius: "3px",
-    labelTop: "0",
+    labelTop: "50%",
+    transform: "translateY(-50%)",
     flexDirection: "row",
     labelPosition: "relative",
   },
@@ -205,7 +207,6 @@ function Input({
         onFocus={onFocus}
         onChange={onChange}
       />
-      {(type == "radio" || type == "checkbox") && <label>{label}</label>}
       {icon && icon}
     </InputContainer>
   );
