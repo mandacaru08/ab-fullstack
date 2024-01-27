@@ -1,22 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaRegCalendarAlt, FaCheck, FaRegTrashAlt } from "react-icons/fa";
-import { MdKeyboardArrowRight, MdRepeat } from "react-icons/md";
-import { HiOutlineReceiptPercent } from "react-icons/hi2";
-import { TbArrowsLeftRight } from "react-icons/tb";
-import { ImInfo } from "react-icons/im";
-import { IoCloseCircleSharp } from "react-icons/io5";
-import styled from "styled-components";
 
-import DateInput from "./DateInput";
-import TimeInput from "./TimeInput";
-import MoreInfos from "./MoreInfos";
-import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { HiOutlineReceiptPercent } from "react-icons/hi2";
+import { ImInfo } from "react-icons/im";
+
+import styled from "styled-components";
 import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
 import Select from "../../../components/Select";
 import Icon from "../../../components/Icon";
-import { TextInput, Checkbox, RadioInput } from "../../../components";
+import { Checkbox, RadioInput } from "../../../components";
+
+import { TravelRoute, TravelDate, AddReturn, DeleteReturn } from "./components";
 
 
 export default function Destination() {
@@ -109,105 +105,30 @@ export default function Destination() {
         <h2>Para onde você quer ir?</h2>
         <FormInfos>
           <TravelInfos>
-            <TravelRoute>
-              <TextInput
-                label="Origem"
-                width="calc(50% - 30px)"
-                variant="default"
-                value={fromCity}
-                placeholder="estação / parada / endereço "
-                onChange={(e) => {
-                  setFromCity(e.target.value);
-                  setFromFilteredCities(filterCities(e.target.value));
-                }}
-                icon={
-                  <Icon
-                    size={"20px"}
-                    color={"#646973"}
-                    icon={<IoCloseCircleSharp />}
-                    onClick={() => cleanInputCities("from")}
-                  />
-                }
-              />
-              <CitiesOptionsFiltered
-                left="0"
-                cities={fromFilteredCities}
-                showOptions={fromFilteredCities.length > 0}
-              />
-              <Icon
-                size={"20px"}
-                color={"#646973"}
-                icon={<TbArrowsLeftRight />}
-                onClick={() => cleanInputCities("from")}
-              />
-              <TextInput
-                label="Destino"
-                width="calc(50% - 30px)"
-                variant="default"
-                placeholder="estação / parada / endereço "
-                value={toCity}
-                onChange={(e) => {
-                  setToCity(e.target.value);
-                  setToFilteredCities(filterCities(e.target.value));
-                }}
-                icon={
-                  <Icon
-                    size={"20px"}
-                    color={"#646973"}
-                    icon={<IoCloseCircleSharp />}
-                    onClick={() => cleanInputCities("to")}
-                  />
-                }
-              />
-              <CitiesOptionsFiltered
-                right="0"
-                cities={toFilteredCities}
-                showOptions={toFilteredCities.length > 0}
-              />
-            </TravelRoute>
-            <TravelDate>
-              <h4>Viagem de ida</h4>
-              <DateAndHour>
-                <DateInput />
-                <Icon
-                  size={"20px"}
-                  color={"#646973"}
-                  icon={<FaRegCalendarAlt />}
-                  onClick={() => cleanInputCities("to")}
-                />
-                <TimeInput />
-              </DateAndHour>
-            </TravelDate>
+            <TravelRoute 
+              fromCity={fromCity} 
+              setFromCity={setFromCity} 
+              toCity={toCity} 
+              setToCity={setToCity}
+              filterCities={filterCities}
+              fromFilteredCities={fromFilteredCities}
+              setFromFilteredCities={setFromFilteredCities}
+              toFilteredCities={toFilteredCities}
+              setToFilteredCities={setToFilteredCities}
+              cleanInputCities={cleanInputCities}
+            />
+            <TravelDate cleanInputCities={cleanInputCities}/>
           </TravelInfos>
 
           {showBackground && (
             <OtherInfosForm addReturnFieldHeight={showReturnField}>
               {showReturnField ? (
                 <ReturnField>
-                  <TravelDate>
-                    <h4>Viagem de volta</h4>
-                    <DateAndHour>
-                      <DateInput />
-                      <Icon
-                        size={"20px"}
-                        color={"#646973"}
-                        icon={<FaRegCalendarAlt />}
-                        onClick={() => cleanInputCities("to")}
-                      />
-
-                      <TimeInput />
-                    </DateAndHour>
-                  </TravelDate>
-                  <DeleteReturn onClick={() => setShowReturnField(false)}>
-                    <FaRegTrashAlt />
-                    <span>Deletar Viagem de Volta</span>
-                  </DeleteReturn>
+                  <TravelDate cleanInputCities={cleanInputCities}/>
+                  <DeleteReturn setShowReturnField={setShowReturnField} />
                 </ReturnField>
               ) : (
-                <AddReturn onClick={() => setShowReturnField(true)}>
-                  <MdRepeat />
-                  <span>Adicionar viagem de retorno</span>
-                </AddReturn>
+                <AddReturn setShowReturnField={setShowReturnField}/>
               )}
               <Select
                 type="text"
@@ -370,41 +291,11 @@ const OtherInfosForm = styled.div`
   justify-content: space-between;
 `;
 
-const AddReturn = styled.span`
-  height: 30px;
-  width: 230px;
-  margin-bottom: 30px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  svg {
-    height: 100%;
-    width: 15px;
-  }
-  :hover {
-    cursor: pointer;
-  }
-`;
-
 const ReturnField = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 40px;
-`;
-
-const DeleteReturn = styled.div`
-  height: 30px;
-  width: 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const AgeAndCardType = styled.div`
@@ -416,19 +307,6 @@ const AgeAndCardType = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const InfoIcon = styled.div`
-  height: 100%;
-  width: 32px;
-  font-size: 20px;
-  color: #8b8b8b;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  pointer-events: none;
 `;
 
 const AmazonTicketInformation = styled.div`
@@ -484,19 +362,6 @@ const Options = styled.ul`
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
-`;
-
-const MoreInfosContainer = styled.div`
-  height: 40px;
-  width: 170px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const Separator = styled.div`
@@ -565,35 +430,6 @@ const FormInfos = styled.div`
   justify-content: space-between;
   z-index: 1;
   position: relative;
-`;
-
-const TravelRoute = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  margin-bottom: 30px;
-`;
-
-const TravelDate = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  margin-bottom: 15px;
-
-  h4 {
-    margin-bottom: 10px;
-  }
-`;
-
-const DateAndHour = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
 `;
 
 const OnlySeatOption = styled.div`

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const IconContainer = styled.div`
@@ -6,7 +7,7 @@ const IconContainer = styled.div`
       height: 100%;
       width: calc(${size} + 14px);
       color: ${color};
-      position: ${position};
+      position: ${position || "absolute"};
       position: relative;
       font-weight: bold;
       display: flex;
@@ -28,5 +29,12 @@ function Icon({ icon, size, color, onClick }) {
     </IconContainer>
   );
 }
+
+Icon.propTypes = {
+  icon: PropTypes.element.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 export default Icon;
