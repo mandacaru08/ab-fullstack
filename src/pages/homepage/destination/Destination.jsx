@@ -14,10 +14,9 @@ import MoreInfos from "./MoreInfos";
 import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
 import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
-import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import Icon from "../../../components/Icon";
-import { Checkbox, RadioInput } from "../../../components";
+import { TextInput, Checkbox, RadioInput } from "../../../components";
 
 
 export default function Destination() {
@@ -111,11 +110,10 @@ export default function Destination() {
         <FormInfos>
           <TravelInfos>
             <TravelRoute>
-              <Input
-                type="text"
+              <TextInput
                 label="Origem"
                 width="calc(50% - 30px)"
-                inputVariant="default"
+                variant="default"
                 value={fromCity}
                 placeholder="estação / parada / endereço "
                 onChange={(e) => {
@@ -142,11 +140,10 @@ export default function Destination() {
                 icon={<TbArrowsLeftRight />}
                 onClick={() => cleanInputCities("from")}
               />
-              <Input
-                type="text"
+              <TextInput
                 label="Destino"
                 width="calc(50% - 30px)"
-                inputVariant="default"
+                variant="default"
                 placeholder="estação / parada / endereço "
                 value={toCity}
                 onChange={(e) => {
@@ -479,10 +476,6 @@ const TransportationInfos = styled.div`
 
 const TransportationClass = styled.div`
   height: 30px;
-
-  label {
-    width: 90px;
-  }
 `;
 
 const Options = styled.ul`
