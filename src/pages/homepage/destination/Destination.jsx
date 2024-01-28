@@ -5,7 +5,6 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { ImInfo } from "react-icons/im";
 
 import styled from "styled-components";
-import amazonCities from "../../../helper/cities.json";
 import SearchTicketButton from "./components/SearchTicketButton";
 import Select from "../../../components/Select";
 import Icon from "../../../components/Icon";
@@ -77,13 +76,6 @@ export default function Destination() {
     };
   }, []);
 
-  function filterCities(inputCity) {
-    const cities = amazonCities.locales.amazon_cities.filter((city) => {
-      return city?.name?.toLowerCase()?.includes(inputCity?.toLowerCase());
-    });
-    return cities;
-  }
-
   function cleanInputCities(inputName) {
     if (inputName === "from") {
       setFromCity("");
@@ -114,7 +106,6 @@ export default function Destination() {
               setFromCity={setFromCity}
               toCity={toCity}
               setToCity={setToCity}
-              filterCities={filterCities}
               fromFilteredCities={fromFilteredCities}
               setFromFilteredCities={setFromFilteredCities}
               toFilteredCities={toFilteredCities}

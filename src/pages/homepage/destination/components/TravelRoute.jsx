@@ -5,6 +5,9 @@ import Icon from "../../../../components/Icon";
 import styled from "styled-components";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { TbArrowsLeftRight } from "react-icons/tb";
+import amazonCities from "../../../../helper/cities.json";
+
+import { filterCities } from "../utils";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +18,7 @@ const Container = styled.div`
   margin-bottom: 30px;
 `;
 
-function TravelRoute({ fromCity, setFromCity, toCity, setToCity, filterCities, fromFilteredCities, setFromFilteredCities, toFilteredCities, setToFilteredCities, cleanInputCities}) {
+function TravelRoute({ fromCity, setFromCity, toCity, setToCity, fromFilteredCities, setFromFilteredCities, toFilteredCities, setToFilteredCities, cleanInputCities}) {
   return (
     <Container>
       <TextInput
@@ -26,7 +29,7 @@ function TravelRoute({ fromCity, setFromCity, toCity, setToCity, filterCities, f
         placeholder="estação / parada / endereço "
         onChange={(e) => {
           setFromCity(e.target.value);
-          setFromFilteredCities(filterCities(e.target.value));
+          setFromFilteredCities(filterCities({ inputCity: e.target.value, amazonCities }));
         }}
         icon={
           <Icon
@@ -56,7 +59,7 @@ function TravelRoute({ fromCity, setFromCity, toCity, setToCity, filterCities, f
         value={toCity}
         onChange={(e) => {
           setToCity(e.target.value);
-          setToFilteredCities(filterCities(e.target.value));
+          setToFilteredCities(filterCities({ inputCity: e.target.value, amazonCities }));
         }}
         icon={
           <Icon
@@ -81,7 +84,6 @@ TravelRoute.propTypes = {
   setFromCity: propTypes.func.isRequired,
   toCity: propTypes.string.isRequired,
   setToCity: propTypes.func.isRequired,
-  filterCities: propTypes.func.isRequired,
   fromFilteredCities: propTypes.array.isRequired,
   setFromFilteredCities: propTypes.func.isRequired,
   toFilteredCities: propTypes.array.isRequired,
