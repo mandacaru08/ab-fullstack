@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { ImInfo } from "react-icons/im";
 
 import styled from "styled-components";
@@ -12,8 +11,13 @@ import Select from "../../../components/Select";
 import Icon from "../../../components/Icon";
 import { Checkbox, RadioInput } from "../../../components";
 
-import { TravelRoute, TravelDate, AddReturn, DeleteReturn } from "./components";
-
+import {
+  TravelRoute,
+  TravelDate,
+  AddReturn,
+  DeleteReturn,
+  AmazonTicketInformation,
+} from "./components";
 
 export default function Destination() {
   const navigate = useNavigate();
@@ -105,10 +109,10 @@ export default function Destination() {
         <h2>Para onde você quer ir?</h2>
         <FormInfos>
           <TravelInfos>
-            <TravelRoute 
-              fromCity={fromCity} 
-              setFromCity={setFromCity} 
-              toCity={toCity} 
+            <TravelRoute
+              fromCity={fromCity}
+              setFromCity={setFromCity}
+              toCity={toCity}
               setToCity={setToCity}
               filterCities={filterCities}
               fromFilteredCities={fromFilteredCities}
@@ -117,18 +121,18 @@ export default function Destination() {
               setToFilteredCities={setToFilteredCities}
               cleanInputCities={cleanInputCities}
             />
-            <TravelDate cleanInputCities={cleanInputCities}/>
+            <TravelDate cleanInputCities={cleanInputCities} />
           </TravelInfos>
 
           {showBackground && (
             <OtherInfosForm addReturnFieldHeight={showReturnField}>
               {showReturnField ? (
                 <ReturnField>
-                  <TravelDate cleanInputCities={cleanInputCities}/>
+                  <TravelDate cleanInputCities={cleanInputCities} />
                   <DeleteReturn setShowReturnField={setShowReturnField} />
                 </ReturnField>
               ) : (
-                <AddReturn setShowReturnField={setShowReturnField}/>
+                <AddReturn setShowReturnField={setShowReturnField} />
               )}
               <Select
                 type="text"
@@ -178,23 +182,7 @@ export default function Destination() {
                   optionsArray={["Sem cartão", "Cartão Amazon Boat"]}
                 />
               </AgeAndCardType>
-              <AmazonTicketInformation>
-                <Icon
-                  size={"18px"}
-                  color={"#646973"}
-                  position={"absolute"}
-                  icon={<HiOutlineReceiptPercent />}
-                />
-                <Information>
-                  <p>
-                    Para os portadores do Amazon-Ticket, pode ser mais barato
-                    limitar a consulta e a reserva à rota de longa distância, já
-                    que esse bilhete já cobre o transporte local. Para obter
-                    mais informações (incluindo sobre os direitos dos
-                    passageiros, que podem ser limitados).
-                  </p>
-                </Information>
-              </AmazonTicketInformation>
+              <AmazonTicketInformation />
               <TransportationInfos>
                 <TransportationClass>
                   <Options>
@@ -307,27 +295,6 @@ const AgeAndCardType = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const AmazonTicketInformation = styled.div`
-  height: 62px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-`;
-
-const Information = styled.div`
-  height: 100%;
-  width: 100%;
-  padding-left: 25px;
-
-  p {
-    font-size: 0.875rem;
-  }
 `;
 
 const TransportationInfos = styled.div`
