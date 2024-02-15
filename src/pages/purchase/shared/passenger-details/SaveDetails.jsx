@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillCheckCircleFill, BsFillCheckSquareFill } from "react-icons/bs";
-import { ImInfo } from "react-icons/im";
-import Button from "../../../../components/Button";
-import { useNavigate } from "react-router-dom";
-import Input from "../../../../components/Input";
+
+import { Button, Checkbox } from "../../../../components";
 
 const advantages = [
   {
@@ -46,11 +45,11 @@ export default function SaveDetails() {
   return (
     <Container>
       <section>
-        <Input
+        <Checkbox
           type="checkbox"
-          inputVariant="checkbox"
           label="Salve os detalhes para futuras reservas"
-          onChange={() => handleInputChange()}
+          checked={saveDetails}
+          onClick={() => handleInputChange()}
           icon={saveDetails && <BsFillCheckSquareFill />}
         />
         <Message>

@@ -6,9 +6,7 @@ import { ImInfo } from "react-icons/im";
 
 import styled from "styled-components";
 import SearchTicketButton from "./components/SearchTicketButton";
-import Select from "../../../components/Select";
-import Icon from "../../../components/Icon";
-import { Checkbox, RadioInput } from "../../../components";
+import { Checkbox, RadioInput, Icon, Select } from "../../../components";
 
 import {
   TravelRoute,

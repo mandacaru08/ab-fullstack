@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import Input from "../../../../components/Input";
-import Select from "../../../../components/Select";
+import { Select, TextInput } from "../../../../components";
 
 function isValidInput(value) {
   const regex = /^[a-zA-Z]+$/;
@@ -48,16 +46,16 @@ export default function CustomerGreetings() {
         />
       </Fieldset>
       <Fieldset>
-        <Input
+        <TextInput
           type="text"
-          inputVariant="default"
+          variant="default"
           label="Primeiro Nome"
           width="calc(50% - 10px)"
           required
         />
-        <Input
+        <TextInput
           type="text"
-          inputVariant="default"
+          variant="default"
           label="Sobrenome"
           width="calc(50% - 10px)"
           required
@@ -86,6 +84,7 @@ const Fieldset = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-bottom: 24px;
 
   section {
     height: 62px;

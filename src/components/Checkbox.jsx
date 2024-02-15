@@ -25,7 +25,7 @@ const InputContainer = styled.div`
     color: #636973;
     position: absolute;
     top: 50%;
-    right: 5px;
+    right: 0;
     transform: translateY(-50%);
     cursor: pointer;
   }
@@ -43,11 +43,12 @@ const InputStyled = styled.input`
   cursor: pointer;
 `;
 
-function Checkbox({ checked, label, onClick }) {
+function Checkbox({ checked, label, onClick, icon }) {
   return (
     <InputContainer onClick={onClick}>
       {label && <label>{label}</label>}
       <InputStyled readOnly checked={checked} />
+      {icon}
     </InputContainer>
   );
 }
@@ -56,6 +57,7 @@ Checkbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  icon: PropTypes.element,
 };
 
 export default Checkbox;

@@ -55,6 +55,8 @@ const InputStyled = styled.input`
 `;
 
 const RequiredInput = ({ label }) => {
+
+  console.log(label)
   return (
     <label>
       {label}
@@ -88,7 +90,7 @@ function TextInput({
       onClick={onClick}
     >
       {required ? (
-        <RequiredInput labelName={label} />
+        <RequiredInput label={label} />
       ) : (
         label && <label>{label}</label>
       )}
