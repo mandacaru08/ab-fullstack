@@ -48,7 +48,6 @@ function Checkbox({ checked, label, onClick, icon }) {
     <InputContainer onClick={onClick}>
       {label && <label>{label}</label>}
       <InputStyled readOnly checked={checked} />
-      {icon}
     </InputContainer>
   );
 }

@@ -5,8 +5,7 @@ import StepsStatus from "../StepsStatus";
 import CustomerGreetings from "../shared/passenger-details/CustomerGreetings";
 import PaymentOptions from "./PaymentOptions";
 import TotalPrice from "../TotalPrice";
-import Input from "../../../components/Input";
-import Select from "../../../components/Select";
+import { Select, TextInput } from "../../../components/index";
 
 export default function Payment() {
   return (
@@ -22,34 +21,34 @@ export default function Payment() {
           <Form>
             <CustomerGreetings />
             <Fieldset>
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Email"
                 width="100%"
                 required
               />
             </Fieldset>
             <Fieldset>
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Rua / Número"
                 width="calc(50% - 10px)"
                 required
               />
 
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="CEP"
                 width="calc(30% - 14px)"
                 required
               />
 
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Cidade"
                 width="calc(20% - 14px)"
                 required
@@ -71,26 +70,26 @@ export default function Payment() {
                 ]}
                 required
               />
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Estado"
                 width="calc(50% - 10px)"
                 required
               />
             </Fieldset>
             <Fieldset>
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Complemento"
                 width="calc(50% - 10px)"
               />
             </Fieldset>
             <Fieldset>
-              <Input
+              <TextInput
                 type="text"
-                inputVariant="default"
+                variant="default"
                 label="Celular"
                 width="calc(30% - 10px)"
               />
@@ -145,7 +144,7 @@ const Form = styled.fieldset`
 `;
 
 const Fieldset = styled.div`
-  height: auto;
+  height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: row;

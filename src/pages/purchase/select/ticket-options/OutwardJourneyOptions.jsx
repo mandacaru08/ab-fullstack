@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import SortByAndTimeButton from "./SortByAndTimeButton";
 import TicketOptions from "./TicketOptions";
-import Input from "../../../../components/Input";
+import { Checkbox } from "../../../../components/index";
 
 export default function OutwardJourneyOptions() {
   const [showBestPrices, setShowBestPrices] = useState(false);
@@ -12,7 +12,7 @@ export default function OutwardJourneyOptions() {
     <Container>
       <TravelDate>
         <span>Viagem de ida em 30/06/2023</span>
-        <Input
+        <Checkbox
           type="checkbox"
           width="fit-content"
           inputVariant="checkbox"

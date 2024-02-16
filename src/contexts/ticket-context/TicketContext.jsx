@@ -23,7 +23,7 @@ export function TicketProvider({ children }) {
       },
       {
         id: 5,
-        stepName: "ticket-confirmation",
+        stepName: "ticket-overview",
         name: "Confirmação",
         status: "pending",
       },
