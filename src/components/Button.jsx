@@ -36,8 +36,10 @@ const ButtonStyled = styled.button`
     const left = position === "left" ? "0" : "auto";
 
     return `
+      font-weight: 600;
       height: ${buttonSize.height || "auto"};
       width: ${buttonSize.width || "auto"};
+      justify-content: flex-end;
       min-width: 32px;
       border: ${border};
       border-radius: ${radius};

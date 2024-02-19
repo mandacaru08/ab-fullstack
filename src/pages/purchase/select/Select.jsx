@@ -11,12 +11,14 @@ import ClassSymbolsAndNotes from "../symbols-meaning/class-options-symbols/Class
 import TicketContext from "../../../contexts/ticket-context/TicketContext";
 
 export default function Select() {
+  const { ticketStatus } = useContext(TicketContext);
+
   return (
     <CurrentPurchaseStep>
       <StepsStatus />
       <TicketOverview />
       {
-        /* ticketContextData.ticketStatus?.ticketSelected */ false ? (
+        ticketStatus.ticketSelected ? (
           <TicketClassesOptions />
         ) : (
           <OutwardJourneyOptions />
@@ -24,7 +26,7 @@ export default function Select() {
       }
       <SymbolLegendNote>
         {
-          /* ticketContextData.ticketStatus?.ticketSelected */ false ? (
+          ticketStatus.ticketSelected ? (
             <ClassSymbolsAndNotes />
           ) : (
             <TicketSymbolsAndNotes />

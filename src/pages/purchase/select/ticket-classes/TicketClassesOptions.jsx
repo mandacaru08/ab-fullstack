@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   BsFillExclamationCircleFill,
@@ -6,6 +7,9 @@ import {
 } from "react-icons/bs";
 import { MdKeyboardArrowRight, MdEventSeat } from "react-icons/md";
 import Input from "../../../../components/Input";
+import { Button } from "../../../../components";
+import TicketContext from "../../../../contexts/ticket-context/TicketContext";
+import ProgressContext from "../../../../contexts/progress-context/ProgressContext";
 
 const ticketClasses = [
   {
@@ -96,7 +100,19 @@ const ticketClasses = [
 ];
 
 export default function TicketClassesOptions() {
+  const navigate = useNavigate();
+
   const [selectedClass, setSelectedClass] = useState({ class: "" });
+
+  const { updateTicketInfos } = useContext(TicketContext);
+  const { updateStepStatus } = useContext(ProgressContext);
+
+  const handleSelectedClass = (ticketClass) => {
+    setSelectedClass(ticketClass);
+    updateTicketInfos("ticketClass", ticketClass);
+    updateStepStatus("select", "done");
+    navigate("/purchase/ticket-reservation");
+  };
 
   return (
     <Container>
@@ -141,7 +157,6 @@ export default function TicketClassesOptions() {
                   width="100%"
                   inputVariant="radio"
                   label={`R$ ${ticketClass.price}`}
-                  icon={ticketClass.seatIncluded && <MdEventSeat />}
                   checked={selectedClass.class === ticketClass.id}
                   onClick={() =>
                     setSelectedClass({
@@ -155,6 +170,17 @@ export default function TicketClassesOptions() {
           );
         })}
       </TicketClasses>
+      <ButtonContainer>
+        <Button 
+          size="medium" 
+          fontColor="#F1F3F5" 
+          backgroundColor="#6495ED"
+          onClick={() => handleSelectedClass(selectedClass)}
+          disabled={selectedClass.class === ""}
+        >
+          Confirm
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }
@@ -177,6 +203,7 @@ const TicketClasses = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 42px;
 `;
 
 const Class = styled.div`
@@ -308,4 +335,12 @@ const Price = styled.div`
   padding: 26px 20px 14px 20px;
   box-sizing: border-box;
   position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;

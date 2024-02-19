@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import ProgressContext from "../../../../contexts/progress-context/ProgressContext";
 import TicketContext from "../../../../contexts/ticket-context/TicketContext";
 
 import styled from "styled-components";
@@ -33,7 +34,8 @@ SelectTicketButton.propTypes = {
 };
 
 export default function TicketOptions() {
-  const ticketContext = useContext(TicketContext);
+  const { steps, updateStepStatus } = useContext(ProgressContext);
+  const { updateTicketStatus } = useContext(TicketContext);
 
   const navigate = useNavigate();
 
@@ -95,7 +97,8 @@ export default function TicketOptions() {
   }
 
   function selectTicket() {
-    navigate("/purchase/ticket-reservation");
+    updateStepStatus("select", "done");
+    updateTicketStatus("ticketSelected", true);
   }
 
   return (

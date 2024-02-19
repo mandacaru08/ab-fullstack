@@ -1,13 +1,13 @@
-import { createContext, useMemo } from "react";
+import { createContext, useState } from "react";
 
 const ProgressContext = createContext();
 export default ProgressContext;
 
 export function ProgressProvider({ children }) {
-  const steps = useMemo(
-    () => [
-      { id: 0, stepName: "search", name: "Pesquisar", status: "pending" },
-      { id: 1, stepName: "select", name: "Selecionar", status: "pending" },
+  const [steps, setSteps] = useState(
+    [
+      { id: 0, stepName: "search", name: "Pesquisar", status: "done" },
+      { id: 1, stepName: "select", name: "Selecionar", status: "in-progress" },
       {
         id: 2,
         stepName: "ticket-reservation",
@@ -27,12 +27,19 @@ export function ProgressProvider({ children }) {
         name: "Confirmação",
         status: "pending",
       },
-    ],
-    []
+    ]
   );
 
+  const updateStepStatus = (stepName, newStatus) => {
+    setSteps(prevSteps =>
+      prevSteps.map(step =>
+        step.stepName === stepName ? { ...step, status: newStatus } : step
+      )
+    );
+  };
+
   return (
-    <ProgressContext.Provider value={{ steps }}>
+    <ProgressContext.Provider value={{ steps, updateStepStatus }}>
       {children}
     </ProgressContext.Provider>
   );

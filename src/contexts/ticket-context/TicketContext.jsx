@@ -1,28 +1,47 @@
-import { createContext, useMemo } from "react";
+import { createContext, useMemo, useState } from "react";
 
 const TicketContext = createContext();
 export default TicketContext;
 
 export function TicketProvider({ children }) {
+  const [ticketInfos, setTicketInfos] = useState({
+    name: null,
+    ticketClass: null,
+    timeAndDate: null,
+    boat: null,
+    from: null,
+    to: null,
+    paymentMethod: null,
+    value: null,
+  });
 
-  const ticketStatus = useMemo(
-    () => [
-      {
-        name: null,
-        ticketType: null,
-        timeAndDate: null,
-        boat: null,
-        from: null,
-        to: null,
-        paymentMethod: null,
-        value: null,
-      },
-    ],
-    []
-  );
+  const updateTicketInfos = (ticketField, fieldValue) => {
+    setTicketInfos((prevTicketInfos) => ({
+      ...prevTicketInfos,
+      [ticketField]: fieldValue,
+    }));
+  };
+
+  const [ticketStatus, setTicketStatus] = useState({
+    ticketSelected: false,
+  });
+
+  const updateTicketStatus = (ticketField, fieldValue) => {
+    setTicketStatus((prevTicketStatus) => ({
+      ...prevTicketStatus,
+      [ticketField]: fieldValue,
+    }));
+  };
 
   return (
-    <TicketContext.Provider value={{ ticketStatus }}>
+    <TicketContext.Provider
+      value={{
+        ticketInfos,
+        updateTicketInfos,
+        ticketStatus,
+        updateTicketStatus,
+      }}
+    >
       {children}
     </TicketContext.Provider>
   );

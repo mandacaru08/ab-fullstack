@@ -11,7 +11,7 @@ export default function OutwardJourneyOptions() {
   return (
     <Container>
       <TravelDate>
-        <span>Viagem de ida em 30/06/2023</span>
+        <span>Viagem de ida em 30/03/2024</span>
         <Checkbox
           type="checkbox"
           width="fit-content"
