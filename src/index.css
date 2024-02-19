@@ -1,0 +1,70 @@
+:root {
+  --color-background-light: '#F0F3F5';
+  --color-background-dark: '#232D37';
+  --color-text-light: '#232D37';
+  --color-text-dark: '#FCFCFD';
+  --color-input-alert: '#ff9a9ac4';
+  --color-input-success: '#9aff9ac4';
+  --color-input-border-alert: '#ff6767c4';
+
+  --position-onFocus-label-top: '0';
+  --position-label-left-Blur: '50%'
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body{
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+h1{
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1em;
+}
+
+h2{
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4em;
+}
+
+h3{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+h4{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+p{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+input {
+  background-color: var(--color-background-light);
+}
+
+.light-theme {
+  --color-background: var(--color-background-light);
+  --color-text: var(--color-text-light);
+}
+
+.dark-theme {
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
+}
