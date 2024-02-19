@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Select, TextInput } from "../../../../components";
+import TicketContext from "../../../../contexts/ticket-context/TicketContext";
+import ProgressContext from "../../../../contexts/progress-context/ProgressContext";
+import {Button} from "../../../../components";
 
 function isValidInput(value) {
   const regex = /^[a-zA-Z]+$/;
@@ -8,10 +12,34 @@ function isValidInput(value) {
 }
 
 export default function CustomerGreetings() {
+
+  const navigate = useNavigate();
+  
   const [customerData, setCustomerData] = useState({
     salutation: "",
     title: "",
+    firstName: "",
+    lastName: "",
   });
+
+  const { updateTicketInfos } = useContext(TicketContext);
+  const { updateStepStatus } = useContext(ProgressContext);
+
+  const NavigateButton = ({ children, onClick, ...props }) => {
+    return (
+      <Button onClick={onClick} {...props} size="medium">
+        {children}
+      </Button>
+    );
+  };
+
+  function setTickerInfos() {
+    const { salutation, title, firstName, lastName } = customerData;
+    const name = `${salutation} ${title} ${firstName} ${lastName}`;
+    updateTicketInfos("name", name);
+    updateStepStatus("ticket-reservation", "done");
+    navigate("/purchase/payment")
+  }
 
   return (
     <FieldsetContainer>
@@ -61,6 +89,11 @@ export default function CustomerGreetings() {
           required
         />
       </Fieldset>
+      <ButtonContainer>
+        <NavigateButton onClick={() => setTickerInfos()}>
+          Continue
+        </NavigateButton>
+      </ButtonContainer>
     </FieldsetContainer>
   );
 }
@@ -115,4 +148,14 @@ const Options = styled.div`
     position: absolute;
     right: 0;
   }
+`;
+
+const ButtonContainer = styled.div`
+  height: 84px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 `;

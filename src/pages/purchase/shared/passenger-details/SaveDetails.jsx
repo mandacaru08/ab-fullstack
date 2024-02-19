@@ -69,13 +69,6 @@ export default function SaveDetails() {
           })}
         </ol>
       </Advantages>
-      <ButtonContainer>
-        <NavigateButton onClick={() => navigate("/purchase/ticket-overview")}>
-          {saveDetails
-            ? "Continuar com o registro"
-            : "Continuar como convidado"}
-        </NavigateButton>
-      </ButtonContainer>
     </Container>
   );
 }

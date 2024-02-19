@@ -7,7 +7,8 @@ export function TicketProvider({ children }) {
   const [ticketInfos, setTicketInfos] = useState({
     name: null,
     ticketClass: null,
-    timeAndDate: null,
+    date: null,
+    time: null,
     boat: null,
     from: null,
     to: null,

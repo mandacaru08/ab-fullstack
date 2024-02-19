@@ -6,8 +6,8 @@ export default ProgressContext;
 export function ProgressProvider({ children }) {
   const [steps, setSteps] = useState(
     [
-      { id: 0, stepName: "search", name: "Pesquisar", status: "done" },
-      { id: 1, stepName: "select", name: "Selecionar", status: "in-progress" },
+      { id: 0, stepName: "search", name: "Pesquisar", status: "pending" },
+      { id: 1, stepName: "select", name: "Selecionar", status: "pending" },
       {
         id: 2,
         stepName: "ticket-reservation",

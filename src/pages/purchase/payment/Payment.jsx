@@ -1,13 +1,59 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Bar from "../Bar";
 import StepsStatus from "../StepsStatus";
-import CustomerGreetings from "../shared/passenger-details/CustomerGreetings";
 import PaymentOptions from "./PaymentOptions";
 import TotalPrice from "../TotalPrice";
 import { Select, TextInput } from "../../../components/index";
+import { Button } from "../../../components/index";
+import { ImInfo } from "react-icons/im";
+
+import AddressContext from "../../../contexts/address-context/AddressContext";
+import ProgressContext from "../../../contexts/progress-context/ProgressContext";
+
+const PreviousOrNextButton = ({ children, onClick, ...props }) => {
+  return (
+    <Button
+      fontColor="#F1F3F5"
+      backgroundColor="#6495DE"
+      size="small"
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+};
+
+const AddressButton = ({ children, onClick, ...props }) => {
+  return (
+    <Button
+      size="medium"
+      fontColor="#F1F3F5"
+      backgroundColor="#6495DE"
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default function Payment() {
+
+  const navigate = useNavigate();
+
+  const { updateAddress } = useContext(AddressContext);
+  const { updateStepStatus } = useContext(ProgressContext);
+
+  function handleAddress(addressField, fieldValue) {
+    updateAddress(addressField, fieldValue);
+    updateStepStatus("payment", "done");
+    navigate("/purchase/ticket-verification");
+  }
+
   return (
     <Container>
       <Bar />
@@ -19,43 +65,47 @@ export default function Payment() {
             <h4>Seu Endereço</h4>
           </TitleForm>
           <Form>
-            <CustomerGreetings />
             <Fieldset>
               <TextInput
+                required
                 type="text"
                 variant="default"
                 label="Email"
                 width="100%"
-                required
+                onChange={(e) => updateAddress("email", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
               <TextInput
+                required
                 type="text"
                 variant="default"
                 label="Rua / Número"
                 width="calc(50% - 10px)"
-                required
+                onChange={(e) => updateAddress("street", e.target.value)}
               />
 
               <TextInput
+                required
                 type="text"
                 variant="default"
                 label="CEP"
                 width="calc(30% - 14px)"
-                required
+                onChange={(e) => updateAddress("cep", e.target.value)}
               />
 
               <TextInput
+                required
                 type="text"
                 variant="default"
                 label="Cidade"
                 width="calc(20% - 14px)"
-                required
+                onChange={(e) => updateAddress("city", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
               <Select
+                required
                 type="text"
                 label="País"
                 selectVariant="default"
@@ -68,14 +118,15 @@ export default function Payment() {
                   ,
                   "Peru",
                 ]}
-                required
+                onChange={(e) => updateAddress("country", e.target.value)}
               />
               <TextInput
+                required
                 type="text"
                 variant="default"
                 label="Estado"
                 width="calc(50% - 10px)"
-                required
+                onChange={(e) => updateAddress("state", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -84,6 +135,7 @@ export default function Payment() {
                 variant="default"
                 label="Complemento"
                 width="calc(50% - 10px)"
+                onChange={(e) => updateAddress("complement", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -92,13 +144,16 @@ export default function Payment() {
                 variant="default"
                 label="Celular"
                 width="calc(30% - 10px)"
+                onChange={(e) => updateAddress("phone", e.target.value)}
               />
             </Fieldset>
+            <AddressButton onClick={() => handleAddress()}>
+              Save Address
+            </AddressButton>
           </Form>
         </AddressForm>
       </PaymentForm>
       <PaymentOptions />
-      <TotalPrice />
     </Container>
   );
 }
@@ -151,7 +206,7 @@ const Fieldset = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 
   section {
     height: 62px;

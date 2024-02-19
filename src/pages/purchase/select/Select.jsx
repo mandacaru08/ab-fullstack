@@ -19,9 +19,9 @@ export default function Select() {
       <TicketOverview />
       {
         ticketStatus.ticketSelected ? (
-          <TicketClassesOptions />
-        ) : (
-          <OutwardJourneyOptions />
+            <TicketClassesOptions />
+          ) : (
+            <OutwardJourneyOptions />
         )
       }
       <SymbolLegendNote>

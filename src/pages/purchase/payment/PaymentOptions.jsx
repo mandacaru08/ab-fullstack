@@ -11,11 +11,6 @@ const methods = [
     name: "Cartão de Crédito",
     icon: <BiCreditCardAlt />,
   },
-  {
-    type: 2,
-    name: "Transferência Pix",
-    icon: <MdOutlinePix />,
-  },
 ];
 
 export default function PaymentOptions() {
@@ -23,25 +18,8 @@ export default function PaymentOptions() {
 
   return (
     <Container>
-      <h3>Como você gostaria de pagar?</h3>
-      <Options>
-        {methods.map((method) => {
-          return (
-            <Input
-              type="radio"
-              width="182px"
-              inputVariant="radio"
-              key={method.type}
-              name="payment-method"
-              value={method.type}
-              label={method.name}
-              icon={method.icon}
-              onChange={() => setMethodSelected(method.type)}
-            />
-          );
-        })}
-      </Options>
-      {methodSelected === 1 && <CreditCardOption />}
+      <h3>Insira seus dados para pagamento:</h3>
+      <CreditCardOption />
     </Container>
   );
 }

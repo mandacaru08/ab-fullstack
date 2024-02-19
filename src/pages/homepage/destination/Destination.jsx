@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -7,6 +7,9 @@ import { ImInfo } from "react-icons/im";
 import styled from "styled-components";
 import SearchTicketButton from "./components/SearchTicketButton";
 import { Checkbox, RadioInput, Icon, Select } from "../../../components";
+
+import TicketContext from "../../../contexts/ticket-context/TicketContext";
+import ProgressContext from "../../../contexts/progress-context/ProgressContext";
 
 import {
   TravelRoute,
@@ -18,6 +21,9 @@ import {
 
 export default function Destination() {
   const navigate = useNavigate();
+
+  const { updateTicketInfos } = useContext(TicketContext);
+  const { updateStepStatus } = useContext(ProgressContext);
 
   const moreInfosRef = useRef();
 
@@ -48,6 +54,17 @@ export default function Destination() {
     paymentMethod: "",
   });
 
+
+  function cleanInputCities(inputName) {
+    if (inputName === "from") {
+      setFromCity("");
+      setFromFilteredCities([]);
+    } else {
+      setToCity("");
+      setToFilteredCities([]);
+    }
+  }
+
   useEffect(() => {
     if (showBackground && showReturnField) {
       setFormHeight("835px");
@@ -74,14 +91,13 @@ export default function Destination() {
     };
   }, []);
 
-  function cleanInputCities(inputName) {
-    if (inputName === "from") {
-      setFromCity("");
-      setFromFilteredCities([]);
-    } else {
-      setToCity("");
-      setToFilteredCities([]);
-    }
+  function handleTicketInfos() {
+    updateTicketInfos("from", fromCity);
+    updateTicketInfos("to", toCity);
+    updateTicketInfos("date", ticket.outboundDate);
+    updateTicketInfos("time", ticket.outboundTime);
+    updateStepStatus("search", "done");
+    navigate("/purchase/select");
   }
 
   return (
@@ -93,7 +109,7 @@ export default function Destination() {
         />
       )}
       <TravelForm
-        isClicked={formHeight}
+        /* isClicked={formHeight} */
         onClick={() => setShowBackground(true)}
       >
         <h2>Para onde você quer ir?</h2>
@@ -113,7 +129,7 @@ export default function Destination() {
             <TravelDate cleanInputCities={cleanInputCities} />
           </TravelInfos>
 
-          {showBackground && (
+          {false && (
             <OtherInfosForm addReturnFieldHeight={showReturnField}>
               {showReturnField ? (
                 <ReturnField>
@@ -250,7 +266,7 @@ export default function Destination() {
               />
               <h3>Apenas assento (sem ticket)</h3>
             </div>
-            <SearchTicketButton onClick={() => navigate("/purchase/select")}>
+            <SearchTicketButton onClick={() => handleTicketInfos()}>
               Pesquisar
             </SearchTicketButton>
           </OnlySeatOption>

@@ -8,6 +8,10 @@ import Bar from "../Bar";
 import StepsStatus from "../StepsStatus";
 import Button from "../../../components/Button";
 
+import TicketContext from "../../../contexts/ticket-context/TicketContext";
+import ProgressContext from "../../../contexts/progress-context/ProgressContext";
+import { useContext } from "react";
+
 const PreviousOrNextButton = ({ children, onClick, ...props }) => {
   return (
     <Button onClick={onClick} {...props} size="small">
@@ -23,6 +27,13 @@ PreviousOrNextButton.propTypes = {
 
 export default function TicketConfirmation() {
   const navigate = new useNavigate();
+
+  const { updateStepStatus } = useContext(ProgressContext);
+
+  function confirmVerification() {
+    updateStepStatus("ticket-verification", "done");
+    navigate("/purchase/ticket-overview")
+  };
 
   return (
     <Container>
@@ -90,7 +101,7 @@ export default function TicketConfirmation() {
           <ContainerButton>
             <PreviousOrNextButton>Alterar</PreviousOrNextButton>
             <PreviousOrNextButton
-              onClick={() => navigate("/purchase/ticket-overview")}
+              onClick={() => confirmVerification()}
             >
               Confirmar
             </PreviousOrNextButton>
