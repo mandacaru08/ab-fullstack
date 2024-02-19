@@ -18,7 +18,17 @@ const Container = styled.div`
   margin-bottom: 30px;
 `;
 
-function TravelRoute({ fromCity, setFromCity, toCity, setToCity, fromFilteredCities, setFromFilteredCities, toFilteredCities, setToFilteredCities, cleanInputCities}) {
+function TravelRoute({
+  fromCity,
+  setFromCity,
+  toCity,
+  setToCity,
+  fromFilteredCities,
+  setFromFilteredCities,
+  toFilteredCities,
+  setToFilteredCities,
+  cleanInputCities,
+}) {
   return (
     <Container>
       <TextInput
@@ -29,7 +39,9 @@ function TravelRoute({ fromCity, setFromCity, toCity, setToCity, fromFilteredCit
         placeholder="estação / parada / endereço "
         onChange={(e) => {
           setFromCity(e.target.value);
-          setFromFilteredCities(filterCities({ inputCity: e.target.value, amazonCities }));
+          setFromFilteredCities(
+            filterCities({ inputCity: e.target.value, amazonCities })
+          );
         }}
         icon={
           <Icon
@@ -59,7 +71,9 @@ function TravelRoute({ fromCity, setFromCity, toCity, setToCity, fromFilteredCit
         value={toCity}
         onChange={(e) => {
           setToCity(e.target.value);
-          setToFilteredCities(filterCities({ inputCity: e.target.value, amazonCities }));
+          setToFilteredCities(
+            filterCities({ inputCity: e.target.value, amazonCities })
+          );
         }}
         icon={
           <Icon

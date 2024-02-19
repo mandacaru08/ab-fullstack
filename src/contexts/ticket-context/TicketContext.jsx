@@ -4,35 +4,25 @@ const TicketContext = createContext();
 export default TicketContext;
 
 export function TicketProvider({ children }) {
-  const steps = useMemo(
+
+  const ticketStatus = useMemo(
     () => [
-      { id: 0, stepName: "search", name: "Pesquisar", status: "done" },
-      { id: 1, stepName: "select", name: "Selecionar", status: "in-progress" },
       {
-        id: 2,
-        stepName: "ticket-reservation",
-        name: "Ticket e Reserva",
-        status: "pending",
-      },
-      { id: 3, stepName: "payment", name: "Pagamento", status: "pending" },
-      {
-        id: 4,
-        stepName: "ticket-verification",
-        name: "Verificar e Reservar",
-        status: "pending",
-      },
-      {
-        id: 5,
-        stepName: "ticket-overview",
-        name: "Confirmação",
-        status: "pending",
+        name: null,
+        ticketType: null,
+        timeAndDate: null,
+        boat: null,
+        from: null,
+        to: null,
+        paymentMethod: null,
+        value: null,
       },
     ],
     []
   );
 
   return (
-    <TicketContext.Provider value={{ steps }}>
+    <TicketContext.Provider value={{ ticketStatus }}>
       {children}
     </TicketContext.Provider>
   );

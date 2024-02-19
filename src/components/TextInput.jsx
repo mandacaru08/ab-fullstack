@@ -56,7 +56,6 @@ const InputStyled = styled.input`
 
 const RequiredInput = ({ label }) => {
 
-  console.log(label)
   return (
     <label>
       {label}

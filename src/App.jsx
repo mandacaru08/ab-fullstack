@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { TicketProvider } from "./contexts/ticket-context/TicketContext";
+import { ProgressProvider } from "./contexts/progress-context/ProgressContext";
 
 import Home from "./pages/homepage/Home";
 import SignIn from "./pages/user/SignIn";
@@ -13,29 +14,31 @@ import TicketOverview from "./pages/purchase/TicketOverview";
 
 function App() {
   return (
-    <TicketProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/purchase/select" element={<Select />} />
-          <Route
-            path="/purchase/ticket-reservation"
-            element={<TicketAndReservation />}
-          />
-          <Route path="/purchase/payment" element={<Payment />} />
-          <Route
-            path="/purchase/ticket-verification"
-            element={<TicketConfirmation />}
-          />
-          <Route
-            path="/purchase/ticket-overview"
-            element={<TicketOverview />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </TicketProvider>
+    <BrowserRouter>
+      <TicketProvider>
+        <ProgressProvider>
+          <Routes>
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/purchase/select" element={<Select />} />
+            <Route
+              path="/purchase/ticket-reservation"
+              element={<TicketAndReservation />}
+            />
+            <Route path="/purchase/payment" element={<Payment />} />
+            <Route
+              path="/purchase/ticket-verification"
+              element={<TicketConfirmation />}
+            />
+            <Route
+              path="/purchase/ticket-overview"
+              element={<TicketOverview />}
+            />
+          </Routes>
+        </ProgressProvider>
+      </TicketProvider>
+    </BrowserRouter>
   );
 }
 

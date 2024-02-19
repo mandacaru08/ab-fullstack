@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import styled from "styled-components";
 
-import TicketContext from "../../contexts/ticket-context/TicketContext";
+import ProgressContext from "../../contexts/progress-context/ProgressContext";
 
 export default function StepsStatus() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function StepsStatus() {
     navigate(route);
   }
 
-  const { steps } = useContext(TicketContext);
+  const { steps } = useContext(ProgressContext);
 
   return (
     <Container>
