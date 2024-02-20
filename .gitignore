@@ -1,5 +1,9 @@
 .env
 node_modules
+<<<<<<< HEAD
 package-lock.json
 key
 chave
+=======
+package-lock.json
+>>>>>>> 26e163175cab158077c858419e8ea777201b31a3

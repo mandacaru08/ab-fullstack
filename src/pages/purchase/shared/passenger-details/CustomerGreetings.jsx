@@ -16,13 +16,13 @@ export default function CustomerGreetings() {
   const navigate = useNavigate();
   
   const [customerData, setCustomerData] = useState({
-    salutation: "",
-    title: "",
-    firstName: "",
-    lastName: "",
+    salutation: "Sr.",
+    title: "Dr.",
+    name: "",
+    surname: "",
   });
 
-  const { updateTicketInfos } = useContext(TicketContext);
+  const { updateTicketInfos, ticketInfos } = useContext(TicketContext);
   const { updateStepStatus } = useContext(ProgressContext);
 
   const NavigateButton = ({ children, onClick, ...props }) => {
@@ -34,13 +34,13 @@ export default function CustomerGreetings() {
   };
 
   function setTickerInfos() {
-    const { salutation, title, firstName, lastName } = customerData;
-    const name = `${salutation} ${title} ${firstName} ${lastName}`;
-    updateTicketInfos("name", name);
+    const { salutation, title, name, surname } = customerData;
+    const greetings = `${salutation} ${title} ${name} ${surname}`;
+    updateTicketInfos("name", greetings);
     updateStepStatus("ticket-reservation", "done");
     navigate("/purchase/payment")
   }
-
+  
   return (
     <FieldsetContainer>
       <Fieldset>
@@ -75,18 +75,20 @@ export default function CustomerGreetings() {
       </Fieldset>
       <Fieldset>
         <TextInput
+          required
           type="text"
           variant="default"
           label="Primeiro Nome"
           width="calc(50% - 10px)"
-          required
+          onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
         />
         <TextInput
+          required
           type="text"
           variant="default"
           label="Sobrenome"
           width="calc(50% - 10px)"
-          required
+          onChange={(e) => setCustomerData({ ...customerData, surname: e.target.value })}
         />
       </Fieldset>
       <ButtonContainer>

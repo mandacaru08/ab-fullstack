@@ -34,18 +34,18 @@ SelectTicketButton.propTypes = {
 };
 
 export default function TicketOptions() {
-  const { steps, updateStepStatus } = useContext(ProgressContext);
-  const { updateTicketStatus } = useContext(TicketContext);
+  const { updateStepStatus } = useContext(ProgressContext);
+  const { ticketInfos, updateTicketStatus } = useContext(TicketContext);
 
   const navigate = useNavigate();
 
   const ticketsInformation = [
     {
-      id: "",
-      from: "Manaus",
-      to: "Santarém",
-      departureTime: "17:34",
-      arrivalTime: "16:09",
+      id: "1",
+      from: ticketInfos.from,
+      to: ticketInfos.to,
+      departureTime: ticketInfos.time,
+      arrivalTime: ticketInfos.time,
       numberOfChanges: "",
       boats: ["BARCO 190", "MADEIRA BOAT"],
       price: "97,39",

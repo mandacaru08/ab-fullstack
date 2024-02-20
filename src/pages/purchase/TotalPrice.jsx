@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ImInfo } from "react-icons/im";
 import Button from "../../components/Button";
 
+import TicketContext from "../../contexts/ticket-context/TicketContext";
+
 const PreviousOrNextButton = ({ children, onClick, ...props }) => {
   return (
     <Button fontColor="#282D37" size="small" onClick={onClick} {...props}>
@@ -17,12 +19,15 @@ PreviousOrNextButton.propTypes = {
 };
 
 export default function TotalPrice() {
+
+  const { ticketInfos } = useContext(TicketContext);
+
   return (
     <Container>
       <Total>
         <span>Total</span>
         <ImInfo />
-        <Price>R$150</Price>
+        <Price>R${ticketInfos.value}</Price>
       </Total>
       <Buttons>
         <PreviousOrNextButton>Voltar</PreviousOrNextButton>

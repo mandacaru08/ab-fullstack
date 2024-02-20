@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import SortByAndTimeButton from "./SortByAndTimeButton";
 import TicketOptions from "./TicketOptions";
 import { Checkbox } from "../../../../components/index";
 
+import TicketContext from "../../../../contexts/ticket-context/TicketContext";
+
 export default function OutwardJourneyOptions() {
+
+  const { ticketInfos } = useContext(TicketContext);
+
   const [showBestPrices, setShowBestPrices] = useState(false);
 
   return (
     <Container>
       <TravelDate>
-        <span>Viagem de ida em 30/03/2024</span>
+        <span>Data da Viagem {ticketInfos.date}</span>
         <Checkbox
           type="checkbox"
           width="fit-content"

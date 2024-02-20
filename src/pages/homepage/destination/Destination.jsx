@@ -22,7 +22,7 @@ import {
 export default function Destination() {
   const navigate = useNavigate();
 
-  const { updateTicketInfos } = useContext(TicketContext);
+  const { ticketInfos } = useContext(TicketContext);
   const { updateStepStatus } = useContext(ProgressContext);
 
   const moreInfosRef = useRef();
@@ -53,7 +53,6 @@ export default function Destination() {
     class: "",
     paymentMethod: "",
   });
-
 
   function cleanInputCities(inputName) {
     if (inputName === "from") {
@@ -92,12 +91,16 @@ export default function Destination() {
   }, []);
 
   function handleTicketInfos() {
-    updateTicketInfos("from", fromCity);
-    updateTicketInfos("to", toCity);
-    updateTicketInfos("date", ticket.outboundDate);
-    updateTicketInfos("time", ticket.outboundTime);
-    updateStepStatus("search", "done");
-    navigate("/purchase/select");
+    const { from, to, date, time } = ticketInfos;
+
+    if (from && to && date && time) {
+      updateStepStatus("search", "done");
+      navigate("/purchase/select");
+      return;
+    }
+
+    window.alert("Preencha todos os campos para continuar!");
+
   }
 
   return (

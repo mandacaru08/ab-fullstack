@@ -5,7 +5,10 @@ export default TicketContext;
 
 export function TicketProvider({ children }) {
   const [ticketInfos, setTicketInfos] = useState({
+    salutation: null,
+    title: null,
     name: null,
+    surname: null,
     ticketClass: null,
     date: null,
     time: null,

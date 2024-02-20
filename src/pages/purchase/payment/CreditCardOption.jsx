@@ -8,6 +8,7 @@ import PaymentContext from "../../../contexts/payment-context/PaymentContext";
 import ProgressContext from "../../../contexts/progress-context/ProgressContext";
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
+import TicketContext from "../../../contexts/ticket-context/TicketContext";
 
 export default function CreditCardOption(showOption) {
 
@@ -15,9 +16,9 @@ export default function CreditCardOption(showOption) {
 
   const { updatePaymentInfos } = useContext(PaymentContext);
   const { updateProgress } = useContext(ProgressContext);
+  const { ticketInfos } = useContext(TicketContext);
 
   const [creditCardData, setCreditCardData] = useState({
-    name: "",
     number: "",
     expiry: "",
     cvc: "",
@@ -49,7 +50,7 @@ export default function CreditCardOption(showOption) {
 
   const handleCardInfos = (cardField, cardValue) => {
     updatePaymentInfos(cardField, cardValue);
-    updateProgress("payment", "done");
+    updateStepStatus("payment", "done");
     navigate("/purchase/ticket-verification");
   };
 
@@ -125,7 +126,7 @@ export default function CreditCardOption(showOption) {
         <Total>
           <span>Total</span>
           <ImInfo />
-          <Price>R$150</Price>
+          <Price>R${ticketInfos.value}</Price>
         </Total>
         <Buttons>
           <PreviousOrNextButton onClick={() => navigate("/purchase/payment")}>Voltar</PreviousOrNextButton>

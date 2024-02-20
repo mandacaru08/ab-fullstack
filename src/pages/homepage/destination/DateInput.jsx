@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { addDays, subDays, format } from "date-fns";
 import styled from "styled-components";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Icon from "../../../components/Icon";
 
+import TicketContext from "../../../contexts/ticket-context/TicketContext";
+
 export default function DateInput() {
+
+  const { updateTicketInfos } = useContext(TicketContext);
+
   const [date, setDate] = useState(new Date());
   const [day, setDay] = useState("Hoje");
+
   const daysOfWeek = [
     "Domingo",
     "Segunda-feira",
@@ -19,6 +25,7 @@ export default function DateInput() {
 
   const incrementDate = () => {
     setDate((prevDate) => addDays(prevDate, 1));
+    updateTicketInfos("date", format(addDays(date, 1), "yyyy-MM-dd"));
   };
 
   const decrementDate = () => {
@@ -32,12 +39,14 @@ export default function DateInput() {
       );
     } else {
       setDate((prevDate) => subDays(prevDate, 1));
+      updateTicketInfos({ date: format(subDays(date, 1), "yyyy-MM-dd") });
     }
   };
 
   useEffect(() => {
     const dayOfWeek = date.getDay();
     setDay(daysOfWeek[dayOfWeek]);
+    updateTicketInfos("date", format(date, "yyyy-MM-dd"));
   }, [date]);
 
   return (

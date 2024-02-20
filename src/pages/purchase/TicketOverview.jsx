@@ -7,8 +7,13 @@ import { IoPersonSharp } from "react-icons/io5";
 import Button from "../../components/Button";
 import styled from "styled-components";
 
+import TicketContext from "../../contexts/ticket-context/TicketContext";
+import { useContext } from "react";
+
 export default function TicketOverview() {
   const navigate = useNavigate();
+
+  const { ticketInfos } = useContext(TicketContext);
 
   const NavigateButton = ({ onClick }) => {
     return (
@@ -27,32 +32,32 @@ export default function TicketOverview() {
       <DestinationAndTime>
         <div>
           <CgEditBlackPoint />
-          <span>Manaus</span>
+          <span>{ticketInfos.from}</span>
         </div>
         <div>
           <MdLocationOn />
-          <span>Santarém</span>
+          <span>{ticketInfos.to}</span>
         </div>
         <div>
           <FiClock />
-          <span>16:00</span>
+          <span>{ticketInfos.time}</span>
         </div>
       </DestinationAndTime>
-      <PassengerAndClass>
+      {/* <PassengerAndClass>
         <IoPersonSharp />
         <span>1 Passageiro, 27-64, 2ª Classe</span>
-      </PassengerAndClass>
-      <ShowFastestConnection>
+      </PassengerAndClass> */}
+      {/* <ShowFastestConnection>
         <CgOptions />
         <span>Show fastest conncetions</span>
-      </ShowFastestConnection>
+      </ShowFastestConnection> */}
       <NavigateButton onClick={() => navigate("/")} />
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 182px;
+  height: fit-content;
   width: 100%;
   background-color: #fff;
   padding: 12px 24px 24px 24px;
@@ -64,12 +69,12 @@ const Container = styled.div`
 `;
 
 const DestinationAndTime = styled.div`
-  width: 254px;
+  width: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 12px 0 4px;
+  margin: 12px 0;
 
   div {
     height: 20px;
@@ -79,6 +84,7 @@ const DestinationAndTime = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-right: 16px;
   }
 
   svg {

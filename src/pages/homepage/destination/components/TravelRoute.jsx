@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import propTypes from "prop-types";
 import { TextInput } from "../../../../components";
 import CitiesOptionsFiltered from "./CitiesOptionsFiltered";
@@ -6,6 +7,8 @@ import styled from "styled-components";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import amazonCities from "../../../../helper/cities.json";
+
+import TicketContext from "../../../../contexts/ticket-context/TicketContext";
 
 import { filterCities } from "../utils";
 
@@ -19,85 +22,97 @@ const Container = styled.div`
 `;
 
 function TravelRoute({
-  fromCity,
-  setFromCity,
-  toCity,
-  setToCity,
   fromFilteredCities,
   setFromFilteredCities,
   toFilteredCities,
   setToFilteredCities,
   cleanInputCities,
 }) {
+  const { ticketInfos, updateTicketInfos } = useContext(TicketContext);
+
+  const [citiesInput, setCitiesInput] = useState({
+    from: ticketInfos.from,
+    to: ticketInfos.to,
+  });
+
+  const [selectedCity, setSelectedCity] = useState({
+    from: "",
+    to: "",
+  });
+
+  function cleanInputCities(fieldName) {
+    updateTicketInfos(fieldName, "");
+    if (fieldName === "from") {
+      setFromFilteredCities([]);
+    } else {
+      setToFilteredCities([]);
+    }
+  }
+
+  function handleOnChange(e, fieldName) {
+    const value = e.target.value;
+    setCitiesInput({ ...citiesInput, [fieldName]: value });
+    if (fieldName === "from") {
+      setFromFilteredCities(filterCities({ inputCity: value, amazonCities }));
+    } else {
+      setToFilteredCities(filterCities({ inputCity: value, amazonCities }));
+    }
+    if (value === "") {
+      updateTicketInfos(fieldName, "");
+      cleanInputCities(fieldName);
+    }
+  }
+
+  const fields = {
+    from: {
+      label: "Origem",
+      setFilteredCities: setFromFilteredCities,
+      filteredCities: fromFilteredCities,
+    },
+    to: {
+      label: "Destino",
+      setFilteredCities: setToFilteredCities,
+      filteredCities: toFilteredCities,
+    },
+  };
+
   return (
     <Container>
-      <TextInput
-        label="Origem"
-        width="calc(50% - 30px)"
-        variant="default"
-        value={fromCity}
-        placeholder="estação / parada / endereço "
-        onChange={(e) => {
-          setFromCity(e.target.value);
-          setFromFilteredCities(
-            filterCities({ inputCity: e.target.value, amazonCities })
-          );
-        }}
-        icon={
-          <Icon
-            size={"20px"}
-            color={"#646973"}
-            icon={<IoCloseCircleSharp />}
-            onClick={() => cleanInputCities("from")}
+      {Object.keys(fields).map((fieldName) => (
+        <>
+          <TextInput
+            label={fields[fieldName].label}
+            width="calc(50% - 30px)"
+            variant="default"
+            value={selectedCity[fieldName] || citiesInput[fieldName]}
+            placeholder="estação / parada / endereço "
+            onChange={(e) => handleOnChange(e, fieldName)}
+            icon={
+              <Icon
+                size={"20px"}
+                color={"#646973"}
+                icon={<IoCloseCircleSharp />}
+                onClick={() => cleanInputCities(fieldName)}
+              />
+            }
           />
-        }
-      />
-      <CitiesOptionsFiltered
-        left="0"
-        cities={fromFilteredCities}
-        showOptions={fromFilteredCities.length > 0}
-      />
-      <Icon
-        size={"20px"}
-        color={"#646973"}
-        icon={<TbArrowsLeftRight />}
-        onClick={() => cleanInputCities("from")}
-      />
-      <TextInput
-        label="Destino"
-        width="calc(50% - 30px)"
-        variant="default"
-        placeholder="estação / parada / endereço "
-        value={toCity}
-        onChange={(e) => {
-          setToCity(e.target.value);
-          setToFilteredCities(
-            filterCities({ inputCity: e.target.value, amazonCities })
-          );
-        }}
-        icon={
-          <Icon
-            size={"20px"}
-            color={"#646973"}
-            icon={<IoCloseCircleSharp />}
-            onClick={() => cleanInputCities("to")}
+          <CitiesOptionsFiltered
+            left={fieldName === "from"}
+            point={fieldName}
+            cities={fields[fieldName].filteredCities}
+            showOptions={fields[fieldName].filteredCities.length > 0}
+            onSelect={(selectedCity) => {
+              setCitiesInput({ ...citiesInput, [fieldName]: selectedCity });
+              fields[fieldName].setFilteredCities([]);
+            }}
           />
-        }
-      />
-      <CitiesOptionsFiltered
-        right="0"
-        cities={toFilteredCities}
-        showOptions={toFilteredCities.length > 0}
-      />
+        </>
+      ))}
     </Container>
   );
 }
 
 TravelRoute.propTypes = {
-  fromCity: propTypes.string.isRequired,
-  setFromCity: propTypes.func.isRequired,
-  toCity: propTypes.string.isRequired,
-  setToCity: propTypes.func.isRequired,
   fromFilteredCities: propTypes.array.isRequired,
   setFromFilteredCities: propTypes.func.isRequired,
   toFilteredCities: propTypes.array.isRequired,

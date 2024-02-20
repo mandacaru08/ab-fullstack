@@ -11,7 +11,7 @@ import ClassSymbolsAndNotes from "../symbols-meaning/class-options-symbols/Class
 import TicketContext from "../../../contexts/ticket-context/TicketContext";
 
 export default function Select() {
-  const { ticketStatus } = useContext(TicketContext);
+  const { ticketStatus, ticketInfos } = useContext(TicketContext);
 
   return (
     <CurrentPurchaseStep>
