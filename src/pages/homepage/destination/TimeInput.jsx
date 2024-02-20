@@ -1,9 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Icon from "../../../components/Icon";
 
+import TicketContext from "../../../contexts/ticket-context/TicketContext";
+
 function TimeInput() {
+
+  const { updateTicketInfos } = useContext(TicketContext);
+
   const [time, setTime] = useState({
     hour: "",
     minute: "",
@@ -13,8 +18,8 @@ function TimeInput() {
   function convertToHour12(time24) {
     const [hours, minutes] = time24.split(":");
 
-    const currentPediod = hours > 12 ? "PM" : "AM";
-    const suffix = time.period ? time.period : currentPediod;
+    const currentPeriod = hours > 12 ? "PM" : "AM";
+    const suffix = time.period ? time.period : currentPeriod;
 
     let hour24 = parseInt(hours, 10);
     let hour12 = Math.abs(hour24) % 24;
@@ -56,6 +61,7 @@ function TimeInput() {
     const localTime = currentDateTime.toLocaleTimeString("pt-BR", options);
     const currentTimeConverted = convertToHour12(localTime);
     setTime(currentTimeConverted);
+    updateTicketInfos("time", currentTimeConverted);
   }
 
   function handleHourInputChange(hourInput) {
@@ -79,12 +85,14 @@ function TimeInput() {
     const hourMinusOne = parseInt(time.hour, 10) - 1;
     const convertedTime = convertToHour12(`${hourMinusOne}:00`);
     setTime(convertedTime);
+    updateTicketInfos("time", convertedTime);
   }
 
   function incrementOneHour() {
     const hourPlusOne = parseInt(time.hour, 10) + 1;
     const convertedTime = convertToHour12(`${hourPlusOne}:00`);
     setTime(convertedTime);
+    updateTicketInfos("time", `${convertedTime.hour}:${convertedTime.minute} ${convertedTime.period}`);
   }
 
   useEffect(() => {
