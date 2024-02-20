@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -48,8 +48,37 @@ export default function Payment() {
   const { updateAddress } = useContext(AddressContext);
   const { updateStepStatus } = useContext(ProgressContext);
 
+  const [address, setAddress] = useState({
+    email: "",
+    street: "",
+    cep: "",
+    city: "",
+    country: "Brazil",
+    state: "",
+    complement: "",
+    phone: "",
+  });
+
+  function handleInputChange(field, value) {
+    setAddress({ ...address, [field]: value });
+  }
+
   function handleAddress(addressField, fieldValue) {
-    updateAddress(addressField, fieldValue);
+    let allFieldsFilled = true;
+  
+    Object.entries(address).forEach(([key, value]) => {
+      if (key !== "complement" && key !== "phone" && !value) {
+        allFieldsFilled = false;
+        window.alert(`Por favor, preencha o campo ${key}.`);
+      }
+      updateAddress(key, value);
+    });
+  
+    if (!allFieldsFilled) {
+      return;
+    }
+  
+    handleInputChange(addressField, fieldValue);
     updateStepStatus("payment", "done");
     navigate("/purchase/ticket-verification");
   }
@@ -72,7 +101,7 @@ export default function Payment() {
                 variant="default"
                 label="Email"
                 width="100%"
-                onChange={(e) => updateAddress("email", e.target.value)}
+                onChange={(e) => handleInputChange("email", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -82,7 +111,7 @@ export default function Payment() {
                 variant="default"
                 label="Rua / Número"
                 width="calc(50% - 10px)"
-                onChange={(e) => updateAddress("street", e.target.value)}
+                onChange={(e) => handleInputChange("street", e.target.value)}
               />
 
               <TextInput
@@ -91,7 +120,7 @@ export default function Payment() {
                 variant="default"
                 label="CEP"
                 width="calc(30% - 14px)"
-                onChange={(e) => updateAddress("cep", e.target.value)}
+                onChange={(e) => handleInputChange("cep", e.target.value)}
               />
 
               <TextInput
@@ -100,7 +129,7 @@ export default function Payment() {
                 variant="default"
                 label="Cidade"
                 width="calc(20% - 14px)"
-                onChange={(e) => updateAddress("city", e.target.value)}
+                onChange={(e) => handleInputChange("city", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -115,10 +144,9 @@ export default function Payment() {
                   "Bolívia",
                   "Colômbia",
                   "Equador",
-                  ,
                   "Peru",
                 ]}
-                onChange={(e) => updateAddress("country", e.target.value)}
+                onChange={(e) => handleInputChange("country", e.target.value)}
               />
               <TextInput
                 required
@@ -126,7 +154,7 @@ export default function Payment() {
                 variant="default"
                 label="Estado"
                 width="calc(50% - 10px)"
-                onChange={(e) => updateAddress("state", e.target.value)}
+                onChange={(e) => handleInputChange("state", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -135,7 +163,7 @@ export default function Payment() {
                 variant="default"
                 label="Complemento"
                 width="calc(50% - 10px)"
-                onChange={(e) => updateAddress("complement", e.target.value)}
+                onChange={(e) => handleInputChange("complement", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -144,11 +172,11 @@ export default function Payment() {
                 variant="default"
                 label="Celular"
                 width="calc(30% - 10px)"
-                onChange={(e) => updateAddress("phone", e.target.value)}
+                onChange={(e) => handleInputChange("phone", e.target.value)}
               />
             </Fieldset>
             <AddressButton onClick={() => handleAddress()}>
-              Save Address
+              Salvar Endereço
             </AddressButton>
           </Form>
         </AddressForm>

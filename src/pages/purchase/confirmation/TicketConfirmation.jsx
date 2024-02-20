@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { BsFillPassFill } from "react-icons/bs";
@@ -10,7 +11,6 @@ import Button from "../../../components/Button";
 
 import TicketContext from "../../../contexts/ticket-context/TicketContext";
 import ProgressContext from "../../../contexts/progress-context/ProgressContext";
-import { useContext } from "react";
 
 const PreviousOrNextButton = ({ children, onClick, ...props }) => {
   return (
@@ -29,6 +29,7 @@ export default function TicketConfirmation() {
   const navigate = new useNavigate();
 
   const { updateStepStatus } = useContext(ProgressContext);
+  const { ticketInfos } = useContext(TicketContext);
 
   function confirmVerification() {
     updateStepStatus("ticket-verification", "done");
@@ -51,7 +52,7 @@ export default function TicketConfirmation() {
               <Information>
                 <div>
                   <span>Nome do passageiro</span>
-                  <p>Jansen Caik</p>
+                  <p>{ticketInfos.name}</p>
                 </div>
                 <div>
                   <span>Tipo de reserva</span>
@@ -61,21 +62,21 @@ export default function TicketConfirmation() {
               <Information>
                 <div>
                   <span>Horário de saída</span>
-                  <p>10:20 - 10/09/23</p>
+                  <p>{ticketInfos.date} - {ticketInfos.time}</p>
                 </div>
                 <div>
                   <span>Horário de chegada</span>
-                  <p>13:45 - 10/09/23</p>
+                  <p>{ticketInfos.date} - {ticketInfos.time}</p>
                 </div>
               </Information>
               <Information>
                 <div>
                   <span>Origem</span>
-                  <p>Santarém</p>
+                  <p>{ticketInfos.from}</p>
                 </div>
                 <div>
                   <span>Destino</span>
-                  <p>Manaus</p>
+                  <p>{ticketInfos.to}</p>
                 </div>
               </Information>
             </TicketInfos>
