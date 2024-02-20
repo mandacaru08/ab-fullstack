@@ -4,7 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 export default function Bar() {
   return (
     <Container>
-      <img src="../../../public/timao.svg"/>
+      <img src="/timao.svg"/>
       <RxCross2 />
     </Container>
   );
