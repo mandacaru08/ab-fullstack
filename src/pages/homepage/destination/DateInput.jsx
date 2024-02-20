@@ -25,7 +25,7 @@ export default function DateInput() {
 
   const incrementDate = () => {
     setDate((prevDate) => addDays(prevDate, 1));
-    updateTicketInfos("date", format(subDays(date, 1), "yyyy-MM-dd"));
+    updateTicketInfos("date", format(addDays(date, 1), "yyyy-MM-dd"));
   };
 
   const decrementDate = () => {
