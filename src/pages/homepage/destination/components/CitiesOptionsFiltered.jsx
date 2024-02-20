@@ -1,15 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import TicketContext from "../../../../contexts/ticket-context/TicketContext";
 
-function CitiesOptionsFiltered({ point, cities, showOptions, ...props }) {
+function CitiesOptionsFiltered({ onSelect, point, cities, showOptions, ...props }) {
 
   const { updateTicketInfos } = useContext(TicketContext);
 
   function setCity(city) {
     updateTicketInfos(point, `${city.name} - ${city.state}`);
+    onSelect(`${city.name} - ${city.state}`);
   }
 
   return (
@@ -35,8 +36,8 @@ export default CitiesOptionsFiltered;
 const CitiesOptions = styled.ol`
   position: absolute;
   top: 42px;
-  left: ${(props) => (props.left ? props.left : "none")};
-  right: ${(props) => (props.right ? props.right : "none")};
+  left: ${(props) => (props.left ? 0 : "none")};
+  right: ${(props) => (props.left ? "none" : 0)};
   z-index: 10;
   width: calc(50% - 30px);
   height: fit-content;
