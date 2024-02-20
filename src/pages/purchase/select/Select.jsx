@@ -13,8 +13,6 @@ import TicketContext from "../../../contexts/ticket-context/TicketContext";
 export default function Select() {
   const { ticketStatus, ticketInfos } = useContext(TicketContext);
 
-  console.log(ticketInfos)
-
   return (
     <CurrentPurchaseStep>
       <StepsStatus />

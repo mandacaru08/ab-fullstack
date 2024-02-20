@@ -17,7 +17,10 @@ export function TicketProvider({ children }) {
   });
 
   const updateTicketInfos = (ticketField, fieldValue) => {
+<<<<<<< HEAD
     console.log(ticketField, fieldValue)
+=======
+>>>>>>> c6ff4ab38366c2f4e79f1c390946927f5dc80d55
     setTicketInfos((prevTicketInfos) => ({
       ...prevTicketInfos,
       [ticketField]: fieldValue,
