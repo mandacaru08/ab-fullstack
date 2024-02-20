@@ -36,7 +36,10 @@ export default function CustomerGreetings() {
   function setTickerInfos() {
     const { salutation, title, firstName, lastName } = customerData;
     const name = `${salutation} ${title} ${firstName} ${lastName}`;
+    updateTicketInfos("salutation", salutation);
+    updateTicketInfos("title", title);
     updateTicketInfos("name", name);
+    updateTicketInfos("surname", lastName);
     updateStepStatus("ticket-reservation", "done");
     navigate("/purchase/payment")
   }

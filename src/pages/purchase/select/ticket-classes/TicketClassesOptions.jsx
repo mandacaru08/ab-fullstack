@@ -104,15 +104,17 @@ export default function TicketClassesOptions() {
 
   const [selectedClass, setSelectedClass] = useState({ class: "" });
 
-  const { updateTicketInfos } = useContext(TicketContext);
+  const { updateTicketInfos, ticketInfos } = useContext(TicketContext);
   const { updateStepStatus } = useContext(ProgressContext);
 
   const handleSelectedClass = (ticketClass) => {
     setSelectedClass(ticketClass);
     updateTicketInfos("ticketClass", ticketClass);
+    updateTicketInfos("value", ticketClasses[ticketClass.class - 1].price);
     updateStepStatus("select", "done");
     navigate("/purchase/ticket-reservation");
   };
+
 
   return (
     <Container>
@@ -178,7 +180,7 @@ export default function TicketClassesOptions() {
           onClick={() => handleSelectedClass(selectedClass)}
           disabled={selectedClass.class === ""}
         >
-          Confirm
+          Confirmar
         </Button>
       </ButtonContainer>
     </Container>
