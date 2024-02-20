@@ -61,7 +61,7 @@ function TimeInput() {
     const localTime = currentDateTime.toLocaleTimeString("pt-BR", options);
     const currentTimeConverted = convertToHour12(localTime);
     setTime(currentTimeConverted);
-    updateTicketInfos("time", currentTimeConverted);
+    updateTicketInfos("time", `${currentTimeConverted.hour}:${currentTimeConverted.minute} ${currentTimeConverted.period}`);
   }
 
   function handleHourInputChange(hourInput) {

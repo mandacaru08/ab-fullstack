@@ -46,6 +46,7 @@ export default function DateInput() {
   useEffect(() => {
     const dayOfWeek = date.getDay();
     setDay(daysOfWeek[dayOfWeek]);
+    updateTicketInfos("date", format(date, "yyyy-MM-dd"));
   }, [date]);
 
   return (
