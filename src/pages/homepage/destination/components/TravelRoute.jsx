@@ -96,10 +96,6 @@ function TravelRoute({
 }
 
 TravelRoute.propTypes = {
-  fromCity: propTypes.string.isRequired,
-  setFromCity: propTypes.func.isRequired,
-  toCity: propTypes.string.isRequired,
-  setToCity: propTypes.func.isRequired,
   fromFilteredCities: propTypes.array.isRequired,
   setFromFilteredCities: propTypes.func.isRequired,
   toFilteredCities: propTypes.array.isRequired,
