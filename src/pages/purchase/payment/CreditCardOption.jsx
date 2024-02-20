@@ -1,12 +1,13 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Cards from "react-credit-cards";
+import Cards from "react-credit-cards-2";
 import { Button } from "../../../components";
 import { ImInfo } from "react-icons/im";
 import PaymentContext from "../../../contexts/payment-context/PaymentContext";
 import ProgressContext from "../../../contexts/progress-context/ProgressContext";
-import "react-credit-cards/es/styles-compiled.css";
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
+
 
 export default function CreditCardOption(showOption) {
 
