@@ -22,7 +22,7 @@ export default function CustomerGreetings() {
     surname: "",
   });
 
-  const { updateTicketInfos, ticketInfos } = useContext(TicketContext);
+  const { updateTicketInfos } = useContext(TicketContext);
   const { updateStepStatus } = useContext(ProgressContext);
 
   const NavigateButton = ({ children, onClick, ...props }) => {
