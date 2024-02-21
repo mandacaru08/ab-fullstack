@@ -3,8 +3,8 @@ import { usePDF } from "react-to-pdf";
 import styled from "styled-components";
 import QRCode from "qrcode";
 import { Button } from "../../../components";
-import Logo from "../../../components/common/Logo";
 import TicketContext from "../../../contexts/ticket-context/TicketContext";
+import logo from "../../../../public/logo.png"
 
 function DownloadTicket() {
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
@@ -37,7 +37,9 @@ function DownloadTicket() {
           <InfosPadding>
             <Infos>
               <TicketHeader>
-                <Logo size="64px" isAnimated="false" />
+                <ContainerLogo >
+                  <img src={logo} alt="image-logo"/>
+                </ContainerLogo>
                 <div>
                   <h3>Passagem</h3>
                   <span>#154959216</span>
@@ -125,6 +127,18 @@ function DownloadTicket() {
 }
 
 export default DownloadTicket;
+
+const ContainerLogo = styled.div`
+  height: 100%;
+  width: fit-content;
+  display: grid;
+  place-items: center;
+
+  img {
+    height: 60px;
+    width: 60px;
+  }
+`;
 
 const Container = styled.div`
   height: 100vh;
