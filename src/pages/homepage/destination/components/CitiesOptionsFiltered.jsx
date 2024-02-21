@@ -34,25 +34,20 @@ CitiesOptionsFiltered.propTypes = {
 export default CitiesOptionsFiltered;
 
 const CitiesOptions = styled.ol`
+  height: fit-content;
+  max-height: 240px;
   position: absolute;
   top: 42px;
-<<<<<<< HEAD
-  left: ${(props) => (props.left ? props.left : "none")};
-  right: ${(props) => (props.right ? props.right : "none")};
-=======
   left: ${(props) => (props.left ? 0 : "none")};
   right: ${(props) => (props.left ? "none" : 0)};
->>>>>>> 26e163175cab158077c858419e8ea777201b31a3
-  z-index: 10;
+  z-index: 100;
   width: calc(50% - 30px);
-  height: fit-content;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: left;
   border: 1px solid #c1c1c1;
   border-radius: 0 0 5px 5px;
   background-color: #ffffff;
+  overflow-y: auto;
   opacity: ${(props) => (props.visibility ? 1 : 0)};
   transform: translateY(
     ${(props) => (props.visibility ? 0 : "calc(-100px + 100px)")}

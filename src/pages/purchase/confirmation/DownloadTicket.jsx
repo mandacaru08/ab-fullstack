@@ -100,7 +100,7 @@ function DownloadTicket() {
                   <span>Data Embarque</span>
                   <h3>{ticketInfos.date}</h3>
                 </div>
-                <div>
+                <div style={{borderBottom: ""}}>
                   <span>Barco</span>
                   <h3>Madeira Boat</h3>
                 </div>
@@ -221,12 +221,14 @@ const Infos = styled.div`
   span {
     color: #425582;
   }
+
+  div:last-child {
+    border-bottom: none;
+  }
 `;
 
 const InfosPadding = styled.div`
   height: fit-content;
-  display: grid;
-  place-content: center;
   padding: 14px;
   border-bottom: 3px dashed #849cd4;
 `;
@@ -243,7 +245,7 @@ const Section = styled.div`
 
 const TicketHeader = styled(Section)`
   height: 78px;
-  padding: 10px 20px;
+  padding: 10px 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -259,7 +261,7 @@ const TicketHeader = styled(Section)`
 
 const PassengerInfo = styled(Section)`
   height: 72px;
-  padding: 6px 22px;
+  padding: 6px 14px;
 
   div {
     height: 100%;
