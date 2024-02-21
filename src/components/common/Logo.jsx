@@ -25,7 +25,7 @@ const Container = styled.div`
 function Logo({ size, isAnimated }) {
   return (
     <Container size={size}>
-      <img src="../../../public/timao.svg" alt="logo"/>
+      <img src="/public/timao.svg" alt="logo"/>
     </Container>
   );
 }
