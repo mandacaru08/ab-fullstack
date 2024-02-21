@@ -51,7 +51,7 @@ export default function TicketOverview() {
         <CgOptions />
         <span>Show fastest conncetions</span>
       </ShowFastestConnection> */}
-      <NavigateButton onClick={() => navigate("/")} />
+      <NavigateButton onClick={() => navigate("/ticket-overview")} />
     </Container>
   );
 }

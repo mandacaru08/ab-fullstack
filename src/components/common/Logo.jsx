@@ -16,15 +16,15 @@ const Container = styled.div`
   place-items: center;
 
   img {
-    height: 108px;
-    width: 108px;
-    animation: ${rotate} 46s linear infinite;
+    height: ${({ size }) => size || '108px'};
+    width: ${({ size }) => size || '108px'};
+    animation: ${({ isAnimated }) => isAnimated ? `${rotate} 46s linear infinite` : '108px'};
   }
 `;
 
-function Logo() {
+function Logo({ size, isAnimated }) {
   return (
-    <Container>
+    <Container size={size}>
       <img src="../../../public/timao.svg" alt="logo"/>
     </Container>
   );

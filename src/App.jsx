@@ -13,6 +13,7 @@ import TicketAndReservation from "./pages/purchase/ticket-reservation/ticket-and
 import Payment from "./pages/purchase/payment/Payment";
 import TicketConfirmation from "./pages/purchase/confirmation/TicketConfirmation";
 import TicketOverview from "./pages/purchase/TicketOverview";
+import DownloadTicket from "./pages/purchase/confirmation/DownloadTicket";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
                 />
                 <Route
                   path="/purchase/ticket-overview"
-                  element={<TicketOverview />}
+                  element={<DownloadTicket />}
                 />
               </Routes>
             </PaymentProvider>
