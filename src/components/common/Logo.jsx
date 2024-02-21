@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import logo from '../../../public/timao.svg';
 
 const rotate = keyframes`
   from {
@@ -25,7 +26,7 @@ const Container = styled.div`
 function Logo({ size, isAnimated }) {
   return (
     <Container size={size}>
-      <img src="/public/timao.svg" alt="logo"/>
+      <img src={logo} alt="logo"/>
     </Container>
   );
 }
